@@ -16,8 +16,8 @@ workflows:
         script: python3 scripts/prepare_brand.py
       - name: Get packages
         script: flutter pub get
-      - name: Generate discover seed
-        script: dart run scripts/generate_discover_seed.dart
+      - name: Check discover seed
+        script: dart run scripts/generate_discover_seed.dart --check
       - name: Test navigation and discover data
         script: flutter test
       - name: Analyze
@@ -52,8 +52,8 @@ workflows:
         script: python3 scripts/prepare_brand.py
       - name: Get packages
         script: flutter pub get
-      - name: Generate discover seed
-        script: dart run scripts/generate_discover_seed.dart
+      - name: Check discover seed
+        script: dart run scripts/generate_discover_seed.dart --check
       - name: Test navigation and discover data
         script: flutter test
       - name: Analyze

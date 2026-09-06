@@ -1,6 +1,614 @@
 {
   "schemaVersion": 1,
-  "revision": 4,
-  "updatedAt": "2026-09-07T00:45:00Z",
-  "entries": []
+  "revision": 1,
+  "updatedAt": "2026-09-06T19:41:24Z",
+  "entries": [
+    {
+      "id": "bosporus-jbr",
+      "name": "Bosporus Turkish Cuisine · The Beach",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "The Beach, Jumeirah Beach Residence, Dubai, UAE",
+      "phone": "+97143808090",
+      "website": "https://thebosporus.com/dubai/",
+      "description": "Türk kahvaltısı, kebap ve tatlılar. The Beach şubesi.",
+      "menuUrl": "https://app.holomenu.net/login?restaurant_name=Bosporus%20%7C%20JBR",
+      "photos": [
+        {
+          "url": "https://thebosporus.com/wp-content/uploads/2026/05/menu-hero-1.jpg",
+          "source": "https://thebosporus.com/menu/",
+          "caption": "Bosporus resmî menü galerisi · marka geneli",
+          "asset": "assets/images/discover/bosporus-1.jpg"
+        },
+        {
+          "url": "https://thebosporus.com/wp-content/uploads/2026/05/menu-hero-2.jpg",
+          "source": "https://thebosporus.com/menu/",
+          "caption": "Bosporus resmî menü galerisi · marka geneli",
+          "asset": "assets/images/discover/bosporus-2.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://thebosporus.com/dubai/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "bosporus-dubai-mall",
+      "name": "Bosporus · Dubai Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Downtown",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Lower Ground Floor, Dubai Mall, Downtown Dubai, UAE",
+      "phone": "+97143808090",
+      "website": "https://thebosporus.com/dubai/",
+      "description": "Dubai Mall içindeki Bosporus şubesi. Türk mutfağı ve kahvaltı.",
+      "menuUrl": "https://app.holomenu.net/login?restaurant_name=Bosporus%20%7C%20Dubai%20Mall",
+      "photos": [
+        {
+          "url": "https://thebosporus.com/wp-content/uploads/2026/05/menu-hero-1.jpg",
+          "source": "https://thebosporus.com/menu/",
+          "caption": "Bosporus resmî menü galerisi · marka geneli",
+          "asset": "assets/images/discover/bosporus-1.jpg"
+        },
+        {
+          "url": "https://thebosporus.com/wp-content/uploads/2026/05/menu-hero-2.jpg",
+          "source": "https://thebosporus.com/menu/",
+          "caption": "Bosporus resmî menü galerisi · marka geneli",
+          "asset": "assets/images/discover/bosporus-2.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://thebosporus.com/dubai/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "zouzou-jbr",
+      "name": "ZouZou · The Beach JBR",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Türk & Lübnan restoranı",
+      "entityType": "business",
+      "address": "Shop 3401, The Beach, Opposite JBR, Dubai, UAE",
+      "phone": "+97145640778",
+      "website": "https://zouzoudubai.com/",
+      "description": "Türk ve Lübnan mutfağı. The Beach JBR şubesi.",
+      "menuUrl": "https://zouzoudubai.com/",
+      "photos": [
+        {
+          "url": "https://zouzoudubai.com/wp-content/uploads/2026/01/zouzou-gal05-700x560.jpg",
+          "source": "https://zouzoudubai.com/gallery/",
+          "caption": "ZouZou resmî galerisinden · marka geneli",
+          "asset": "assets/images/discover/zouzou-1.jpg"
+        },
+        {
+          "url": "https://zouzoudubai.com/wp-content/uploads/2026/01/zouzou-gal02-700x560.jpg",
+          "source": "https://zouzoudubai.com/gallery/",
+          "caption": "ZouZou resmî galerisinden · marka geneli",
+          "asset": "assets/images/discover/zouzou-2.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://zouzoudubai.com/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "hafiz-dubai-mall",
+      "name": "Hafız Mustafa 1864 · Dubai Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Downtown",
+      "kind": "Tatlı & kafe",
+      "entityType": "business",
+      "address": "LG 093, Dubai Mall, Financial Center Street, Downtown Dubai, UAE",
+      "phone": "+97145844694",
+      "website": "https://www.hm1864.ae/get-in-touch/",
+      "description": "Baklava, kadayıf, lokum ve Türk tatlıları. Dubai Mall şubesi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://api.hm1864.ae/uploads/admin/media/1788208808345-29550d.webp",
+          "source": "https://www.hm1864.ae/get-in-touch/",
+          "caption": "Hafız Mustafa Dubai Mall · resmî şube fotoğrafı",
+          "asset": "assets/images/discover/hafiz.webp"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://www.hm1864.ae/get-in-touch/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "sultan-dubai",
+      "name": "Sultan Saray · Dubai",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Thanya",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Beside Metropolitan Hotel, Al Thanya Street, Sheikh Zayed Road, Dubai, UAE",
+      "phone": "+97142290600",
+      "website": "https://sultansaray.ae/dubai/",
+      "description": "Türk kahvaltısı, pide, ızgara ve tatlılar. Dubai şubesi.",
+      "menuUrl": "https://sultansaray.ae/downloads/Sultan%20Saray%20Menu%20%20Dubai.pdf",
+      "photos": [
+        {
+          "url": "https://sultansaray.ae/wp-content/uploads/2025/11/sultan_saray_Images6-1024x674.jpg",
+          "source": "https://sultansaray.ae/",
+          "caption": "Sultan Saray resmî fotoğrafı · marka geneli",
+          "asset": "assets/images/discover/sultan-1.jpg"
+        },
+        {
+          "url": "https://sultansaray.ae/wp-content/uploads/2025/11/sultan_saray_Images7-1024x674.jpg",
+          "source": "https://sultansaray.ae/",
+          "caption": "Sultan Saray resmî fotoğrafı · marka geneli",
+          "asset": "assets/images/discover/sultan-2.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://sultansaray.ae/dubai/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true,
+      "latitude": 25.1319637,
+      "longitude": 55.2120418,
+      "coordinateSource": "https://sultansaray.ae/dubai/"
+    },
+    {
+      "id": "turquaz",
+      "name": "Turquaz Gourmet",
+      "category": "Market & Gıda",
+      "categories": [
+        "Market & Gıda"
+      ],
+      "area": "Umm Suqeim 2",
+      "kind": "Türk marketi",
+      "entityType": "business",
+      "address": "Hamad Saif Building, Umm Suqeim 2, Dubai, UAE",
+      "phone": "+97142984621",
+      "website": "https://turquazgourmet.ae/pages/about-us",
+      "description": "Türk ürünleri ve gurme gıda alışverişi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://turquazgourmet.ae/cdn/shop/files/138068.png?v=1788123662&width=1225",
+          "source": "https://turquazgourmet.ae/",
+          "caption": "Turquaz Gourmet · resmî ürün tanıtım görseli",
+          "asset": "assets/images/discover/turquaz.png"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://turquazgourmet.ae/pages/about-us"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true,
+      "latitude": 25.1546324,
+      "longitude": 55.203519,
+      "coordinateSource": "https://turquazgourmet.ae/pages/about-us",
+      "whatsapp": "+97142975211"
+    },
+    {
+      "id": "galata",
+      "name": "Galata Fine Foods",
+      "category": "Market & Gıda",
+      "categories": [
+        "Market & Gıda"
+      ],
+      "area": "Al Wasl",
+      "kind": "Türk marketi",
+      "entityType": "business",
+      "address": "Ground Floor, Al Wadi Building, Al Wasl Area, Sheikh Zayed Road, Dubai, UAE",
+      "phone": "+97142501317",
+      "website": "https://galatafinefoods.com/contact-us/",
+      "description": "Türk gıda ürünleri ve gurme market.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://galatafinefoods.com/wp-content/uploads/2023/08/fine-foods-finer-prices-finest-quality_-large-optimized.png",
+          "source": "https://galatafinefoods.com/contact-us/",
+          "caption": "Galata Fine Foods resmî marka görseli",
+          "asset": "assets/images/discover/galata.png"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://galatafinefoods.com/contact-us/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "dr-tosun",
+      "name": "Dr Tosun Dental Clinic",
+      "category": "Sağlık",
+      "categories": [
+        "Sağlık"
+      ],
+      "area": "Umm Suqeim 1",
+      "kind": "Diş kliniği",
+      "entityType": "business",
+      "address": "Villa 886, Al Wasl Road, Umm Suqeim 1, Dubai, UAE",
+      "phone": "+97143435051",
+      "website": "https://drtosundental.com/contact-us/",
+      "description": "Diş hekimliği ve ortodonti hizmetleri. Randevu ve hizmet dili için kliniğe ulaşın.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://drtosundental.com/wp-content/uploads/2023/06/panorama3small.jpg",
+          "source": "https://drtosundental.com/",
+          "caption": "Dr Tosun Dental Clinic · resmî klinik fotoğrafı",
+          "asset": "assets/images/discover/tosun.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://drtosundental.com/contact-us/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "hair-palace",
+      "name": "The Hair Palace by Ozzy",
+      "category": "Güzellik & Bakım",
+      "categories": [
+        "Güzellik & Bakım"
+      ],
+      "area": "Safa 2",
+      "kind": "Kuaför & bakım",
+      "entityType": "business",
+      "address": "Villa 23, Al Wasl Road, Safa 2, Jumeirah, Dubai, UAE",
+      "phone": "+97143373656",
+      "website": "https://www.thehairpalace.ae/",
+      "description": "Saç kesimi, renklendirme, kaynak ve kişisel bakım.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.thehairpalace.ae/images/dubaisalon.png",
+          "source": "https://www.thehairpalace.ae/",
+          "caption": "The Hair Palace · resmî salon fotoğrafı",
+          "asset": "assets/images/discover/hair.png"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://www.thehairpalace.ae/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true,
+      "whatsapp": "+971501092102"
+    },
+    {
+      "id": "bekir-dogan",
+      "name": "Bekir Doğan · Bekko Properties",
+      "category": "Ev & Emlak",
+      "categories": [
+        "Ev & Emlak"
+      ],
+      "area": "Barsha Heights",
+      "kind": "Emlak danışmanı",
+      "entityType": "professional",
+      "address": "30-C13, I Rise Tower, Barsha Heights, Dubai, UAE",
+      "phone": "+971556769870",
+      "website": "https://bekkoproperties.com/agent/bekir-dogan/",
+      "description": "Bekko Properties emlak danışmanı. Satış ve kiralama bilgileri için profesyonel profili inceleyin.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://bekkoproperties.com/wp-content/uploads/2026/05/agent_101421_6a1026da2f28b.jpg",
+          "source": "https://bekkoproperties.com/agent/bekir-dogan/",
+          "caption": "Bekir Doğan · resmî profesyonel profil fotoğrafı",
+          "asset": "assets/images/discover/bekir.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://bekkoproperties.com/agent/bekir-dogan/",
+        "https://www.propertyfinder.ae/en/agent/bekir-dogan-229636"
+      ],
+      "turkishService": true,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "oydo",
+      "name": "OYDO · Türkçe ve kültür programları",
+      "category": "Çocuk & Eğitim",
+      "categories": [
+        "Çocuk & Eğitim",
+        "Kültür & Türk Etkinlikleri"
+      ],
+      "area": "Emirates Hills",
+      "kind": "Eğitim & kültür atölyeleri",
+      "entityType": "business",
+      "address": "Dubai International Academy, First Al Khail Street, Emirates Hills, Dubai, UAE",
+      "phone": "+971589735981",
+      "website": "https://www.oydoglobal.com/",
+      "description": "Türkçe, iki dilli eğitim ve oyun temelli kültür atölyeleri. Güncel program ve kampüsü kurumla teyit edin.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.oydoglobal.com/wp-content/uploads/2026/07/oydo-profil-nazife-pehlivan-600x722.png",
+          "source": "https://www.oydoglobal.com/hakkimizda/",
+          "caption": "OYDO ekibinden Nazife Pehlivan · resmî portre",
+          "asset": "assets/images/discover/oydo-team.png"
+        },
+        {
+          "url": "https://www.oydoglobal.com/wp-content/uploads/2026/07/01-nazife-sinif.webp",
+          "source": "https://www.oydoglobal.com/",
+          "caption": "OYDO resmî eğitim illüstrasyonu",
+          "asset": "assets/images/discover/oydo.webp"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://www.oydoglobal.com/"
+      ],
+      "turkishService": true,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "elvan-sener",
+      "name": "Elvan Şener",
+      "category": "Spor & Wellness",
+      "categories": [
+        "Spor & Wellness"
+      ],
+      "area": "Dubai",
+      "kind": "Personal trainer",
+      "entityType": "professional",
+      "address": null,
+      "phone": null,
+      "website": "https://www.ereps.eu/member-profile/67819",
+      "description": "EREPS profesyonel kaydında listelenen Dubai merkezli kişisel antrenör. Seans yeri ve iletişim için profesyonel profili inceleyin.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.ereps.eu/sites/ereps.eu/files/webform/Screenshot_20221128-181747_Photos.jpg",
+          "source": "https://www.ereps.eu/member-profile/67819",
+          "caption": "Elvan Şener · EREPS profesyonel profil fotoğrafı",
+          "asset": "assets/images/discover/elvan.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://www.ereps.eu/member-profile/67819"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "mourah",
+      "name": "Mourah Home",
+      "category": "Mağazalar & Türk Markaları",
+      "categories": [
+        "Mağazalar & Türk Markaları"
+      ],
+      "area": "Al Mankhool",
+      "kind": "Türk mobilyası",
+      "entityType": "business",
+      "address": "Office L18/03-93, Burjuman Business Tower, Sheikh Khalifa Bin Zayed Street, Al Mankhool, Dubai, UAE",
+      "phone": "+971585950114",
+      "website": "https://mourahhome.ae/",
+      "description": "Türkiye üretimi mobilya ve ev ürünleri. Adres resmî ofis adresidir; ziyaret öncesi iletişime geçin.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://mourahhome.ae/cdn/shop/files/M.KT.02.23423.2hero.jpg?v=1758879705&width=832",
+          "source": "https://mourahhome.ae/",
+          "caption": "Mourah Home · resmî ürün fotoğrafı",
+          "asset": "assets/images/discover/mourah.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://mourahhome.ae/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "active-auto",
+      "name": "Active Auto Workshop",
+      "category": "Otomotiv",
+      "categories": [
+        "Otomotiv"
+      ],
+      "area": "Al Quoz",
+      "kind": "Otomotiv servisi",
+      "entityType": "business",
+      "address": "22nd Street, Al Quoz Industrial Area 4, Dubai, UAE",
+      "phone": "+971501978160",
+      "website": "https://activeauto.me/turkish-garage-dubai",
+      "description": "Türkçe araç bakımı, mekanik, kaporta ve klima hizmetleri.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://activeauto.me/opengraph.jpg",
+          "source": "https://activeauto.me/",
+          "caption": "Active Auto · resmî işletme görseli",
+          "asset": "assets/images/discover/auto.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://activeauto.me/turkish-garage-dubai"
+      ],
+      "turkishService": true,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true,
+      "latitude": 25.1095916,
+      "longitude": 55.2292372,
+      "coordinateSource": "https://activeauto.me/turkish-garage-dubai",
+      "rating": 4.8,
+      "ratingSource": "https://activeauto.me/",
+      "ratingLabel": "İşletmenin sitesinde yayımladığı puan",
+      "whatsapp": "+971501978160"
+    },
+    {
+      "id": "kargo-dubai",
+      "name": "KARGO DUBAI",
+      "category": "Kargo & Taşıma",
+      "categories": [
+        "Kargo & Taşıma"
+      ],
+      "area": "Türkiye → Dubai",
+      "kind": "Kargo & taşıma",
+      "entityType": "business",
+      "address": "Aksaray Mahallesi, Küçük Langa Caddesi, Yeni Emniyet Terminali No:69/10, Fatih, İstanbul, Türkiye",
+      "phone": "+905065596121",
+      "website": "https://kargodubai.com/",
+      "description": "Türkiye’den Dubai’ye kapıdan kapıya kargo ve ev taşıma. Yayımlanan iletişim adresi İstanbul ofisidir.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://kargodubai.com/gonderiler/foto1.jpg",
+          "source": "https://kargodubai.com/",
+          "caption": "KARGO DUBAI · resmî gönderi fotoğrafı",
+          "asset": "assets/images/discover/kargo-photo.jpg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://kargodubai.com/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true,
+      "whatsapp": "+905065596121"
+    },
+    {
+      "id": "okan-pictures",
+      "name": "Okan Atabay · Okan Pictures",
+      "category": "Fotoğraf & Organizasyon",
+      "categories": [
+        "Fotoğraf & Organizasyon"
+      ],
+      "area": "Dubai",
+      "kind": "Video & prodüksiyon",
+      "entityType": "professional",
+      "address": null,
+      "phone": "+971585059840",
+      "website": "https://okanpictures.com/contact/",
+      "description": "Dubai genelinde işletmeler için video prodüksiyonu. Türkçe, İngilizce ve Almanca iletişim.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://okanpictures.com/images/okan-atabay-portrait.webp",
+          "source": "https://okanpictures.com/contact/",
+          "caption": "Okan Atabay · resmî profesyonel portresi",
+          "asset": "assets/images/discover/okan.webp"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://okanpictures.com/contact/"
+      ],
+      "turkishService": true,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true,
+      "whatsapp": "+971585059840"
+    },
+    {
+      "id": "sayin",
+      "name": "Sayın Law UAE",
+      "category": "Profesyonel Destek",
+      "categories": [
+        "Profesyonel Destek"
+      ],
+      "area": "Business Bay",
+      "kind": "Hukuk & danışmanlık",
+      "entityType": "business",
+      "address": "Office 401, Bay Square 10, Business Bay, Dubai, UAE",
+      "phone": "+971586921278",
+      "website": "https://sayinlegal.ae/contact",
+      "description": "Dubai’de hukuk ve işletme danışmanlığı. Görüşme kapsamını doğrudan ofisle belirleyin.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://minio.nogaps.com/storage/Root/sayin-law-uae/images2x/hero-left.webp",
+          "source": "https://sayinlegal.ae/",
+          "caption": "Sayın Law UAE · resmî site tanıtım görseli",
+          "asset": "assets/images/discover/sayin.webp"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://sayinlegal.ae/contact"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    },
+    {
+      "id": "turkish-vet",
+      "name": "Turkish Vet Clinic · Jubail",
+      "category": "Pet",
+      "categories": [
+        "Pet"
+      ],
+      "area": "Sharjah",
+      "kind": "Veteriner kliniği",
+      "entityType": "business",
+      "address": "Al Jubail, Al Qasimiah, Sharjah, UAE",
+      "phone": "+971543532215",
+      "website": "https://turkishvetclinic.com/contact-us/",
+      "description": "Sharjah’daki veteriner kliniği. Jubail ve Al Hoshy şubeleri için arayarak şube/randevu teyidi alın.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://turkishvetclinic.com/wp-content/uploads/2026/03/WhatsApp-Image-2026-02-20-at-23.25.51-2.jpeg",
+          "source": "https://turkishvetclinic.com/",
+          "caption": "Turkish Vet Clinic · resmî ekip fotoğrafı",
+          "asset": "assets/images/discover/vet.jpeg"
+        }
+      ],
+      "checkedAt": "2026-09-06",
+      "sources": [
+        "https://turkishvetclinic.com/contact-us/"
+      ],
+      "turkishService": false,
+      "turkishConnection": "Türkiye bağlantısı / Türk ürünleri veya profesyonel profil",
+      "active": true
+    }
+  ]
 }
