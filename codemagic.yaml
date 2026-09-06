@@ -13,16 +13,26 @@ workflows:
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
       - name: Restore application source and logo
         script: |
-          mkdir -p assets/images
-          base64 -D -i lib/main.dart.gz.b64 -o /tmp/main.dart.gz
-          gzip -dc /tmp/main.dart.gz > lib/main.dart
-          base64 -D -i assets/images/logo.b64 -o assets/images/logo.png
+          python3 - <<'PY'
+          import base64, gzip
+          from pathlib import Path
+
+          main_b64 = Path('lib/main.dart.gz.b64').read_text().strip()
+          main_gz = base64.b64decode(main_b64, validate=True)
+          Path('lib/main.dart').write_bytes(gzip.decompress(main_gz))
+
+          logo_b64 = Path('assets/images/logo.b64').read_text().strip()
+          logo = base64.b64decode(logo_b64, validate=True)
+          if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
+              raise SystemExit('logo is not a valid PNG')
+          Path('assets/images').mkdir(parents=True, exist_ok=True)
+          Path('assets/images/logo.png').write_bytes(logo)
+          PY
           test -s lib/main.dart
           test -s assets/images/logo.png
+          file assets/images/logo.png
       - name: Get packages
         script: flutter pub get
-      - name: Generate iOS app icons
-        script: dart run flutter_launcher_icons
       - name: Analyze
         script: flutter analyze
       - name: Build iOS simulator app
@@ -49,16 +59,26 @@ workflows:
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
       - name: Restore application source and logo
         script: |
-          mkdir -p assets/images
-          base64 -D -i lib/main.dart.gz.b64 -o /tmp/main.dart.gz
-          gzip -dc /tmp/main.dart.gz > lib/main.dart
-          base64 -D -i assets/images/logo.b64 -o assets/images/logo.png
+          python3 - <<'PY'
+          import base64, gzip
+          from pathlib import Path
+
+          main_b64 = Path('lib/main.dart.gz.b64').read_text().strip()
+          main_gz = base64.b64decode(main_b64, validate=True)
+          Path('lib/main.dart').write_bytes(gzip.decompress(main_gz))
+
+          logo_b64 = Path('assets/images/logo.b64').read_text().strip()
+          logo = base64.b64decode(logo_b64, validate=True)
+          if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
+              raise SystemExit('logo is not a valid PNG')
+          Path('assets/images').mkdir(parents=True, exist_ok=True)
+          Path('assets/images/logo.png').write_bytes(logo)
+          PY
           test -s lib/main.dart
           test -s assets/images/logo.png
+          file assets/images/logo.png
       - name: Get packages
         script: flutter pub get
-      - name: Generate iOS app icons
-        script: dart run flutter_launcher_icons
       - name: Analyze
         script: flutter analyze
       - name: Initialize keychain
