@@ -5,8 +5,17 @@ import 'package:bizimdubai/main.dart';
 void main() {
   testWidgets('Restaurant shortcut opens the filtered directory and returns', (tester) async {
     await tester.pumpWidget(const MaterialApp(home: Scaffold(body: HomePage())));
-    await tester.ensureVisible(find.widgetWithText(OutlinedButton, 'Mekanlar'));
-    await tester.tap(find.widgetWithText(OutlinedButton, 'Mekanlar'));
+    final shortcut = find.widgetWithText(OutlinedButton, 'Mekanlar');
+    // A built child can still be below the viewport in the tall hero panel.
+    // Scroll the vertical page until the button can actually receive a tap.
+    await tester.scrollUntilVisible(
+      shortcut.hitTestable(),
+      200,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.pumpAndSettle();
+    expect(shortcut.hitTestable(), findsOneWidget);
+    await tester.tap(shortcut.hitTestable());
     await tester.pumpAndSettle();
     expect(find.text('Bosporus Turkish Cuisine · The Beach'), findsWidgets);
     expect(find.text('Dr Tosun Dental Clinic'), findsNothing);
