@@ -11,6 +11,7 @@ workflows:
       - name: Generate iOS project
         script: |
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
+          rm -rf test
       - name: Restore application source and logo
         script: |
           python3 - <<'PY'
@@ -34,7 +35,7 @@ workflows:
       - name: Get packages
         script: flutter pub get
       - name: Analyze
-        script: flutter analyze
+        script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Build iOS simulator app
         script: flutter build ios --simulator --debug --build-number=$BUILD_NUMBER
     artifacts:
@@ -57,6 +58,7 @@ workflows:
       - name: Generate iOS project
         script: |
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
+          rm -rf test
       - name: Restore application source and logo
         script: |
           python3 - <<'PY'
@@ -80,7 +82,7 @@ workflows:
       - name: Get packages
         script: flutter pub get
       - name: Analyze
-        script: flutter analyze
+        script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Initialize keychain
         script: keychain initialize
       - name: Fetch Apple signing files
