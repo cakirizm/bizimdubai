@@ -24,9 +24,9 @@ class BizimDubaiApp extends StatelessWidget {
         fontFamily: 'SF Pro Display',
         textTheme: const TextTheme(
           headlineLarge: TextStyle(fontWeight: FontWeight.w900, letterSpacing: -1.3),
-          headlineMedium: TextStyle(fontWeight: FontWeight.w850, letterSpacing: -.9),
-          titleLarge: TextStyle(fontWeight: FontWeight.w850, letterSpacing: -.5),
-          titleMedium: TextStyle(fontWeight: FontWeight.w750),
+          headlineMedium: TextStyle(fontWeight: FontWeight.w800, letterSpacing: -.9),
+          titleLarge: TextStyle(fontWeight: FontWeight.w800, letterSpacing: -.5),
+          titleMedium: TextStyle(fontWeight: FontWeight.w700),
           bodyLarge: TextStyle(height: 1.35),
           bodyMedium: TextStyle(height: 1.35),
         ),
@@ -354,7 +354,7 @@ class AppHeader extends StatelessWidget {
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15), border: Border.all(color: const Color(0xFFECEDEF))),
-        child: const Row(children: [Icon(Icons.location_on_rounded, color: brand, size: 18), SizedBox(width: 4), Text('Dubai', style: TextStyle(fontWeight: FontWeight.w750, fontSize: 13))]),
+        child: const Row(children: [Icon(Icons.location_on_rounded, color: brand, size: 18), SizedBox(width: 4), Text('Dubai', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13))]),
       ),
       const SizedBox(width: 8),
       Container(
@@ -500,7 +500,7 @@ class QuickAccessCard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 13.2, fontWeight: FontWeight.w850, height: 1.08, color: ink)),
+                Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 13.2, fontWeight: FontWeight.w800, height: 1.08, color: ink)),
                 const SizedBox(height: 4),
                 Expanded(child: Text(item.subtitle, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 10.6, color: muted, fontWeight: FontWeight.w600, height: 1.18))),
               ]),
@@ -535,14 +535,14 @@ class VenueCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w850, fontSize: 15.5)),
+              Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15.5)),
               const SizedBox(height: 4),
               Text(meta, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: muted, fontSize: 12.5, fontWeight: FontWeight.w600)),
               const SizedBox(height: 9),
               Row(children: [
                 const Icon(Icons.star_rounded, color: Color(0xFFFFB400), size: 19),
                 const SizedBox(width: 3),
-                Text(rating, style: const TextStyle(fontWeight: FontWeight.w850)),
+                Text(rating, style: const TextStyle(fontWeight: FontWeight.w800)),
                 const Spacer(),
                 const Icon(Icons.location_on_outlined, size: 17, color: muted),
               ]),
@@ -573,7 +573,7 @@ class EventCard extends StatelessWidget {
         ClipRRect(borderRadius: BorderRadius.circular(14), child: SizedBox(width: 68, height: 62, child: Image.network(image, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(color: const Color(0xFFF2F3F5))))),
         const SizedBox(width: 12),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(title, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w850, fontSize: 15)),
+          Text(title, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
           const SizedBox(height: 5),
           Text(meta, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 12.2)),
         ])),
@@ -598,7 +598,7 @@ class CommunityCallout extends StatelessWidget {
         CircleAvatar(radius: 25, backgroundColor: Colors.white, child: Icon(Icons.groups_2_rounded, color: brand, size: 27)),
         SizedBox(width: 13),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Türk topluluğuna katıl', style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w850, color: ink)),
+          Text('Türk topluluğuna katıl', style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w800, color: ink)),
           SizedBox(height: 3),
           Text('Etkinlikler, duyurular ve yeni bağlantılar', style: TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 12.8)),
         ])),
@@ -618,7 +618,7 @@ class SectionTitle extends StatelessWidget {
     return Row(children: [
       Expanded(child: Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: ink, letterSpacing: -.6))),
       if (trailing != null) Row(mainAxisSize: MainAxisSize.min, children: [
-        Text(trailing!, style: const TextStyle(color: brand, fontWeight: FontWeight.w750, fontSize: 13.3)),
+        Text(trailing!, style: const TextStyle(color: brand, fontWeight: FontWeight.w700, fontSize: 13.3)),
         const SizedBox(width: 4),
         const Icon(Icons.arrow_forward_rounded, color: brand, size: 16),
       ]),
