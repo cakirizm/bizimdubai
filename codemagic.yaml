@@ -1,27 +1,32 @@
 workflows:
-  android-release:
-    name: BizimDubai Android APK
+  ios-ci:
+    name: BizimDubai iOS CI
     max_build_duration: 60
-    instance_type: linux_x2
+    instance_type: mac_mini_m2
     environment:
       flutter: stable
+      xcode: latest
+      cocoapods: default
     scripts:
-      - name: Generate Android project
-        script: flutter create --platforms=android --org com.cakirizm --project-name bizimdubai .
-      - name: Restore generated sources and brand logo
+      - name: Generate iOS project
+        script: |
+          flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
+      - name: Restore application source and logo
         script: |
           base64 --decode lib/main.dart.gz.b64 | gzip -d > lib/main.dart
+          mkdir -p assets/images
           base64 --decode assets/images/logo.b64 > assets/images/logo.png
       - name: Get packages
         script: flutter pub get
-      - name: Generate app icons
+      - name: Generate iOS app icons
         script: dart run flutter_launcher_icons
       - name: Analyze
         script: flutter analyze
-      - name: Build release APK
-        script: flutter build apk --release --build-number=$BUILD_NUMBER
+      - name: Build iOS simulator app
+        script: flutter build ios --simulator --debug --build-number=$BUILD_NUMBER
     artifacts:
-      - build/app/outputs/flutter-apk/*.apk
+      - build/ios/iphonesimulator/Runner.app
+      - /tmp/xcodebuild_logs/*.log
 
   ios-testflight:
     name: BizimDubai iOS TestFlight
@@ -37,15 +42,19 @@ workflows:
       cocoapods: default
     scripts:
       - name: Generate iOS project
-        script: flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
-      - name: Restore generated sources and brand logo
+        script: |
+          flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
+      - name: Restore application source and logo
         script: |
           base64 --decode lib/main.dart.gz.b64 | gzip -d > lib/main.dart
+          mkdir -p assets/images
           base64 --decode assets/images/logo.b64 > assets/images/logo.png
       - name: Get packages
         script: flutter pub get
-      - name: Generate app icons
+      - name: Generate iOS app icons
         script: dart run flutter_launcher_icons
+      - name: Analyze
+        script: flutter analyze
       - name: Initialize keychain
         script: keychain initialize
       - name: Fetch Apple signing files
@@ -59,8 +68,6 @@ workflows:
         script: xcode-project use-profiles
       - name: Install CocoaPods
         script: find . -name "Podfile" -execdir pod install \;
-      - name: Analyze
-        script: flutter analyze
       - name: Build IPA
         script: |
           flutter build ipa --release \
@@ -70,6 +77,7 @@ workflows:
     artifacts:
       - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
+      - build/ios/archive/*.xcarchive
     publishing:
       app_store_connect:
         api_key: $APP_STORE_CONNECT_PRIVATE_KEY
