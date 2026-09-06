@@ -51,6 +51,9 @@ workflows:
         - appstore_credentials
       vars:
         BUNDLE_ID: com.cakirizm.bizimdubai
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.cakirizm.bizimdubai
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -83,15 +86,6 @@ workflows:
         script: flutter pub get
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
-      - name: Initialize keychain
-        script: keychain initialize
-      - name: Fetch Apple signing files
-        script: |
-          app-store-connect fetch-signing-files "$BUNDLE_ID" \
-            --type IOS_APP_STORE \
-            --create
-      - name: Add signing certificates
-        script: keychain add-certificates
       - name: Apply provisioning profiles
         script: xcode-project use-profiles
       - name: Install CocoaPods
