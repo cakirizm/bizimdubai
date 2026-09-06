@@ -1,14 +1,22 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
 part 'home/home_screen.dart';
+part 'discover/catalog.dart';
+part 'discover/discover_screen.dart';
+part 'discover/seed_data.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await discoverRepository.initialize();
   runApp(const BizimDubaiApp());
+  unawaited(discoverRepository.refresh());
 }
 
 class BizimDubaiApp extends StatelessWidget {
@@ -209,264 +217,6 @@ class TodayCard extends StatelessWidget {
   );
 }
 
-class DiscoverItem {
-  const DiscoverItem({required this.name, required this.category, required this.area, required this.kind, this.rating, this.reviews, this.phone, this.website, this.turkishBusiness = false, this.turkishService = true, this.subtitle = ''});
-  final String name;
-  final String category;
-  final String area;
-  final String kind;
-  final double? rating;
-  final int? reviews;
-  final String? phone;
-  final String? website;
-  final bool turkishBusiness;
-  final bool turkishService;
-  final String subtitle;
-}
-
-const discoverItems = <DiscoverItem>[
-  DiscoverItem(name: 'Bosporus Turkish Cuisine · The Beach', category: 'Restoranlar', area: 'JBR', kind: 'Türk restoranı', rating: 4.9, reviews: 25260, phone: '+97143808090', turkishBusiness: true, subtitle: 'Türk mutfağı · Kahvaltı · Kebap'),
-  DiscoverItem(name: 'Bosporus Turkish Cuisine · Dubai Mall', category: 'Restoranlar', area: 'Downtown', kind: 'Türk restoranı', rating: 4.9, reviews: 16893, phone: '+97143808090', turkishBusiness: true, subtitle: 'Waterfront · Türk mutfağı'),
-  DiscoverItem(name: 'ZouZou Turkish & Lebanese · JBR', category: 'Restoranlar', area: 'JBR', kind: 'Türk & Lübnan', rating: 4.8, reviews: 13797, phone: '+97145640778', turkishBusiness: true, subtitle: 'Türk & Lübnan mutfağı'),
-  DiscoverItem(name: 'Hafız Mustafa 1864 · Dubai Mall', category: 'Restoranlar', area: 'Downtown', kind: 'Tatlı & Cafe', rating: 4.9, reviews: 30516, phone: '+97145844694', turkishBusiness: true, subtitle: 'Baklava · Türk tatlıları · Cafe'),
-  DiscoverItem(name: 'Çeşme Bazlama Kahvaltı', category: 'Restoranlar', area: 'Al Safa', kind: 'Kahvaltı', rating: 4.7, reviews: 4301, phone: '+97142364056', turkishBusiness: true, subtitle: 'Türk kahvaltısı'),
-  DiscoverItem(name: 'Sultan Saray', category: 'Restoranlar', area: 'Al Thanya', kind: 'Türk restoranı', rating: 4.4, reviews: 4279, phone: '+97142290600', turkishBusiness: true, subtitle: 'Türk mutfağı · Aile restoranı'),
-  DiscoverItem(name: 'Turquaz Gourmet · Turkish Market', category: 'Market & Gıda', area: 'Umm Suqeim 2', kind: 'Türk marketi', rating: 4.9, reviews: 720, phone: '+97142984621', website: 'https://turquazgourmet.ae/', turkishBusiness: true, subtitle: 'Kasap · Fırın · Şarküteri · Türk ürünleri'),
-  DiscoverItem(name: 'Galata Fine Foods · Turkish Market', category: 'Market & Gıda', area: 'Al Wasl', kind: 'Türk marketi', rating: 4.5, reviews: 36, phone: '+97142501317', turkishBusiness: true, subtitle: 'Fırın · Et · Peynir · Kiler ürünleri'),
-  DiscoverItem(name: 'Butcher Emre', category: 'Market & Gıda', area: 'Jumeirah 3', kind: 'Kasap', rating: 4.7, reviews: 63, phone: '+97145915873', subtitle: 'Et & kasap ürünleri'),
-  DiscoverItem(name: 'ADRES Turkish Gents Saloon', category: 'Güzellik & Bakım', area: 'Al Barsha', kind: 'Erkek berberi', rating: 4.8, reviews: 1007, phone: '+971504261841', turkishBusiness: true, subtitle: 'Saç · Sakal · Bakım'),
-  DiscoverItem(name: 'ANTIOCHIA Turkish Gents Salon · Barsha', category: 'Güzellik & Bakım', area: 'Al Barsha', kind: 'Erkek berberi', rating: 4.8, reviews: 896, phone: '+97143235233', turkishBusiness: true, subtitle: 'Türk berberliği'),
-  DiscoverItem(name: 'The Hair Palace by Ozzy', category: 'Güzellik & Bakım', area: 'Jumeirah / Safa 2', kind: 'Kadın kuaför & beauty', phone: '+971501092102', website: 'https://www.thehairpalace.ae/', turkishBusiness: true, subtitle: 'Hair color · Cut · Extensions · Nails · Makeup'),
-  DiscoverItem(name: 'Las Meninas Beauty Salon & SPA', category: 'Güzellik & Bakım', area: 'Dubailand', kind: 'Kadın beauty & spa', phone: '+971582789920', website: 'https://lasmeninasdubailand.ae/', turkishService: true, subtitle: 'Hair · Nails · Lashes · Massage · Makeup'),
-  DiscoverItem(name: 'Dr Tosun Dental Clinic', category: 'Sağlık', area: 'Umm Suqeim 1', kind: 'Diş kliniği', rating: 4.9, reviews: 123, phone: '+97143435051', turkishService: true, subtitle: 'Türkçe diş hizmeti'),
-  DiscoverItem(name: 'Elif Basol', category: 'Sağlık', area: 'Dubai', kind: 'Kadın doğum uzmanı', turkishService: true, subtitle: 'Türk doktor'),
-  DiscoverItem(name: 'Gözde Ercan', category: 'Sağlık', area: 'Dubai', kind: 'Pediatri', turkishService: true, subtitle: 'Türk doktor'),
-  DiscoverItem(name: 'Dilek Eryılmaz', category: 'Sağlık', area: 'Dubai', kind: 'Dermatoloji', turkishService: true, subtitle: 'Türk doktor'),
-  DiscoverItem(name: 'Hacer Subaşı', category: 'Sağlık', area: 'Dubai', kind: 'Psikolog', turkishService: true, subtitle: 'Türkçe psikoloji hizmeti'),
-  DiscoverItem(name: 'Doğuş Atalık', category: 'Ev & Emlak', area: 'Dubai', kind: 'Emlak danışmanı', turkishService: true, subtitle: 'Türkçe konuşan emlak danışmanı'),
-  DiscoverItem(name: 'Umut Marmara', category: 'Ev & Emlak', area: 'Dubai', kind: 'Emlak danışmanı', turkishService: true, subtitle: 'Türkçe konuşan emlak danışmanı'),
-  DiscoverItem(name: 'Bekir Doğan', category: 'Ev & Emlak', area: 'Dubai', kind: 'Emlak danışmanı', rating: 5.0, turkishService: true, subtitle: 'Türk emlak danışmanı'),
-  DiscoverItem(name: 'OYDO Turkish School Dubai', category: 'Çocuk & Eğitim', area: 'Dubai', kind: 'Türkçe eğitim', turkishService: true, subtitle: 'Türkçe eğitim · Çocuklar'),
-  DiscoverItem(name: 'Kübra Karakulah', category: 'Çocuk & Eğitim', area: 'Dubai', kind: 'Türkçe tutor', turkishService: true, subtitle: 'Özel Türkçe dersleri'),
-  DiscoverItem(name: 'Elvan Şener', category: 'Spor & Wellness', area: 'Dubai', kind: 'Personal trainer', turkishService: true, subtitle: 'Türk lisanslı trainer · EREPS'),
-  DiscoverItem(name: 'Beste Ertürk', category: 'Spor & Wellness', area: 'Dubai', kind: 'Personal trainer', turkishService: true, subtitle: 'REPS UAE · Türk trainer'),
-  DiscoverItem(name: 'Active Auto', category: 'Otomotiv', area: 'Al Quoz', kind: 'Türk garajı', phone: '+971501978160', website: 'https://activeauto.me/turkish-garage-dubai', turkishBusiness: true, subtitle: 'Bakım · Mekanik · Klima · Kaporta · Sigorta hasarı'),
-  DiscoverItem(name: 'KARGO DUBAI', category: 'Kargo & Taşıma', area: 'Türkiye ↔ Dubai', kind: 'Kargo & taşıma', phone: '+905065596121', website: 'https://kargodubai.com/', turkishService: true, subtitle: 'Kapıdan kapıya · Ev taşıma · Ticari sevkiyat'),
-  DiscoverItem(name: 'Okan Pictures', category: 'Fotoğraf & Organizasyon', area: 'Dubai', kind: 'Fotoğrafçı', turkishService: true, subtitle: 'Türkçe fotoğraf & event çekimi'),
-  DiscoverItem(name: 'Onur Güney', category: 'Fotoğraf & Organizasyon', area: 'Dubai', kind: 'Fotoğrafçı', turkishService: true, subtitle: 'Portre · Event · Lifestyle'),
-  DiscoverItem(name: 'Sayın Law UAE', category: 'Profesyonel Destek', area: 'Dubai', kind: 'Hukuk & danışmanlık', website: 'https://sayinlegal.ae/', turkishService: true, subtitle: 'Türkçe hukuk · Vergi · Danışmanlık'),
-  DiscoverItem(name: 'Mourah Home', category: 'Mağazalar & Türk Markaları', area: 'Dubai', kind: 'Türk mobilyası', phone: '+971585950114', website: 'https://mourahhome.ae/', turkishBusiness: true, subtitle: 'Modern Türk mobilyası'),
-  DiscoverItem(name: 'Home Identity UAE', category: 'Mağazalar & Türk Markaları', area: 'Dubai Outlet Mall', kind: 'Halı & ev dekor', phone: '+971045535105', website: 'https://homeidentity.com/', turkishService: true, subtitle: 'Türk halıları · Kilim · Homeware'),
-  DiscoverItem(name: 'Turkish Vet Clinic UAE', category: 'Pet', area: 'Sharjah · Yakın UAE', kind: 'Veteriner & grooming', website: 'https://turkishvetclinic.com/', turkishBusiness: true, subtitle: 'Dr. Ömer Kundakçı · Veteriner hizmetleri'),
-  DiscoverItem(name: 'TurkFest', category: 'Kültür & Türk Etkinlikleri', area: 'Dubai', kind: 'Türk expat etkinlikleri', website: 'https://www.turkfest.net/', turkishBusiness: true, subtitle: 'Workshop · Networking · Kültür etkinlikleri'),
-];
-
-const discoverCategories = <({String title, IconData icon, Color color})>[
-  (title: 'Restoranlar', icon: Icons.restaurant, color: Color(0xFFFFE8E5)),
-  (title: 'Sağlık', icon: Icons.local_hospital, color: Color(0xFFE6F4FF)),
-  (title: 'Market & Gıda', icon: Icons.local_grocery_store, color: Color(0xFFE8F7EC)),
-  (title: 'Güzellik & Bakım', icon: Icons.content_cut, color: Color(0xFFFFE8F5)),
-  (title: 'Ev & Emlak', icon: Icons.home_work, color: Color(0xFFFFF1D8)),
-  (title: 'Çocuk & Eğitim', icon: Icons.school, color: Color(0xFFEFE8FF)),
-  (title: 'Spor & Wellness', icon: Icons.fitness_center, color: Color(0xFFE4F7F5)),
-  (title: 'Mağazalar & Türk Markaları', icon: Icons.shopping_bag, color: Color(0xFFFFEDE0)),
-  (title: 'Otomotiv', icon: Icons.directions_car, color: Color(0xFFE7EEF7)),
-  (title: 'Kargo & Taşıma', icon: Icons.local_shipping, color: Color(0xFFEFF7E4)),
-  (title: 'Fotoğraf & Organizasyon', icon: Icons.photo_camera, color: Color(0xFFFFEAF1)),
-  (title: 'Profesyonel Destek', icon: Icons.business_center, color: Color(0xFFEDEDED)),
-  (title: 'Pet', icon: Icons.pets, color: Color(0xFFFFF0D8)),
-  (title: 'Kültür & Türk Etkinlikleri', icon: Icons.theater_comedy, color: Color(0xFFECE9FF)),
-];
-
-class DiscoverPage extends StatefulWidget {
-  const DiscoverPage({super.key, this.initialCategory});
-  final String? initialCategory;
-  @override
-  State<DiscoverPage> createState() => _DiscoverPageState();
-}
-
-class _DiscoverPageState extends State<DiscoverPage> {
-  String query = '';
-  late String? selectedCategory = widget.initialCategory;
-
-  List<DiscoverItem> get filtered => discoverItems.where((e) {
-    final q = query.toLowerCase().trim();
-    final categoryOk = selectedCategory == null || e.category == selectedCategory;
-    final textOk = q.isEmpty || '${e.name} ${e.category} ${e.area} ${e.kind} ${e.subtitle}'.toLowerCase().contains(q);
-    return categoryOk && textOk;
-  }).toList();
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(children: [
-        Padding(padding: const EdgeInsets.fromLTRB(18, 14, 18, 8), child: Column(children: [
-          const BrandHeader(compact: true),
-          const SizedBox(height: 18),
-          TextField(
-            onChanged: (v) => setState(() => query = v),
-            decoration: InputDecoration(
-              hintText: 'Restoran, Türk doktor, berber, market ara…',
-              prefixIcon: const Icon(Icons.search),
-              suffixIcon: const Icon(Icons.tune),
-              filled: true,
-              fillColor: Colors.white,
-              border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(18)),
-            ),
-          ),
-        ])),
-        Expanded(child: CustomScrollView(slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(18, 8, 18, 8),
-            sliver: SliverToBoxAdapter(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const SectionTitle(title: 'Keşfet'),
-              const SizedBox(height: 4),
-              const Text('Dubai’de Türk işletmeleri ve Türkçe hizmet verenleri bul.', style: TextStyle(color: Color(0xFF6B7280), fontWeight: FontWeight.w600)),
-              const SizedBox(height: 14),
-              SizedBox(height: 106, child: ListView.separated(scrollDirection: Axis.horizontal, itemCount: discoverCategories.length, separatorBuilder: (_, __) => const SizedBox(width: 10), itemBuilder: (_, i) {
-                final c = discoverCategories[i];
-                final selected = selectedCategory == c.title;
-                return InkWell(
-                  onTap: () => setState(() => selectedCategory = selected ? null : c.title),
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(width: 104, padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: selected ? const Color(0xFFE30613) : Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: selected ? const Color(0xFFE30613) : const Color(0xFFEFF0F2))), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Container(width: 42, height: 42, decoration: BoxDecoration(color: selected ? Colors.white.withValues(alpha: .18) : c.color, borderRadius: BorderRadius.circular(14)), child: Icon(c.icon, color: selected ? Colors.white : const Color(0xFFE30613))),
-                    const SizedBox(height: 7),
-                    Text(c.title.replaceAll(' & Türk Markaları', ''), maxLines: 2, textAlign: TextAlign.center, style: TextStyle(fontSize: 11, height: 1.05, color: selected ? Colors.white : const Color(0xFF1F2937), fontWeight: FontWeight.w800)),
-                  ])),
-                );
-              })),
-              const SizedBox(height: 14),
-              SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: [
-                FilterChip(label: const Text('Tümü'), selected: selectedCategory == null, onSelected: (_) => setState(() => selectedCategory = null)),
-                const SizedBox(width: 8),
-                const Chip(avatar: Icon(Icons.language, size: 16), label: Text('Türkçe hizmet')),
-                const SizedBox(width: 8),
-                const Chip(avatar: Icon(Icons.star, size: 16, color: Color(0xFFFFB300)), label: Text('En yüksek puan')),
-                const SizedBox(width: 8),
-                const Chip(avatar: Icon(Icons.location_on, size: 16), label: Text('Yakınımda')),
-              ])),
-              const SizedBox(height: 18),
-              SectionTitle(title: selectedCategory ?? 'Öne çıkanlar', action: '${filtered.length} sonuç'),
-            ])),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(18, 5, 18, 120),
-            sliver: SliverList.separated(
-              itemCount: filtered.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemBuilder: (_, i) => DiscoverCard(item: filtered[i]),
-            ),
-          )
-        ]))
-      ]),
-    );
-  }
-}
-
-class DiscoverCard extends StatelessWidget {
-  const DiscoverCard({super.key, required this.item});
-  final DiscoverItem item;
-
-  @override
-  Widget build(BuildContext context) {
-    final icon = switch (item.category) {
-      'Restoranlar' => Icons.restaurant,
-      'Sağlık' => Icons.local_hospital,
-      'Market & Gıda' => Icons.local_grocery_store,
-      'Güzellik & Bakım' => Icons.content_cut,
-      'Ev & Emlak' => Icons.home_work,
-      'Çocuk & Eğitim' => Icons.school,
-      'Spor & Wellness' => Icons.fitness_center,
-      'Otomotiv' => Icons.directions_car,
-      'Kargo & Taşıma' => Icons.local_shipping,
-      'Pet' => Icons.pets,
-      _ => Icons.place,
-    };
-    return InkWell(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => PlaceDetailPage(item: item))),
-      borderRadius: BorderRadius.circular(22),
-      child: Ink(
-        height: 154 * MediaQuery.textScalerOf(context).scale(1).clamp(1.0, 2.0),
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(22)),
-        child: Row(children: [
-          Container(width: 104, height: 106, decoration: BoxDecoration(borderRadius: BorderRadius.circular(17), gradient: const LinearGradient(colors: [Color(0xFFFFE3E6), Color(0xFFFFF8F8)])), child: Stack(alignment: Alignment.center, children: [Icon(icon, size: 48, color: const Color(0xFFE30613)), Positioned(right: 7, top: 7, child: Container(padding: const EdgeInsets.all(5), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: const Icon(Icons.arrow_forward, size: 15))) ])),
-          const SizedBox(width: 12),
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
-            Row(children: [Expanded(child: Text(item.name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15))), if (item.turkishBusiness) const Text(' 🇹🇷', style: TextStyle(fontSize: 14))]),
-            const SizedBox(height: 4),
-            Text(item.subtitle.isEmpty ? item.kind : item.subtitle, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11.5, color: Color(0xFF6B7280), fontWeight: FontWeight.w600)),
-            const SizedBox(height: 8),
-            Row(children: [
-              if (item.rating != null) ...[const Icon(Icons.star_rounded, size: 17, color: Color(0xFFFFB300)), Text('${item.rating}', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12)), if (item.reviews != null) Text(' (${compactCount(item.reviews!)})', style: const TextStyle(fontSize: 10, color: Color(0xFF8B9098))), const SizedBox(width: 8)],
-              const Icon(Icons.location_on_outlined, size: 15, color: Color(0xFF6B7280)), Expanded(child: Text(item.area, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280), fontWeight: FontWeight.w700))),
-            ]),
-            if (item.turkishService) Padding(padding: const EdgeInsets.only(top: 6), child: Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4), decoration: BoxDecoration(color: const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(999)), child: const Text('🗣️ Türkçe hizmet', style: TextStyle(fontSize: 9.5, fontWeight: FontWeight.w800, color: Color(0xFFB0000A)))))
-          ]))
-        ]),
-      ),
-    );
-  }
-}
-
-String compactCount(int n) {
-  if (n >= 1000) return '${(n / 1000).toStringAsFixed(n >= 10000 ? 0 : 1)}K';
-  return '$n';
-}
-
-class PlaceDetailPage extends StatelessWidget {
-  const PlaceDetailPage({super.key, required this.item});
-  final DiscoverItem item;
-
-  Future<void> _open(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) await launchUrl(uri, mode: LaunchMode.externalApplication);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(item.kind, style: const TextStyle(fontWeight: FontWeight.w900))),
-      body: ListView(padding: const EdgeInsets.fromLTRB(18, 0, 18, 40), children: [
-        Container(height: 210, decoration: BoxDecoration(borderRadius: BorderRadius.circular(26), gradient: const LinearGradient(colors: [Color(0xFFFFE3E6), Color(0xFFFFFAFA)])), child: Stack(alignment: Alignment.center, children: [const Icon(Icons.location_city, size: 110, color: Color(0x33E30613)), Positioned(right: 14, top: 14, child: CircleAvatar(backgroundColor: Colors.white, child: IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border))))])),
-        const SizedBox(height: 18),
-        Text(item.name, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 25, height: 1.05, letterSpacing: -0.7)),
-        const SizedBox(height: 8),
-        Wrap(spacing: 7, runSpacing: 7, children: [
-          if (item.rating != null) Chip(avatar: const Icon(Icons.star, color: Color(0xFFFFB300), size: 18), label: Text('${item.rating}${item.reviews != null ? ' · ${compactCount(item.reviews!)} yorum' : ''}')),
-          if (item.turkishBusiness) const Chip(label: Text('🇹🇷 Türk işletmesi')),
-          if (item.turkishService) const Chip(label: Text('🗣️ Türkçe hizmet')),
-        ]),
-        const SizedBox(height: 8),
-        ListTile(contentPadding: EdgeInsets.zero, leading: const CircleAvatar(child: Icon(Icons.location_on_outlined)), title: Text(item.area, style: const TextStyle(fontWeight: FontWeight.w800)), subtitle: Text(item.subtitle)),
-        const SizedBox(height: 10),
-        Row(children: [
-          Expanded(child: FilledButton.icon(onPressed: () => _open('https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent('${item.name} ${item.area} Dubai')}'), icon: const Icon(Icons.directions), label: const Text('Yol Tarifi'))),
-          const SizedBox(width: 8),
-          Expanded(child: OutlinedButton.icon(onPressed: item.phone == null ? null : () => _open('tel:${item.phone}'), icon: const Icon(Icons.call), label: const Text('Ara'))),
-        ]),
-        if (item.phone != null) ...[
-          const SizedBox(height: 8),
-          SizedBox(width: double.infinity, child: OutlinedButton.icon(onPressed: () => _open('https://wa.me/${item.phone!.replaceAll(RegExp(r'[^0-9]'), '')}'), icon: const Icon(Icons.chat), label: const Text('WhatsApp'))),
-        ],
-        if (item.website != null) ...[
-          const SizedBox(height: 8),
-          SizedBox(width: double.infinity, child: OutlinedButton.icon(onPressed: () => _open(item.website!), icon: const Icon(Icons.language), label: const Text('Resmî site / Menü'))),
-        ],
-        const SizedBox(height: 22),
-        const SectionTitle(title: 'Hakkında'),
-        const SizedBox(height: 8),
-        Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)), child: Text('${item.name}, BizimDubai Keşfet veritabanında ${item.kind.toLowerCase()} olarak listeleniyor. İşletme bilgileri ve Türkçe hizmet durumu yayın öncesi doğrulanarak güncellenir.', style: const TextStyle(height: 1.45, color: Color(0xFF4B5563), fontWeight: FontWeight.w600))),
-        const SizedBox(height: 18),
-        const SectionTitle(title: 'BizimDubai topluluğu'),
-        const SizedBox(height: 8),
-        Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: const Color(0xFFFFF4F5), borderRadius: BorderRadius.circular(20)), child: const Row(children: [Icon(Icons.forum_outlined, color: Color(0xFFE30613)), SizedBox(width: 12), Expanded(child: Text('Bu yer hakkında soru sor veya kendi deneyimini paylaş.', style: TextStyle(fontWeight: FontWeight.w800))), Icon(Icons.chevron_right)])),
-      ]),
-    );
-  }
-}
-
 class CommunityPage extends StatelessWidget {
   const CommunityPage({super.key});
   @override
@@ -560,7 +310,7 @@ class _CreateEventSheetState extends State<CreateEventSheet> {
       const SizedBox(height: 18),
       const Text('Etkinlik oluştur', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24)),
       const SizedBox(height: 12),
-      DropdownButtonFormField<String>(value: type, items: const ['Halı Saha','Padel','Maç İzleme','Kahve & Sosyal','Piknik & Outdoor','Oyun Gecesi','Koşu','Aile & Çocuk'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => setState(() => type = v ?? type), decoration: const InputDecoration(labelText: 'Etkinlik türü', border: OutlineInputBorder())),
+      DropdownButtonFormField<String>(initialValue: type, items: const ['Halı Saha','Padel','Maç İzleme','Kahve & Sosyal','Piknik & Outdoor','Oyun Gecesi','Koşu','Aile & Çocuk'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => setState(() => type = v ?? type), decoration: const InputDecoration(labelText: 'Etkinlik türü', border: OutlineInputBorder())),
       const SizedBox(height: 10),
       const TextField(decoration: InputDecoration(labelText: 'Başlık', hintText: 'Örn. Cuma Halı Saha', border: OutlineInputBorder())),
       const SizedBox(height: 10),
@@ -876,7 +626,7 @@ class _SplashGateState extends State<SplashGate> with SingleTickerProviderStateM
                       const SizedBox(height: 18),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
-                        decoration: BoxDecoration(color: Colors.white.withOpacity(.15), borderRadius: BorderRadius.circular(999), border: Border.all(color: Colors.white24)),
+                        decoration: BoxDecoration(color: Colors.white.withValues(alpha: .15), borderRadius: BorderRadius.circular(999), border: Border.all(color: Colors.white24)),
                         child: const Text('🇹🇷 Aynı kültür. Aynı şehir. Tek topluluk.', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 13.5)),
                       ),
                       const Spacer(),

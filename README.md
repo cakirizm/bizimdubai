@@ -14,7 +14,7 @@ Kırmızı-beyaz BizimDubai kimliği, büyük görsel kartlar, sade navigasyon v
 
 ## Build
 Codemagic `codemagic.yaml` içinde iki workflow içerir:
-- `android-release` → APK
+- `ios-ci` → iOS simülatör uygulaması
 - `ios-testflight` → IPA / TestFlight hazırlığı
 
 ### iOS Codemagic environment group
@@ -30,6 +30,7 @@ Bundle ID: `com.cakirizm.bizimdubai`
 - Gönderilen logo uygulama başlıklarında, splash ve profil alanında kullanılır.
 - Codemagic `scripts/prepare_brand.py` ile aynı logodan iOS uygulama ikonlarını ve açılış görsellerini üretir.
 - Posterler, kategori kısayolları ve öneriler ilgili liste veya detay ekranlarına açılır.
-- Listeler arşivlenmiş kaynak içindeki başlangıç verilerini kullanır. Canlı servis bağlantısı yoktur; etkinlik detaylarında örnek veri olduğu belirtilir.
+- Keşfet, kaynaklı JSON kataloğunu GitHub üzerinden günceller ve son geçerli veriyi cihazda saklar. [Veri ekleme ve güncelleme rehberi](docs/discover-data.md).
+- Etkinlik ve topluluk içerikleri başlangıç/örnek verisidir; Keşfet işletme kataloğundan ayrıdır.
 - `flutter test` gezinme ve dar ekran kontrollerini her iki iOS workflow’unda çalıştırır.
 - Mevcut workflow’lar: `ios-ci` (simülatör), `ios-testflight` (IPA/TestFlight).

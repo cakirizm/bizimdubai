@@ -688,32 +688,38 @@ class HomeRecommendationData {
   final Widget destination;
 }
 
-final _homeRecommendations = [
-  HomeRecommendationData(
-      'bosporus',
-      'restaurant',
-      'Öne Çıkan',
-      discoverItems[0].name,
-      'Türk mutfağı · JBR',
-      '4.9 · JBR',
-      PlaceDetailPage(item: discoverItems[0])),
-  HomeRecommendationData(
-      'coffee',
-      'dubai',
-      'Etkinlik',
-      featuredEvents[1].title,
-      'Yeni tanışmalar, keyifli sohbetler',
-      'Dubai Marina',
-      EventDetailPage(event: featuredEvents[1])),
-  HomeRecommendationData(
-      'zouzou',
-      'restaurant',
-      'Mekan',
-      discoverItems[2].name,
-      'Türk & Lübnan mutfağı',
-      '4.8 · JBR',
-      PlaceDetailPage(item: discoverItems[2])),
-];
+DiscoverItem _homePlace(String id) =>
+    discoverRepository.find(id) ??
+    DiscoverCatalog.parse(discoverSeedJson)
+        .entries
+        .firstWhere((e) => e.id == id);
+
+List<HomeRecommendationData> get _homeRecommendations => [
+      HomeRecommendationData(
+          'bosporus',
+          'restaurant',
+          'Öne Çıkan',
+          _homePlace('bosporus-jbr').name,
+          'Türk mutfağı · JBR',
+          'JBR · Menü',
+          PlaceDetailPage(item: _homePlace('bosporus-jbr'))),
+      HomeRecommendationData(
+          'coffee',
+          'dubai',
+          'Etkinlik',
+          featuredEvents[1].title,
+          'Yeni tanışmalar, keyifli sohbetler',
+          'Dubai Marina',
+          EventDetailPage(event: featuredEvents[1])),
+      HomeRecommendationData(
+          'zouzou',
+          'restaurant',
+          'Mekan',
+          _homePlace('zouzou-jbr').name,
+          'Türk & Lübnan mutfağı',
+          'JBR · Menü',
+          PlaceDetailPage(item: _homePlace('zouzou-jbr'))),
+    ];
 // Home session favourites are shared between the rail and its full list.
 final _homeFavorites = ValueNotifier<Set<String>>(<String>{});
 
@@ -755,7 +761,14 @@ class HomeRecommendedCard extends StatelessWidget {
             SizedBox(
                 height: 139,
                 child: Stack(children: [
-                  HomePhoto(item.photo),
+                  if (item.destination is PlaceDetailPage)
+                    DiscoverImage(
+                        photo: (item.destination as PlaceDetailPage)
+                            .item
+                            .photos
+                            .first)
+                  else
+                    HomePhoto(item.photo),
                   Positioned(
                       left: 10,
                       top: 10,
@@ -822,10 +835,10 @@ class HomeRecommendedCard extends StatelessWidget {
                         Icon(
                             item.badge == 'Etkinlik'
                                 ? CupertinoIcons.location
-                                : CupertinoIcons.star_fill,
+                                : CupertinoIcons.book,
                             color: item.badge == 'Etkinlik'
                                 ? _homeMuted
-                                : const Color(0xFFF4AB35),
+                                : _homeRed,
                             size: 13),
                         const SizedBox(width: 4),
                         Expanded(
