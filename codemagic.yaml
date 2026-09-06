@@ -20,7 +20,8 @@ workflows:
           src = Path('assets/images/logo.b64')
           if not src.exists():
               raise SystemExit('assets/images/logo.b64 is missing')
-          logo = base64.b64decode(src.read_text().strip(), validate=True)
+          clean = ''.join(src.read_text().split())
+          logo = base64.b64decode(clean, validate=True)
           if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
               raise SystemExit('logo is not a valid PNG')
           out = Path('assets/images/logo.png')
@@ -42,7 +43,8 @@ workflows:
           out = Path('assets/images/logo.png')
           out.parent.mkdir(parents=True, exist_ok=True)
           if not out.exists() or out.stat().st_size == 0:
-              logo = base64.b64decode(src.read_text().strip(), validate=True)
+              clean = ''.join(src.read_text().split())
+              logo = base64.b64decode(clean, validate=True)
               if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
                   raise SystemExit('logo is not a valid PNG')
               out.write_bytes(logo)
@@ -86,7 +88,8 @@ workflows:
           src = Path('assets/images/logo.b64')
           if not src.exists():
               raise SystemExit('assets/images/logo.b64 is missing')
-          logo = base64.b64decode(src.read_text().strip(), validate=True)
+          clean = ''.join(src.read_text().split())
+          logo = base64.b64decode(clean, validate=True)
           if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
               raise SystemExit('logo is not a valid PNG')
           out = Path('assets/images/logo.png')
@@ -108,7 +111,8 @@ workflows:
           out = Path('assets/images/logo.png')
           out.parent.mkdir(parents=True, exist_ok=True)
           if not out.exists() or out.stat().st_size == 0:
-              logo = base64.b64decode(src.read_text().strip(), validate=True)
+              clean = ''.join(src.read_text().split())
+              logo = base64.b64decode(clean, validate=True)
               if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
                   raise SystemExit('logo is not a valid PNG')
               out.write_bytes(logo)
