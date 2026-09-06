@@ -6,11 +6,12 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Generate platform folders
+      - name: Generate Android project
+        script: flutter create --platforms=android --org com.cakirizm --project-name bizimdubai .
+      - name: Restore generated sources and brand logo
         script: |
-          flutter create --platforms=android --org com.cakirizm --project-name bizimdubai .
-      - name: Decode brand logo
-        script: base64 --decode assets/images/logo.b64 > assets/images/logo.png
+          base64 --decode lib/main.dart.gz.b64 | gzip -d > lib/main.dart
+          base64 --decode assets/images/logo.b64 > assets/images/logo.png
       - name: Get packages
         script: flutter pub get
       - name: Generate app icons
@@ -18,7 +19,7 @@ workflows:
       - name: Analyze
         script: flutter analyze
       - name: Build release APK
-        script: flutter build apk --release
+        script: flutter build apk --release --build-number=$BUILD_NUMBER
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
 
@@ -36,10 +37,11 @@ workflows:
       cocoapods: default
     scripts:
       - name: Generate iOS project
+        script: flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
+      - name: Restore generated sources and brand logo
         script: |
-          flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
-      - name: Decode brand logo
-        script: base64 --decode assets/images/logo.b64 > assets/images/logo.png
+          base64 --decode lib/main.dart.gz.b64 | gzip -d > lib/main.dart
+          base64 --decode assets/images/logo.b64 > assets/images/logo.png
       - name: Get packages
         script: flutter pub get
       - name: Generate app icons

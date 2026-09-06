@@ -1,12 +1,21 @@
+# Flutter/Dart
 .dart_tool/
 .packages
-.pub/
+.pub-cache/
 build/
-.flutter-plugins
-.flutter-plugins-dependencies
+
+# Generated at build time from tracked .b64 sources
+lib/main.dart
+assets/images/logo.png
+
+# IDE / OS
 .idea/
 .vscode/
 .DS_Store
-ios/Pods/
-ios/.symlinks/
-android/.gradle/
+
+# Signing / secrets
+*.jks
+*.keystore
+*.p12
+*.mobileprovision
+*.p8
