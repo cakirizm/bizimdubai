@@ -17,12 +17,16 @@ workflows:
           python3 - <<'PY'
           import base64
           from pathlib import Path
-          logo_b64 = Path('assets/images/logo.b64').read_text().strip()
-          logo = base64.b64decode(logo_b64, validate=True)
+          src = Path('assets/images/logo.b64')
+          if not src.exists():
+              raise SystemExit('assets/images/logo.b64 is missing')
+          logo = base64.b64decode(src.read_text().strip(), validate=True)
           if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
               raise SystemExit('logo is not a valid PNG')
-          Path('assets/images').mkdir(parents=True, exist_ok=True)
-          Path('assets/images/logo.png').write_bytes(logo)
+          out = Path('assets/images/logo.png')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_bytes(logo)
+          print(f'logo restored: {out} ({len(logo)} bytes)')
           PY
           test -s lib/main.dart
           test -s assets/images/logo.png
@@ -30,7 +34,22 @@ workflows:
       - name: Get packages
         script: flutter pub get
       - name: Generate Bizim Dubai app icon
-        script: dart run flutter_launcher_icons
+        script: |
+          python3 - <<'PY'
+          import base64
+          from pathlib import Path
+          src = Path('assets/images/logo.b64')
+          out = Path('assets/images/logo.png')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          if not out.exists() or out.stat().st_size == 0:
+              logo = base64.b64decode(src.read_text().strip(), validate=True)
+              if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
+                  raise SystemExit('logo is not a valid PNG')
+              out.write_bytes(logo)
+          print(f'launcher icon source ready: {out} ({out.stat().st_size} bytes)')
+          PY
+          test -s assets/images/logo.png
+          dart run flutter_launcher_icons
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Build iOS simulator app
@@ -64,12 +83,16 @@ workflows:
           python3 - <<'PY'
           import base64
           from pathlib import Path
-          logo_b64 = Path('assets/images/logo.b64').read_text().strip()
-          logo = base64.b64decode(logo_b64, validate=True)
+          src = Path('assets/images/logo.b64')
+          if not src.exists():
+              raise SystemExit('assets/images/logo.b64 is missing')
+          logo = base64.b64decode(src.read_text().strip(), validate=True)
           if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
               raise SystemExit('logo is not a valid PNG')
-          Path('assets/images').mkdir(parents=True, exist_ok=True)
-          Path('assets/images/logo.png').write_bytes(logo)
+          out = Path('assets/images/logo.png')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          out.write_bytes(logo)
+          print(f'logo restored: {out} ({len(logo)} bytes)')
           PY
           test -s lib/main.dart
           test -s assets/images/logo.png
@@ -77,7 +100,22 @@ workflows:
       - name: Get packages
         script: flutter pub get
       - name: Generate Bizim Dubai app icon
-        script: dart run flutter_launcher_icons
+        script: |
+          python3 - <<'PY'
+          import base64
+          from pathlib import Path
+          src = Path('assets/images/logo.b64')
+          out = Path('assets/images/logo.png')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          if not out.exists() or out.stat().st_size == 0:
+              logo = base64.b64decode(src.read_text().strip(), validate=True)
+              if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
+                  raise SystemExit('logo is not a valid PNG')
+              out.write_bytes(logo)
+          print(f'launcher icon source ready: {out} ({out.stat().st_size} bytes)')
+          PY
+          test -s assets/images/logo.png
+          dart run flutter_launcher_icons
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Apply provisioning profiles
