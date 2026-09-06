@@ -12,16 +12,11 @@ workflows:
         script: |
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
           rm -rf test
-      - name: Restore application source and logo
+      - name: Restore logo
         script: |
           python3 - <<'PY'
-          import base64, gzip
+          import base64
           from pathlib import Path
-
-          main_b64 = Path('lib/main.dart.gz.b64').read_text().strip()
-          main_gz = base64.b64decode(main_b64, validate=True)
-          Path('lib/main.dart').write_bytes(gzip.decompress(main_gz))
-
           logo_b64 = Path('assets/images/logo.b64').read_text().strip()
           logo = base64.b64decode(logo_b64, validate=True)
           if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
@@ -62,16 +57,11 @@ workflows:
         script: |
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
           rm -rf test
-      - name: Restore application source and logo
+      - name: Restore logo
         script: |
           python3 - <<'PY'
-          import base64, gzip
+          import base64
           from pathlib import Path
-
-          main_b64 = Path('lib/main.dart.gz.b64').read_text().strip()
-          main_gz = base64.b64decode(main_b64, validate=True)
-          Path('lib/main.dart').write_bytes(gzip.decompress(main_gz))
-
           logo_b64 = Path('assets/images/logo.b64').read_text().strip()
           logo = base64.b64decode(logo_b64, validate=True)
           if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
