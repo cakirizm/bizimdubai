@@ -15,15 +15,16 @@ workflows:
       - name: Restore logo
         script: |
           python3 - <<'PY'
-          import base64
+          import base64, re
           from pathlib import Path
           src = Path('assets/images/logo.b64')
           if not src.exists():
               raise SystemExit('assets/images/logo.b64 is missing')
-          clean = ''.join(src.read_text().split())
-          logo = base64.b64decode(clean, validate=True)
+          raw = src.read_text(errors='ignore')
+          clean = re.sub(r'[^A-Za-z0-9+/=]', '', raw)
+          logo = base64.b64decode(clean, validate=False)
           if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
-              raise SystemExit('logo is not a valid PNG')
+              raise SystemExit('logo decode completed but output is not a valid PNG')
           out = Path('assets/images/logo.png')
           out.parent.mkdir(parents=True, exist_ok=True)
           out.write_bytes(logo)
@@ -36,20 +37,6 @@ workflows:
         script: flutter pub get
       - name: Generate Bizim Dubai app icon
         script: |
-          python3 - <<'PY'
-          import base64
-          from pathlib import Path
-          src = Path('assets/images/logo.b64')
-          out = Path('assets/images/logo.png')
-          out.parent.mkdir(parents=True, exist_ok=True)
-          if not out.exists() or out.stat().st_size == 0:
-              clean = ''.join(src.read_text().split())
-              logo = base64.b64decode(clean, validate=True)
-              if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
-                  raise SystemExit('logo is not a valid PNG')
-              out.write_bytes(logo)
-          print(f'launcher icon source ready: {out} ({out.stat().st_size} bytes)')
-          PY
           test -s assets/images/logo.png
           dart run flutter_launcher_icons
       - name: Analyze
@@ -83,15 +70,16 @@ workflows:
       - name: Restore logo
         script: |
           python3 - <<'PY'
-          import base64
+          import base64, re
           from pathlib import Path
           src = Path('assets/images/logo.b64')
           if not src.exists():
               raise SystemExit('assets/images/logo.b64 is missing')
-          clean = ''.join(src.read_text().split())
-          logo = base64.b64decode(clean, validate=True)
+          raw = src.read_text(errors='ignore')
+          clean = re.sub(r'[^A-Za-z0-9+/=]', '', raw)
+          logo = base64.b64decode(clean, validate=False)
           if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
-              raise SystemExit('logo is not a valid PNG')
+              raise SystemExit('logo decode completed but output is not a valid PNG')
           out = Path('assets/images/logo.png')
           out.parent.mkdir(parents=True, exist_ok=True)
           out.write_bytes(logo)
@@ -104,20 +92,6 @@ workflows:
         script: flutter pub get
       - name: Generate Bizim Dubai app icon
         script: |
-          python3 - <<'PY'
-          import base64
-          from pathlib import Path
-          src = Path('assets/images/logo.b64')
-          out = Path('assets/images/logo.png')
-          out.parent.mkdir(parents=True, exist_ok=True)
-          if not out.exists() or out.stat().st_size == 0:
-              clean = ''.join(src.read_text().split())
-              logo = base64.b64decode(clean, validate=True)
-              if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
-                  raise SystemExit('logo is not a valid PNG')
-              out.write_bytes(logo)
-          print(f'launcher icon source ready: {out} ({out.stat().st_size} bytes)')
-          PY
           test -s assets/images/logo.png
           dart run flutter_launcher_icons
       - name: Analyze
