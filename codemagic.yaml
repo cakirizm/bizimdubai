@@ -35,10 +35,24 @@ workflows:
           file assets/images/logo.png
       - name: Get packages
         script: flutter pub get
-      - name: Generate Bizim Dubai app icon
+      - name: Generate Bizim Dubai iOS app icons
         script: |
-          test -s assets/images/logo.png
-          dart run flutter_launcher_icons
+          set -e
+          SRC="$CM_BUILD_DIR/assets/images/logo.png"
+          ICON_DIR="$CM_BUILD_DIR/ios/Runner/Assets.xcassets/AppIcon.appiconset"
+          test -s "$SRC"
+          mkdir -p "$ICON_DIR"
+          sips -z 40 40 "$SRC" --out "$ICON_DIR/Icon-App-20x20@2x.png" >/dev/null
+          sips -z 60 60 "$SRC" --out "$ICON_DIR/Icon-App-20x20@3x.png" >/dev/null
+          sips -z 58 58 "$SRC" --out "$ICON_DIR/Icon-App-29x29@2x.png" >/dev/null
+          sips -z 87 87 "$SRC" --out "$ICON_DIR/Icon-App-29x29@3x.png" >/dev/null
+          sips -z 80 80 "$SRC" --out "$ICON_DIR/Icon-App-40x40@2x.png" >/dev/null
+          sips -z 120 120 "$SRC" --out "$ICON_DIR/Icon-App-40x40@3x.png" >/dev/null
+          sips -z 120 120 "$SRC" --out "$ICON_DIR/Icon-App-60x60@2x.png" >/dev/null
+          sips -z 180 180 "$SRC" --out "$ICON_DIR/Icon-App-60x60@3x.png" >/dev/null
+          sips -z 1024 1024 "$SRC" --out "$ICON_DIR/Icon-App-1024x1024@1x.png" >/dev/null
+          test -s "$ICON_DIR/Icon-App-1024x1024@1x.png"
+          echo "Bizim Dubai iOS app icons generated successfully"
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Build iOS simulator app
@@ -90,10 +104,24 @@ workflows:
           file assets/images/logo.png
       - name: Get packages
         script: flutter pub get
-      - name: Generate Bizim Dubai app icon
+      - name: Generate Bizim Dubai iOS app icons
         script: |
-          test -s assets/images/logo.png
-          dart run flutter_launcher_icons
+          set -e
+          SRC="$CM_BUILD_DIR/assets/images/logo.png"
+          ICON_DIR="$CM_BUILD_DIR/ios/Runner/Assets.xcassets/AppIcon.appiconset"
+          test -s "$SRC"
+          mkdir -p "$ICON_DIR"
+          sips -z 40 40 "$SRC" --out "$ICON_DIR/Icon-App-20x20@2x.png" >/dev/null
+          sips -z 60 60 "$SRC" --out "$ICON_DIR/Icon-App-20x20@3x.png" >/dev/null
+          sips -z 58 58 "$SRC" --out "$ICON_DIR/Icon-App-29x29@2x.png" >/dev/null
+          sips -z 87 87 "$SRC" --out "$ICON_DIR/Icon-App-29x29@3x.png" >/dev/null
+          sips -z 80 80 "$SRC" --out "$ICON_DIR/Icon-App-40x40@2x.png" >/dev/null
+          sips -z 120 120 "$SRC" --out "$ICON_DIR/Icon-App-40x40@3x.png" >/dev/null
+          sips -z 120 120 "$SRC" --out "$ICON_DIR/Icon-App-60x60@2x.png" >/dev/null
+          sips -z 180 180 "$SRC" --out "$ICON_DIR/Icon-App-60x60@3x.png" >/dev/null
+          sips -z 1024 1024 "$SRC" --out "$ICON_DIR/Icon-App-1024x1024@1x.png" >/dev/null
+          test -s "$ICON_DIR/Icon-App-1024x1024@1x.png"
+          echo "Bizim Dubai iOS app icons generated successfully"
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Apply provisioning profiles
