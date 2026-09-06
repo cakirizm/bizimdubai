@@ -13,9 +13,12 @@ workflows:
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
       - name: Restore application source and logo
         script: |
-          base64 --decode lib/main.dart.gz.b64 | gzip -d > lib/main.dart
           mkdir -p assets/images
-          base64 --decode assets/images/logo.b64 > assets/images/logo.png
+          base64 -D -i lib/main.dart.gz.b64 -o /tmp/main.dart.gz
+          gzip -dc /tmp/main.dart.gz > lib/main.dart
+          base64 -D -i assets/images/logo.b64 -o assets/images/logo.png
+          test -s lib/main.dart
+          test -s assets/images/logo.png
       - name: Get packages
         script: flutter pub get
       - name: Generate iOS app icons
@@ -46,9 +49,12 @@ workflows:
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
       - name: Restore application source and logo
         script: |
-          base64 --decode lib/main.dart.gz.b64 | gzip -d > lib/main.dart
           mkdir -p assets/images
-          base64 --decode assets/images/logo.b64 > assets/images/logo.png
+          base64 -D -i lib/main.dart.gz.b64 -o /tmp/main.dart.gz
+          gzip -dc /tmp/main.dart.gz > lib/main.dart
+          base64 -D -i assets/images/logo.b64 -o assets/images/logo.png
+          test -s lib/main.dart
+          test -s assets/images/logo.png
       - name: Get packages
         script: flutter pub get
       - name: Generate iOS app icons
