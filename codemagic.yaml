@@ -35,6 +35,10 @@ workflows:
           file assets/images/logo.png
       - name: Get packages
         script: flutter pub get
+      - name: Generate Bizim Dubai app icon
+        script: |
+          test -s assets/images/logo.png
+          dart run flutter_launcher_icons
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Build iOS simulator app
@@ -86,6 +90,10 @@ workflows:
           file assets/images/logo.png
       - name: Get packages
         script: flutter pub get
+      - name: Generate Bizim Dubai app icon
+        script: |
+          test -s assets/images/logo.png
+          dart run flutter_launcher_icons
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Apply provisioning profiles
