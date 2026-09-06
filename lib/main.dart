@@ -7,6 +7,7 @@ const brand = Color(0xFFE51B2B);
 const ink = Color(0xFF17181C);
 const muted = Color(0xFF7B818C);
 const canvas = Color(0xFFF6F7F9);
+const logoAsset = 'assets/images/logo.png';
 
 class BizimDubaiApp extends StatelessWidget {
   const BizimDubaiApp({super.key});
@@ -35,6 +36,36 @@ class BizimDubaiApp extends StatelessWidget {
   }
 }
 
+class BrandLogo extends StatelessWidget {
+  final double size;
+  final bool whiteFrame;
+  final bool shadow;
+  const BrandLogo({super.key, this.size = 54, this.whiteFrame = true, this.shadow = true});
+
+  @override
+  Widget build(BuildContext context) {
+    final radius = size * .3;
+    return Container(
+      width: size,
+      height: size,
+      padding: EdgeInsets.all(size * .09),
+      decoration: BoxDecoration(
+        color: whiteFrame ? Colors.white : const Color(0xFFFFF1F3),
+        borderRadius: BorderRadius.circular(radius),
+        border: Border.all(color: whiteFrame ? const Color(0xFFF1F1F3) : const Color(0xFFFFD5DB)),
+        boxShadow: shadow ? const [BoxShadow(color: Color(0x1A000000), blurRadius: 18, offset: Offset(0, 7))] : null,
+      ),
+      child: Image.asset(
+        logoAsset,
+        fit: BoxFit.contain,
+        filterQuality: FilterQuality.high,
+        gaplessPlayback: true,
+        errorBuilder: (_, __, ___) => const Icon(Icons.location_city_rounded, color: brand),
+      ),
+    );
+  }
+}
+
 class SplashGate extends StatefulWidget {
   const SplashGate({super.key});
   @override
@@ -51,9 +82,9 @@ class _SplashGateState extends State<SplashGate> with SingleTickerProviderStateM
     super.initState();
     controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 950));
     fade = CurvedAnimation(parent: controller, curve: Curves.easeOutCubic);
-    scale = Tween(begin: .84, end: 1.0).animate(CurvedAnimation(parent: controller, curve: Curves.easeOutBack));
+    scale = Tween(begin: .82, end: 1.0).animate(CurvedAnimation(parent: controller, curve: Curves.easeOutBack));
     controller.forward();
-    Future.delayed(const Duration(milliseconds: 2300), () {
+    Future.delayed(const Duration(milliseconds: 2400), () {
       if (!mounted) return;
       Navigator.of(context).pushReplacement(PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 520),
@@ -84,7 +115,7 @@ class _SplashGateState extends State<SplashGate> with SingleTickerProviderStateM
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Color(0x33000000), Color(0x88A8000B), Color(0xE6B20A16)],
+                colors: [Color(0x28000000), Color(0x8895000A), Color(0xF0B20A16)],
               ),
             ),
           ),
@@ -94,33 +125,34 @@ class _SplashGateState extends State<SplashGate> with SingleTickerProviderStateM
               child: ScaleTransition(
                 scale: scale,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(28, 36, 28, 34),
+                  padding: const EdgeInsets.fromLTRB(28, 34, 28, 32),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 108,
-                        height: 108,
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(32),
-                          boxShadow: const [BoxShadow(color: Color(0x44000000), blurRadius: 30, offset: Offset(0, 14))],
+                      const Spacer(flex: 2),
+                      const BrandLogo(size: 126),
+                      const SizedBox(height: 28),
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: const TextSpan(
+                          style: TextStyle(fontSize: 43, fontWeight: FontWeight.w900, letterSpacing: -2),
+                          children: [
+                            TextSpan(text: 'Bizim ', style: TextStyle(color: Colors.white)),
+                            TextSpan(text: 'Dubai', style: TextStyle(color: Color(0xFFFFD7DC))),
+                          ],
                         ),
-                        child: Image.asset('assets/images/logo.png', fit: BoxFit.contain),
                       ),
-                      const SizedBox(height: 26),
-                      const Text('Bizim Dubai', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontSize: 42, fontWeight: FontWeight.w900, letterSpacing: -1.8)),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 12),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                         decoration: BoxDecoration(color: Colors.white.withOpacity(.16), borderRadius: BorderRadius.circular(999), border: Border.all(color: Colors.white.withOpacity(.28))),
-                        child: const Text('🇹🇷 Dubai’de Türkçe hayat', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 15)),
+                        child: const Text('🇹🇷 Dubai’de Türkçe hayat', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 15)),
                       ),
-                      const SizedBox(height: 20),
-                      const Text('Aynı kültür. Aynı şehir.\nTek topluluk.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 21, height: 1.3)),
-                      const Spacer(),
-                      const Text('Mekanlar • Topluluk • Rehber • İlanlar', style: TextStyle(color: Color(0xFFEED8DB), fontWeight: FontWeight.w600, fontSize: 13)),
+                      const SizedBox(height: 21),
+                      const Text('Aynı kültür. Aynı şehir.\nTek topluluk.', textAlign: TextAlign.center, style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 21, height: 1.3)),
+                      const Spacer(flex: 2),
+                      const BrandLogo(size: 38, shadow: false),
+                      const SizedBox(height: 12),
+                      const Text('Mekanlar • Topluluk • Rehber • İlanlar', style: TextStyle(color: Color(0xFFFFE7EA), fontWeight: FontWeight.w700, fontSize: 13)),
                     ],
                   ),
                 ),
@@ -153,13 +185,13 @@ class _AppShellState extends State<AppShell> {
           backgroundColor: Colors.white,
           surfaceTintColor: Colors.white,
           elevation: 0,
-          height: 74,
+          height: 76,
           indicatorColor: const Color(0xFFFFE5E8),
           selectedIndex: index,
           labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
           onDestinationSelected: (i) => setState(() => index = i),
           destinations: const [
-            NavigationDestination(icon: Icon(Icons.home_rounded), label: 'Ana Sayfa'),
+            NavigationDestination(icon: BrandLogo(size: 28, shadow: false), label: 'Ana Sayfa'),
             NavigationDestination(icon: Icon(Icons.search_rounded), label: 'Keşfet'),
             NavigationDestination(icon: Icon(Icons.groups_2_rounded), label: 'Topluluk'),
             NavigationDestination(icon: Icon(Icons.menu_book_rounded), label: 'Rehber'),
@@ -233,7 +265,9 @@ class _HomeScreenState extends State<HomeScreen> {
           sliver: SliverList(
             delegate: SliverChildListDelegate([
               const AppHeader(),
-              const SizedBox(height: 20),
+              const SizedBox(height: 18),
+              const BrandRibbon(),
+              const SizedBox(height: 16),
               SizedBox(
                 height: 310,
                 child: PageView.builder(
@@ -294,37 +328,38 @@ class AppHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      Container(
-        width: 54,
-        height: 54,
-        padding: const EdgeInsets.all(7),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(18), boxShadow: const [BoxShadow(color: Color(0x12000000), blurRadius: 16, offset: Offset(0, 6))]),
-        child: Image.asset('assets/images/logo.png', fit: BoxFit.contain),
-      ),
+      const BrandLogo(size: 58),
       const SizedBox(width: 12),
       const Expanded(
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Bizim Dubai', style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900, letterSpacing: -1.2, color: ink)),
+          Text('Bizim Dubai', style: TextStyle(fontSize: 27, fontWeight: FontWeight.w900, letterSpacing: -1.2, color: ink)),
           SizedBox(height: 2),
           Text('Dubai’de Türklerin yanında', style: TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 13)),
         ]),
       ),
       Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), border: Border.all(color: const Color(0xFFECEDEF))),
-        child: const Row(children: [Icon(Icons.location_on_rounded, color: brand, size: 19), SizedBox(width: 5), Text('Dubai', style: TextStyle(fontWeight: FontWeight.w700))]),
-      ),
-      const SizedBox(width: 8),
-      Container(
-        width: 42,
-        height: 42,
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), border: Border.all(color: const Color(0xFFECEDEF))),
-        child: Stack(alignment: Alignment.center, children: [
-          const Icon(Icons.notifications_none_rounded, color: ink),
-          Positioned(top: 7, right: 8, child: Container(width: 8, height: 8, decoration: const BoxDecoration(color: brand, shape: BoxShape.circle))),
-        ]),
+        padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15), border: Border.all(color: const Color(0xFFECEDEF))),
+        child: const Row(children: [Icon(Icons.location_on_rounded, color: brand, size: 18), SizedBox(width: 4), Text('Dubai', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13))]),
       ),
     ]);
+  }
+}
+
+class BrandRibbon extends StatelessWidget {
+  const BrandRibbon({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+      decoration: BoxDecoration(color: const Color(0xFFFFF0F2), borderRadius: BorderRadius.circular(18), border: Border.all(color: const Color(0xFFFFD7DD))),
+      child: const Row(children: [
+        BrandLogo(size: 34, shadow: false),
+        SizedBox(width: 10),
+        Expanded(child: Text('Bizim Dubai · Dubai’deki Türk topluluğunun uygulaması', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 12.5, color: ink))),
+        Icon(Icons.verified_rounded, color: brand, size: 19),
+      ]),
+    );
   }
 }
 
@@ -347,6 +382,7 @@ class HeroCard extends StatelessWidget {
       child: Stack(fit: StackFit.expand, children: [
         Image.network(slide.image, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(color: const Color(0xFFB60E19))),
         Container(decoration: const BoxDecoration(gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0x10000000), Color(0xCC000000)]))),
+        const Positioned(top: 18, right: 18, child: BrandLogo(size: 48, shadow: true)),
         Positioned(
           left: 22,
           right: 22,
@@ -415,7 +451,10 @@ class QuickAccessItem extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(8, 10, 8, 9),
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFFECEEF1))),
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Container(width: 46, height: 46, decoration: BoxDecoration(color: item.tint, borderRadius: BorderRadius.circular(15)), child: Icon(item.icon, color: brand, size: 24)),
+        Stack(clipBehavior: Clip.none, children: [
+          Container(width: 46, height: 46, decoration: BoxDecoration(color: item.tint, borderRadius: BorderRadius.circular(15)), child: Icon(item.icon, color: brand, size: 24)),
+          const Positioned(right: -7, top: -7, child: BrandLogo(size: 21, shadow: false)),
+        ]),
         const SizedBox(height: 8),
         Text(item.title, textAlign: TextAlign.center, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 12, color: ink)),
         const SizedBox(height: 2),
@@ -433,7 +472,7 @@ class CommunityBanner extends StatelessWidget {
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(gradient: const LinearGradient(colors: [Color(0xFFFFEFF1), Color(0xFFFFF8F8)]), borderRadius: BorderRadius.circular(24), border: Border.all(color: const Color(0xFFFFD9DE))),
       child: const Row(children: [
-        CircleAvatar(radius: 26, backgroundColor: Colors.white, child: Icon(Icons.groups_2_rounded, color: brand, size: 28)),
+        BrandLogo(size: 54, shadow: false),
         SizedBox(width: 14),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('Türk topluluğuna katıl', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: ink)), SizedBox(height: 3), Text('Etkinlikler, duyurular ve gerçek bağlantılar', style: TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 13))])),
         Icon(Icons.arrow_forward_ios_rounded, color: brand, size: 18),
@@ -458,7 +497,8 @@ class VenueCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Stack(children: [
-            SizedBox(height: 135, width: double.infinity, child: Image.network(image, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(color: const Color(0xFFFFE8EA), child: const Icon(Icons.restaurant, color: brand, size: 42)))),
+            SizedBox(height: 135, width: double.infinity, child: Image.network(image, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(color: const Color(0xFFFFE8EA), child: const BrandLogo(size: 58)))),
+            const Positioned(top: 10, left: 10, child: BrandLogo(size: 36, shadow: true)),
             Positioned(top: 10, right: 10, child: Container(width: 34, height: 34, decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: const Icon(Icons.favorite_border_rounded, size: 20))),
           ]),
           Padding(
@@ -468,7 +508,7 @@ class VenueCard extends StatelessWidget {
               const SizedBox(height: 4),
               Text(meta, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: muted, fontSize: 12.5, fontWeight: FontWeight.w600)),
               const SizedBox(height: 8),
-              Row(children: [const Icon(Icons.star_rounded, color: Color(0xFFFFB400), size: 19), const SizedBox(width: 3), Text(rating, style: const TextStyle(fontWeight: FontWeight.w800)), const Spacer(), const Icon(Icons.location_on_outlined, size: 17, color: muted)]),
+              Row(children: [const Icon(Icons.star_rounded, color: Color(0xFFFFB400), size: 19), const SizedBox(width: 3), Text(rating, style: const TextStyle(fontWeight: FontWeight.w800)), const Spacer(), const BrandLogo(size: 25, shadow: false)]),
             ]),
           ),
         ]),
@@ -491,11 +531,11 @@ class EventCard extends StatelessWidget {
       decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFFECEEF1))),
       child: Row(children: [
         Container(width: 54, height: 58, decoration: BoxDecoration(color: const Color(0xFFFFEDF0), borderRadius: BorderRadius.circular(16)), alignment: Alignment.center, child: Text(date, textAlign: TextAlign.center, style: const TextStyle(color: brand, fontWeight: FontWeight.w900, height: 1.05))),
-        const SizedBox(width: 12),
-        Container(width: 42, height: 42, decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(14)), child: Icon(icon, color: ink)),
-        const SizedBox(width: 12),
+        const SizedBox(width: 10),
+        const BrandLogo(size: 38, shadow: false),
+        const SizedBox(width: 10),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15.5)), const SizedBox(height: 4), Text(meta, style: const TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 12.5))])),
-        const Icon(Icons.arrow_forward_ios_rounded, size: 17, color: muted),
+        Icon(icon, color: brand, size: 19),
       ]),
     );
   }
@@ -508,6 +548,8 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
+      const BrandLogo(size: 29, shadow: false),
+      const SizedBox(width: 9),
       Expanded(child: Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: ink, letterSpacing: -.6))),
       if (trailing != null) Text(trailing!, style: const TextStyle(color: brand, fontWeight: FontWeight.w700, fontSize: 13.5)),
     ]);
@@ -548,19 +590,29 @@ class PlaceholderPage extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(18, 14, 18, 30),
       children: [
         const AppHeader(),
-        const SizedBox(height: 34),
-        Text(title, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w900, letterSpacing: -1)),
-        const SizedBox(height: 8),
-        Text(subtitle, style: const TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 15)),
+        const SizedBox(height: 18),
+        const BrandRibbon(),
+        const SizedBox(height: 30),
+        Row(children: [
+          const BrandLogo(size: 52),
+          const SizedBox(width: 12),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(title, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w900, letterSpacing: -1)),
+            const SizedBox(height: 5),
+            Text(subtitle, style: const TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 15)),
+          ])),
+        ]),
         const SizedBox(height: 24),
         Container(
-          height: 220,
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(28), border: Border.all(color: const Color(0xFFECEEF1))),
+          height: 230,
+          decoration: BoxDecoration(gradient: const LinearGradient(colors: [Colors.white, Color(0xFFFFF2F4)]), borderRadius: BorderRadius.circular(28), border: Border.all(color: const Color(0xFFFFD8DE))),
           alignment: Alignment.center,
-          child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Image.asset('assets/images/logo.png', width: 72, height: 72),
-            const SizedBox(height: 14),
-            const Text('Bu ekranı sıradaki adımda premiumlaştıracağız.', style: TextStyle(fontWeight: FontWeight.w700, color: muted)),
+          child: const Column(mainAxisSize: MainAxisSize.min, children: [
+            BrandLogo(size: 92),
+            SizedBox(height: 14),
+            Text('Bizim Dubai', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 22, color: ink)),
+            SizedBox(height: 5),
+            Text('Bu ekranı sıradaki adımda premiumlaştıracağız.', style: TextStyle(fontWeight: FontWeight.w700, color: muted)),
           ]),
         ),
       ],
