@@ -1,34 +1,39 @@
-import 'dart:async';
+
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(const BizimDubaiApp());
+import 'package:url_launcher/url_launcher.dart';
 
-const brand = Color(0xFFE51B2B);
-const ink = Color(0xFF17181C);
-const muted = Color(0xFF7B818C);
-const canvas = Color(0xFFF6F7F9);
-const logoAsset = 'assets/images/logo.png';
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const BizimDubaiApp());
+}
 
 class BizimDubaiApp extends StatelessWidget {
   const BizimDubaiApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const red = Color(0xFFE30613);
+    final scheme = ColorScheme.fromSeed(seedColor: red, brightness: Brightness.light);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Bizim Dubai',
+      title: 'BizimDubai',
       theme: ThemeData(
         useMaterial3: true,
-        scaffoldBackgroundColor: canvas,
-        colorScheme: ColorScheme.fromSeed(seedColor: brand),
-        fontFamily: 'SF Pro Display',
-        textTheme: const TextTheme(
-          headlineLarge: TextStyle(fontWeight: FontWeight.w900, letterSpacing: -1.3),
-          headlineMedium: TextStyle(fontWeight: FontWeight.w800, letterSpacing: -.9),
-          titleLarge: TextStyle(fontWeight: FontWeight.w800, letterSpacing: -.5),
-          titleMedium: TextStyle(fontWeight: FontWeight.w700),
-          bodyLarge: TextStyle(height: 1.35),
-          bodyMedium: TextStyle(height: 1.35),
+        colorScheme: scheme,
+        scaffoldBackgroundColor: const Color(0xFFF7F8FA),
+        fontFamily: 'Arial',
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+        ),
+        cardTheme: const CardThemeData(
+          color: Colors.white,
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+          margin: EdgeInsets.zero,
         ),
       ),
       home: const SplashGate(),
@@ -36,50 +41,850 @@ class BizimDubaiApp extends StatelessWidget {
   }
 }
 
-class BrandLogo extends StatelessWidget {
-  final double size;
-  final bool shadow;
-  const BrandLogo({super.key, this.size = 52, this.shadow = true});
+class Shell extends StatefulWidget {
+  const Shell({super.key});
+
+  @override
+  State<Shell> createState() => _ShellState();
+}
+
+class _ShellState extends State<Shell> {
+  int index = 0;
+  final pages = const [HomePage(), DiscoverPage(), CommunityPage(), GuidePage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      padding: EdgeInsets.all(size * .08),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(size * .3),
-        border: Border.all(color: const Color(0xFFEFF0F2)),
-        boxShadow: shadow
-            ? const [BoxShadow(color: Color(0x17000000), blurRadius: 18, offset: Offset(0, 7))]
-            : null,
-      ),
-      child: Image.asset(
-        logoAsset,
-        fit: BoxFit.contain,
-        filterQuality: FilterQuality.high,
-        errorBuilder: (_, __, ___) => const _FallbackBrandMark(),
+    return Scaffold(
+      body: IndexedStack(index: index, children: pages),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: index,
+        onDestinationSelected: (value) => setState(() => index = value),
+        height: 72,
+        backgroundColor: Colors.white,
+        indicatorColor: const Color(0xFFFFE3E6),
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Ana Sayfa'),
+          NavigationDestination(icon: Icon(Icons.explore_outlined), selectedIcon: Icon(Icons.explore), label: 'Keşfet'),
+          NavigationDestination(icon: Icon(Icons.groups_outlined), selectedIcon: Icon(Icons.groups), label: 'Topluluk'),
+          NavigationDestination(icon: Icon(Icons.menu_book_outlined), selectedIcon: Icon(Icons.menu_book), label: 'Rehber'),
+          NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Profil'),
+        ],
       ),
     );
   }
 }
 
-class _FallbackBrandMark extends StatelessWidget {
-  const _FallbackBrandMark();
+void openHomeDestination(BuildContext context, Widget page, String title) {
+  Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) =>
+    Scaffold(appBar: AppBar(title: Text(title)), body: page)));
+}
+
+class BrandLogo extends StatelessWidget {
+  const BrandLogo({super.key, this.size = 52});
+  final double size;
+  @override
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: BorderRadius.circular(size * .24),
+    child: Image.asset('assets/images/logo.png', width: size, height: size,
+      fit: BoxFit.contain, semanticLabel: 'BizimDubai logosu'),
+  );
+}
+
+class BrandHeader extends StatelessWidget {
+  const BrandHeader({super.key, this.compact = false});
+  final bool compact;
+  @override
+  Widget build(BuildContext context) => Row(children: [
+    BrandLogo(size: compact ? 44 : 56),
+    const SizedBox(width: 12),
+    const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text('BizimDubai', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, letterSpacing: -1)),
+      Text('Dubai’de hayat, birlikte güzel.', style: TextStyle(fontSize: 11, color: Color(0xFF6B7280))),
+    ])),
+    const Text('🇹🇷', style: TextStyle(fontSize: 26)),
+  ]);
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+  @override
+  Widget build(BuildContext context) => SafeArea(child: ListView(
+    padding: const EdgeInsets.fromLTRB(18, 14, 18, 28),
+    children: [
+      const _HeroCard(),
+      const SizedBox(height: 28),
+      const SectionTitle(title: 'Hızlı erişim'),
+      const SizedBox(height: 6),
+      const Text('Dubai’de ihtiyacın olan her şey, bir dokunuş uzağında.', style: TextStyle(color: Color(0xFF6B7280), height: 1.5)),
+      const SizedBox(height: 14),
+      LayoutBuilder(builder: (context, constraints) {
+        final width = constraints.maxWidth < 300 ? constraints.maxWidth : (constraints.maxWidth - 12) / 2;
+        return Wrap(spacing: 12, runSpacing: 12, children: [
+          SizedBox(width: width, child: QuickTile(icon: Icons.restaurant_outlined, title: 'Mekanları keşfet', subtitle: 'Türk restoranları ve kafeler', onTap: () => openHomeDestination(context, const DiscoverPage(initialCategory: 'Restoranlar'), 'Mekanları keşfet'))),
+          for (final entry in const [
+            ('Market & Gıda', 'Türk ürünleri ve yerel marketler', Icons.local_grocery_store_outlined),
+            ('Sağlık', 'Türkçe hizmet veren uzmanlar', Icons.local_hospital_outlined),
+            ('Güzellik & Bakım', 'Kuaför ve kişisel bakım', Icons.content_cut),
+            ('Ev & Emlak', 'Türkçe emlak danışmanlığı', Icons.home_work_outlined),
+            ('Çocuk & Eğitim', 'Okullar, kurslar ve özel ders', Icons.school_outlined),
+            ('Spor & Wellness', 'Antrenörler ve aktif yaşam', Icons.fitness_center),
+          ])
+            SizedBox(width: width, child: QuickTile(icon: entry.$3, title: entry.$1, subtitle: entry.$2,
+              onTap: () => openHomeDestination(context, DiscoverPage(initialCategory: entry.$1), entry.$1))),
+          SizedBox(width: width, child: QuickTile(icon: Icons.grid_view_outlined, title: 'Tüm kategoriler', subtitle: 'Tüm Türkçe hizmetleri incele', onTap: () => openHomeDestination(context, const DiscoverPage(), 'Tüm kategoriler'))),
+          SizedBox(width: width, child: QuickTile(icon: Icons.shopping_bag_outlined, title: 'İkinci el pazarı', subtitle: 'İlanları incele, fırsatları bul', onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => const ClassifiedsPage())))),
+          SizedBox(width: width, child: QuickTile(icon: Icons.calendar_month_outlined, title: 'Etkinlik & topluluk', subtitle: 'Buluşmalar ve yeni dostluklar', onTap: () => openHomeDestination(context, const CommunityPage(), 'Etkinlik & topluluk'))),
+          SizedBox(width: width, child: QuickTile(icon: Icons.menu_book_outlined, title: 'Dubai yaşam rehberi', subtitle: 'Yeni başlangıçlara yol gösterir', onTap: () => openHomeDestination(context, const GuidePage(), 'Dubai yaşam rehberi'))),
+        ]);
+      }),
+      const SizedBox(height: 28),
+      SectionTitle(title: 'Senin için önerilenler', action: 'Tümünü gör', onAction: () => openHomeDestination(context, const DiscoverPage(initialCategory: 'Restoranlar'), 'Önerilen mekanlar')),
+      const SizedBox(height: 12),
+      for (final item in discoverItems.take(3))
+        Padding(padding: const EdgeInsets.only(bottom: 10), child: DiscoverCard(item: item)),
+      const SizedBox(height: 24),
+      SectionTitle(title: 'Topluluktan seçkiler', action: 'Tümünü gör', onAction: () => openHomeDestination(context, const HomeHighlightsPage(), 'Topluluktan seçkiler')),
+      const SizedBox(height: 12),
+      ...homeHighlights(context),
+    ],
+  ));
+}
+
+List<Widget> homeHighlights(BuildContext context) => [
+  for (final event in featuredEvents)
+    Padding(padding: const EdgeInsets.only(bottom: 10), child: TodayCard(
+      icon: event.icon, title: event.title, subtitle: event.subtitle, badge: event.status,
+      onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => EventDetailPage(event: event))),
+    )),
+  TodayCard(icon: classifiedItems[1].icon, title: classifiedItems[1].title,
+    subtitle: '${classifiedItems[1].area} · ${classifiedItems[1].category}', badge: classifiedItems[1].price,
+    onTap: () => Navigator.push(context, MaterialPageRoute<void>(builder: (_) => ListingDetailPage(item: classifiedItems[1])))),
+];
+
+class HomeHighlightsPage extends StatelessWidget {
+  const HomeHighlightsPage({super.key});
+  @override
+  Widget build(BuildContext context) => ListView(padding: const EdgeInsets.all(18), children: homeHighlights(context));
+}
+
+class _HeroCard extends StatelessWidget {
+  const _HeroCard();
+  @override
+  Widget build(BuildContext context) => Container(
+    clipBehavior: Clip.antiAlias,
+    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),
+      gradient: const LinearGradient(colors: [Color(0xFFED2336), Color(0xFF950C22)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+      boxShadow: const [BoxShadow(color: Color(0x26AB132B), blurRadius: 24, offset: Offset(0, 10))]),
+    child: Stack(children: [
+      const Positioned(right: -25, top: 72, child: IgnorePointer(child: Icon(Icons.location_city, size: 240, color: Color(0x14FFFFFF)))),
+      Padding(padding: const EdgeInsets.all(22), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(children: [
+          const BrandLogo(size: 64), const SizedBox(width: 14),
+          const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text('BİZİM DUBAİ', style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.w900, letterSpacing: 1)),
+            SizedBox(height: 4),
+            Text('Dubai’deki Türklerin yanında.', style: TextStyle(color: Color(0xFFFFE1E5), fontSize: 12, height: 1.5)),
+          ])),
+        ]),
+        const SizedBox(height: 20),
+        const Divider(color: Color(0x40FFFFFF)),
+        const SizedBox(height: 14),
+        const Text('🇹🇷  AYNI DİL. AYNI ŞEHİR.', style: TextStyle(color: Color(0xFFFFD7DE), fontSize: 11, letterSpacing: 1.6, fontWeight: FontWeight.w800)),
+        const SizedBox(height: 12),
+        const HomePoster(),
+        FilledButton.icon(style: FilledButton.styleFrom(backgroundColor: Colors.white, foregroundColor: const Color(0xFFAD1027), minimumSize: const Size(double.infinity, 50)),
+          onPressed: () => openHomeDestination(context, const DiscoverPage(), 'Dubai’yi keşfet'), icon: const Icon(Icons.explore_outlined), label: const Text('Dubai’yi keşfet')),
+        const SizedBox(height: 10),
+        Wrap(spacing: 8, runSpacing: 8, children: [
+          _heroLink(context, 'Mekanlar', Icons.restaurant_outlined, const DiscoverPage(initialCategory: 'Restoranlar')),
+          _heroLink(context, 'Topluluk', Icons.groups_outlined, const CommunityPage()),
+          _heroLink(context, 'Yaşam rehberi', Icons.menu_book_outlined, const GuidePage()),
+        ]),
+      ])),
+    ]),
+  );
+  Widget _heroLink(BuildContext context, String title, IconData icon, Widget page) => OutlinedButton.icon(
+    style: OutlinedButton.styleFrom(foregroundColor: Colors.white, side: const BorderSide(color: Color(0x66FFFFFF)), padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12)),
+    onPressed: () => openHomeDestination(context, page, title), icon: Icon(icon, size: 16), label: Text(title));
+}
+
+class SectionTitle extends StatelessWidget {
+  const SectionTitle({super.key, required this.title, this.action, this.onAction});
+  final String title;
+  final String? action;
+  final VoidCallback? onAction;
+  @override
+  Widget build(BuildContext context) => Row(children: [
+    Expanded(child: Text(title, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 20, letterSpacing: -.4))),
+    if (action != null)
+      if (onAction != null) TextButton(onPressed: onAction, child: Text(action!))
+      else Text(action!, style: const TextStyle(color: Color(0xFFE30613), fontWeight: FontWeight.w800, fontSize: 13)),
+  ]);
+}
+
+class QuickTile extends StatelessWidget {
+  const QuickTile({super.key, required this.icon, required this.title, required this.subtitle, required this.onTap});
+  final IconData icon;
+  final String title, subtitle;
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context) => Material(color: Colors.white, borderRadius: BorderRadius.circular(22),
+    child: InkWell(onTap: onTap, borderRadius: BorderRadius.circular(22), child: Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(22), border: Border.all(color: const Color(0xFFE9EAF0))),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(children: [Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: const Color(0xFFFFECEF), borderRadius: BorderRadius.circular(13)), child: Icon(icon, color: const Color(0xFFC51630))), const Spacer(), const Icon(Icons.north_east, size: 17, color: Color(0xFF9CA3AF))]),
+        const SizedBox(height: 16),
+        Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, height: 1.3)),
+        const SizedBox(height: 5),
+        Text(subtitle, style: const TextStyle(color: Color(0xFF6B7280), fontSize: 11, height: 1.5)),
+      ]),
+    )),
+  );
+}
+
+class CommunityEvent {
+  const CommunityEvent(this.title, this.subtitle, this.status, this.icon);
+  final String title, subtitle, status;
+  final IconData icon;
+}
+const featuredEvents = [
+  CommunityEvent('Cuma Halı Saha', 'Cuma · 21:00 · Al Quoz', '9/14 kişi', Icons.sports_soccer),
+  CommunityEvent('Yeni Gelenler Kahvesi', 'Cumartesi · 17:30 · Marina', '12 kişi', Icons.coffee),
+];
+class EventDetailPage extends StatelessWidget {
+  const EventDetailPage({super.key, required this.event});
+  final CommunityEvent event;
+  @override
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('Etkinlik detayı')),
+    body: ListView(padding: const EdgeInsets.all(22), children: [
+      const BrandHeader(), const SizedBox(height: 28),
+      Icon(event.icon, size: 64, color: const Color(0xFFE30613)), const SizedBox(height: 20),
+      Text(event.title, style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w900)),
+      const SizedBox(height: 14), Text(event.subtitle), const SizedBox(height: 10), Text(event.status),
+      const SizedBox(height: 24),
+      const Text('Bu etkinlik örnek topluluk içeriğidir. Güncel tarih ve organizatör bilgisi henüz eklenmediği için katılım kaydı alınmıyor.', style: TextStyle(height: 1.6, color: Color(0xFF6B7280))),
+      const SizedBox(height: 20),
+      OutlinedButton.icon(onPressed: () => openHomeDestination(context, const CommunityPage(), 'Topluluk'), icon: const Icon(Icons.groups_outlined), label: const Text('Topluluğu incele')),
+    ]));
+}
+
+class TodayCard extends StatelessWidget {
+  const TodayCard({super.key, required this.icon, required this.title, required this.subtitle, required this.badge, this.onTap});
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final String badge;
+  final VoidCallback? onTap;
+  @override
+  Widget build(BuildContext context) => InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(18),
+    child: Ink(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(18)),
+      child: Row(children: [
+        Container(width: 48, height: 48, decoration: BoxDecoration(color: const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(16)), child: Icon(icon, color: const Color(0xFFE30613))),
+        const SizedBox(width: 12),
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: const TextStyle(fontWeight: FontWeight.w900)), const SizedBox(height: 3), Text(subtitle, style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280), fontWeight: FontWeight.w600))])),
+        Container(padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6), decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(999)), child: Text(badge, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w800))),
+      ]),
+    ),
+  );
+}
+
+class DiscoverItem {
+  const DiscoverItem({required this.name, required this.category, required this.area, required this.kind, this.rating, this.reviews, this.phone, this.website, this.turkishBusiness = false, this.turkishService = true, this.subtitle = ''});
+  final String name;
+  final String category;
+  final String area;
+  final String kind;
+  final double? rating;
+  final int? reviews;
+  final String? phone;
+  final String? website;
+  final bool turkishBusiness;
+  final bool turkishService;
+  final String subtitle;
+}
+
+const discoverItems = <DiscoverItem>[
+  DiscoverItem(name: 'Bosporus Turkish Cuisine · The Beach', category: 'Restoranlar', area: 'JBR', kind: 'Türk restoranı', rating: 4.9, reviews: 25260, phone: '+97143808090', turkishBusiness: true, subtitle: 'Türk mutfağı · Kahvaltı · Kebap'),
+  DiscoverItem(name: 'Bosporus Turkish Cuisine · Dubai Mall', category: 'Restoranlar', area: 'Downtown', kind: 'Türk restoranı', rating: 4.9, reviews: 16893, phone: '+97143808090', turkishBusiness: true, subtitle: 'Waterfront · Türk mutfağı'),
+  DiscoverItem(name: 'ZouZou Turkish & Lebanese · JBR', category: 'Restoranlar', area: 'JBR', kind: 'Türk & Lübnan', rating: 4.8, reviews: 13797, phone: '+97145640778', turkishBusiness: true, subtitle: 'Türk & Lübnan mutfağı'),
+  DiscoverItem(name: 'Hafız Mustafa 1864 · Dubai Mall', category: 'Restoranlar', area: 'Downtown', kind: 'Tatlı & Cafe', rating: 4.9, reviews: 30516, phone: '+97145844694', turkishBusiness: true, subtitle: 'Baklava · Türk tatlıları · Cafe'),
+  DiscoverItem(name: 'Çeşme Bazlama Kahvaltı', category: 'Restoranlar', area: 'Al Safa', kind: 'Kahvaltı', rating: 4.7, reviews: 4301, phone: '+97142364056', turkishBusiness: true, subtitle: 'Türk kahvaltısı'),
+  DiscoverItem(name: 'Sultan Saray', category: 'Restoranlar', area: 'Al Thanya', kind: 'Türk restoranı', rating: 4.4, reviews: 4279, phone: '+97142290600', turkishBusiness: true, subtitle: 'Türk mutfağı · Aile restoranı'),
+  DiscoverItem(name: 'Turquaz Gourmet · Turkish Market', category: 'Market & Gıda', area: 'Umm Suqeim 2', kind: 'Türk marketi', rating: 4.9, reviews: 720, phone: '+97142984621', website: 'https://turquazgourmet.ae/', turkishBusiness: true, subtitle: 'Kasap · Fırın · Şarküteri · Türk ürünleri'),
+  DiscoverItem(name: 'Galata Fine Foods · Turkish Market', category: 'Market & Gıda', area: 'Al Wasl', kind: 'Türk marketi', rating: 4.5, reviews: 36, phone: '+97142501317', turkishBusiness: true, subtitle: 'Fırın · Et · Peynir · Kiler ürünleri'),
+  DiscoverItem(name: 'Butcher Emre', category: 'Market & Gıda', area: 'Jumeirah 3', kind: 'Kasap', rating: 4.7, reviews: 63, phone: '+97145915873', subtitle: 'Et & kasap ürünleri'),
+  DiscoverItem(name: 'ADRES Turkish Gents Saloon', category: 'Güzellik & Bakım', area: 'Al Barsha', kind: 'Erkek berberi', rating: 4.8, reviews: 1007, phone: '+971504261841', turkishBusiness: true, subtitle: 'Saç · Sakal · Bakım'),
+  DiscoverItem(name: 'ANTIOCHIA Turkish Gents Salon · Barsha', category: 'Güzellik & Bakım', area: 'Al Barsha', kind: 'Erkek berberi', rating: 4.8, reviews: 896, phone: '+97143235233', turkishBusiness: true, subtitle: 'Türk berberliği'),
+  DiscoverItem(name: 'The Hair Palace by Ozzy', category: 'Güzellik & Bakım', area: 'Jumeirah / Safa 2', kind: 'Kadın kuaför & beauty', phone: '+971501092102', website: 'https://www.thehairpalace.ae/', turkishBusiness: true, subtitle: 'Hair color · Cut · Extensions · Nails · Makeup'),
+  DiscoverItem(name: 'Las Meninas Beauty Salon & SPA', category: 'Güzellik & Bakım', area: 'Dubailand', kind: 'Kadın beauty & spa', phone: '+971582789920', website: 'https://lasmeninasdubailand.ae/', turkishService: true, subtitle: 'Hair · Nails · Lashes · Massage · Makeup'),
+  DiscoverItem(name: 'Dr Tosun Dental Clinic', category: 'Sağlık', area: 'Umm Suqeim 1', kind: 'Diş kliniği', rating: 4.9, reviews: 123, phone: '+97143435051', turkishService: true, subtitle: 'Türkçe diş hizmeti'),
+  DiscoverItem(name: 'Elif Basol', category: 'Sağlık', area: 'Dubai', kind: 'Kadın doğum uzmanı', turkishService: true, subtitle: 'Türk doktor'),
+  DiscoverItem(name: 'Gözde Ercan', category: 'Sağlık', area: 'Dubai', kind: 'Pediatri', turkishService: true, subtitle: 'Türk doktor'),
+  DiscoverItem(name: 'Dilek Eryılmaz', category: 'Sağlık', area: 'Dubai', kind: 'Dermatoloji', turkishService: true, subtitle: 'Türk doktor'),
+  DiscoverItem(name: 'Hacer Subaşı', category: 'Sağlık', area: 'Dubai', kind: 'Psikolog', turkishService: true, subtitle: 'Türkçe psikoloji hizmeti'),
+  DiscoverItem(name: 'Doğuş Atalık', category: 'Ev & Emlak', area: 'Dubai', kind: 'Emlak danışmanı', turkishService: true, subtitle: 'Türkçe konuşan emlak danışmanı'),
+  DiscoverItem(name: 'Umut Marmara', category: 'Ev & Emlak', area: 'Dubai', kind: 'Emlak danışmanı', turkishService: true, subtitle: 'Türkçe konuşan emlak danışmanı'),
+  DiscoverItem(name: 'Bekir Doğan', category: 'Ev & Emlak', area: 'Dubai', kind: 'Emlak danışmanı', rating: 5.0, turkishService: true, subtitle: 'Türk emlak danışmanı'),
+  DiscoverItem(name: 'OYDO Turkish School Dubai', category: 'Çocuk & Eğitim', area: 'Dubai', kind: 'Türkçe eğitim', turkishService: true, subtitle: 'Türkçe eğitim · Çocuklar'),
+  DiscoverItem(name: 'Kübra Karakulah', category: 'Çocuk & Eğitim', area: 'Dubai', kind: 'Türkçe tutor', turkishService: true, subtitle: 'Özel Türkçe dersleri'),
+  DiscoverItem(name: 'Elvan Şener', category: 'Spor & Wellness', area: 'Dubai', kind: 'Personal trainer', turkishService: true, subtitle: 'Türk lisanslı trainer · EREPS'),
+  DiscoverItem(name: 'Beste Ertürk', category: 'Spor & Wellness', area: 'Dubai', kind: 'Personal trainer', turkishService: true, subtitle: 'REPS UAE · Türk trainer'),
+  DiscoverItem(name: 'Active Auto', category: 'Otomotiv', area: 'Al Quoz', kind: 'Türk garajı', phone: '+971501978160', website: 'https://activeauto.me/turkish-garage-dubai', turkishBusiness: true, subtitle: 'Bakım · Mekanik · Klima · Kaporta · Sigorta hasarı'),
+  DiscoverItem(name: 'KARGO DUBAI', category: 'Kargo & Taşıma', area: 'Türkiye ↔ Dubai', kind: 'Kargo & taşıma', phone: '+905065596121', website: 'https://kargodubai.com/', turkishService: true, subtitle: 'Kapıdan kapıya · Ev taşıma · Ticari sevkiyat'),
+  DiscoverItem(name: 'Okan Pictures', category: 'Fotoğraf & Organizasyon', area: 'Dubai', kind: 'Fotoğrafçı', turkishService: true, subtitle: 'Türkçe fotoğraf & event çekimi'),
+  DiscoverItem(name: 'Onur Güney', category: 'Fotoğraf & Organizasyon', area: 'Dubai', kind: 'Fotoğrafçı', turkishService: true, subtitle: 'Portre · Event · Lifestyle'),
+  DiscoverItem(name: 'Sayın Law UAE', category: 'Profesyonel Destek', area: 'Dubai', kind: 'Hukuk & danışmanlık', website: 'https://sayinlegal.ae/', turkishService: true, subtitle: 'Türkçe hukuk · Vergi · Danışmanlık'),
+  DiscoverItem(name: 'Mourah Home', category: 'Mağazalar & Türk Markaları', area: 'Dubai', kind: 'Türk mobilyası', phone: '+971585950114', website: 'https://mourahhome.ae/', turkishBusiness: true, subtitle: 'Modern Türk mobilyası'),
+  DiscoverItem(name: 'Home Identity UAE', category: 'Mağazalar & Türk Markaları', area: 'Dubai Outlet Mall', kind: 'Halı & ev dekor', phone: '+971045535105', website: 'https://homeidentity.com/', turkishService: true, subtitle: 'Türk halıları · Kilim · Homeware'),
+  DiscoverItem(name: 'Turkish Vet Clinic UAE', category: 'Pet', area: 'Sharjah · Yakın UAE', kind: 'Veteriner & grooming', website: 'https://turkishvetclinic.com/', turkishBusiness: true, subtitle: 'Dr. Ömer Kundakçı · Veteriner hizmetleri'),
+  DiscoverItem(name: 'TurkFest', category: 'Kültür & Türk Etkinlikleri', area: 'Dubai', kind: 'Türk expat etkinlikleri', website: 'https://www.turkfest.net/', turkishBusiness: true, subtitle: 'Workshop · Networking · Kültür etkinlikleri'),
+];
+
+const discoverCategories = <({String title, IconData icon, Color color})>[
+  (title: 'Restoranlar', icon: Icons.restaurant, color: Color(0xFFFFE8E5)),
+  (title: 'Sağlık', icon: Icons.local_hospital, color: Color(0xFFE6F4FF)),
+  (title: 'Market & Gıda', icon: Icons.local_grocery_store, color: Color(0xFFE8F7EC)),
+  (title: 'Güzellik & Bakım', icon: Icons.content_cut, color: Color(0xFFFFE8F5)),
+  (title: 'Ev & Emlak', icon: Icons.home_work, color: Color(0xFFFFF1D8)),
+  (title: 'Çocuk & Eğitim', icon: Icons.school, color: Color(0xFFEFE8FF)),
+  (title: 'Spor & Wellness', icon: Icons.fitness_center, color: Color(0xFFE4F7F5)),
+  (title: 'Mağazalar & Türk Markaları', icon: Icons.shopping_bag, color: Color(0xFFFFEDE0)),
+  (title: 'Otomotiv', icon: Icons.directions_car, color: Color(0xFFE7EEF7)),
+  (title: 'Kargo & Taşıma', icon: Icons.local_shipping, color: Color(0xFFEFF7E4)),
+  (title: 'Fotoğraf & Organizasyon', icon: Icons.photo_camera, color: Color(0xFFFFEAF1)),
+  (title: 'Profesyonel Destek', icon: Icons.business_center, color: Color(0xFFEDEDED)),
+  (title: 'Pet', icon: Icons.pets, color: Color(0xFFFFF0D8)),
+  (title: 'Kültür & Türk Etkinlikleri', icon: Icons.theater_comedy, color: Color(0xFFECE9FF)),
+];
+
+class DiscoverPage extends StatefulWidget {
+  const DiscoverPage({super.key, this.initialCategory});
+  final String? initialCategory;
+  @override
+  State<DiscoverPage> createState() => _DiscoverPageState();
+}
+
+class _DiscoverPageState extends State<DiscoverPage> {
+  String query = '';
+  late String? selectedCategory = widget.initialCategory;
+
+  List<DiscoverItem> get filtered => discoverItems.where((e) {
+    final q = query.toLowerCase().trim();
+    final categoryOk = selectedCategory == null || e.category == selectedCategory;
+    final textOk = q.isEmpty || '${e.name} ${e.category} ${e.area} ${e.kind} ${e.subtitle}'.toLowerCase().contains(q);
+    return categoryOk && textOk;
+  }).toList();
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        Positioned(bottom: 5, child: Container(width: 6, height: 30, decoration: BoxDecoration(color: brand, borderRadius: BorderRadius.circular(4)))),
-        Positioned(bottom: 5, left: 8, child: Container(width: 8, height: 19, decoration: BoxDecoration(color: brand, borderRadius: BorderRadius.circular(4)))),
-        Positioned(bottom: 5, right: 8, child: Container(width: 8, height: 16, decoration: BoxDecoration(color: brand, borderRadius: BorderRadius.circular(4)))),
-        Positioned(bottom: 1, left: 5, child: Container(width: 12, height: 12, decoration: const BoxDecoration(color: brand, shape: BoxShape.circle))),
-        Positioned(bottom: 1, right: 5, child: Container(width: 12, height: 12, decoration: const BoxDecoration(color: brand, shape: BoxShape.circle))),
-      ],
+    return SafeArea(
+      child: Column(children: [
+        Padding(padding: const EdgeInsets.fromLTRB(18, 14, 18, 8), child: Column(children: [
+          const BrandHeader(compact: true),
+          const SizedBox(height: 18),
+          TextField(
+            onChanged: (v) => setState(() => query = v),
+            decoration: InputDecoration(
+              hintText: 'Restoran, Türk doktor, berber, market ara…',
+              prefixIcon: const Icon(Icons.search),
+              suffixIcon: const Icon(Icons.tune),
+              filled: true,
+              fillColor: Colors.white,
+              border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(18)),
+            ),
+          ),
+        ])),
+        Expanded(child: CustomScrollView(slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(18, 8, 18, 8),
+            sliver: SliverToBoxAdapter(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const SectionTitle(title: 'Keşfet'),
+              const SizedBox(height: 4),
+              const Text('Dubai’de Türk işletmeleri ve Türkçe hizmet verenleri bul.', style: TextStyle(color: Color(0xFF6B7280), fontWeight: FontWeight.w600)),
+              const SizedBox(height: 14),
+              SizedBox(height: 106, child: ListView.separated(scrollDirection: Axis.horizontal, itemCount: discoverCategories.length, separatorBuilder: (_, __) => const SizedBox(width: 10), itemBuilder: (_, i) {
+                final c = discoverCategories[i];
+                final selected = selectedCategory == c.title;
+                return InkWell(
+                  onTap: () => setState(() => selectedCategory = selected ? null : c.title),
+                  borderRadius: BorderRadius.circular(20),
+                  child: Container(width: 104, padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: selected ? const Color(0xFFE30613) : Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: selected ? const Color(0xFFE30613) : const Color(0xFFEFF0F2))), child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Container(width: 42, height: 42, decoration: BoxDecoration(color: selected ? Colors.white.withValues(alpha: .18) : c.color, borderRadius: BorderRadius.circular(14)), child: Icon(c.icon, color: selected ? Colors.white : const Color(0xFFE30613))),
+                    const SizedBox(height: 7),
+                    Text(c.title.replaceAll(' & Türk Markaları', ''), maxLines: 2, textAlign: TextAlign.center, style: TextStyle(fontSize: 11, height: 1.05, color: selected ? Colors.white : const Color(0xFF1F2937), fontWeight: FontWeight.w800)),
+                  ])),
+                );
+              })),
+              const SizedBox(height: 14),
+              SingleChildScrollView(scrollDirection: Axis.horizontal, child: Row(children: [
+                FilterChip(label: const Text('Tümü'), selected: selectedCategory == null, onSelected: (_) => setState(() => selectedCategory = null)),
+                const SizedBox(width: 8),
+                const Chip(avatar: Icon(Icons.language, size: 16), label: Text('Türkçe hizmet')),
+                const SizedBox(width: 8),
+                const Chip(avatar: Icon(Icons.star, size: 16, color: Color(0xFFFFB300)), label: Text('En yüksek puan')),
+                const SizedBox(width: 8),
+                const Chip(avatar: Icon(Icons.location_on, size: 16), label: Text('Yakınımda')),
+              ])),
+              const SizedBox(height: 18),
+              SectionTitle(title: selectedCategory ?? 'Öne çıkanlar', action: '${filtered.length} sonuç'),
+            ])),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(18, 5, 18, 120),
+            sliver: SliverList.separated(
+              itemCount: filtered.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 10),
+              itemBuilder: (_, i) => DiscoverCard(item: filtered[i]),
+            ),
+          )
+        ]))
+      ]),
     );
   }
+}
+
+class DiscoverCard extends StatelessWidget {
+  const DiscoverCard({super.key, required this.item});
+  final DiscoverItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    final icon = switch (item.category) {
+      'Restoranlar' => Icons.restaurant,
+      'Sağlık' => Icons.local_hospital,
+      'Market & Gıda' => Icons.local_grocery_store,
+      'Güzellik & Bakım' => Icons.content_cut,
+      'Ev & Emlak' => Icons.home_work,
+      'Çocuk & Eğitim' => Icons.school,
+      'Spor & Wellness' => Icons.fitness_center,
+      'Otomotiv' => Icons.directions_car,
+      'Kargo & Taşıma' => Icons.local_shipping,
+      'Pet' => Icons.pets,
+      _ => Icons.place,
+    };
+    return InkWell(
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => PlaceDetailPage(item: item))),
+      borderRadius: BorderRadius.circular(22),
+      child: Ink(
+        height: 154 * MediaQuery.textScalerOf(context).scale(1).clamp(1.0, 2.0),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(22)),
+        child: Row(children: [
+          Container(width: 104, height: 106, decoration: BoxDecoration(borderRadius: BorderRadius.circular(17), gradient: const LinearGradient(colors: [Color(0xFFFFE3E6), Color(0xFFFFF8F8)])), child: Stack(alignment: Alignment.center, children: [Icon(icon, size: 48, color: const Color(0xFFE30613)), Positioned(right: 7, top: 7, child: Container(padding: const EdgeInsets.all(5), decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: const Icon(Icons.arrow_forward, size: 15))) ])),
+          const SizedBox(width: 12),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
+            Row(children: [Expanded(child: Text(item.name, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 15))), if (item.turkishBusiness) const Text(' 🇹🇷', style: TextStyle(fontSize: 14))]),
+            const SizedBox(height: 4),
+            Text(item.subtitle.isEmpty ? item.kind : item.subtitle, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11.5, color: Color(0xFF6B7280), fontWeight: FontWeight.w600)),
+            const SizedBox(height: 8),
+            Row(children: [
+              if (item.rating != null) ...[const Icon(Icons.star_rounded, size: 17, color: Color(0xFFFFB300)), Text('${item.rating}', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12)), if (item.reviews != null) Text(' (${compactCount(item.reviews!)})', style: const TextStyle(fontSize: 10, color: Color(0xFF8B9098))), const SizedBox(width: 8)],
+              const Icon(Icons.location_on_outlined, size: 15, color: Color(0xFF6B7280)), Expanded(child: Text(item.area, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: Color(0xFF6B7280), fontWeight: FontWeight.w700))),
+            ]),
+            if (item.turkishService) Padding(padding: const EdgeInsets.only(top: 6), child: Container(padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4), decoration: BoxDecoration(color: const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(999)), child: const Text('🗣️ Türkçe hizmet', style: TextStyle(fontSize: 9.5, fontWeight: FontWeight.w800, color: Color(0xFFB0000A)))))
+          ]))
+        ]),
+      ),
+    );
+  }
+}
+
+String compactCount(int n) {
+  if (n >= 1000) return '${(n / 1000).toStringAsFixed(n >= 10000 ? 0 : 1)}K';
+  return '$n';
+}
+
+class PlaceDetailPage extends StatelessWidget {
+  const PlaceDetailPage({super.key, required this.item});
+  final DiscoverItem item;
+
+  Future<void> _open(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(item.kind, style: const TextStyle(fontWeight: FontWeight.w900))),
+      body: ListView(padding: const EdgeInsets.fromLTRB(18, 0, 18, 40), children: [
+        Container(height: 210, decoration: BoxDecoration(borderRadius: BorderRadius.circular(26), gradient: const LinearGradient(colors: [Color(0xFFFFE3E6), Color(0xFFFFFAFA)])), child: Stack(alignment: Alignment.center, children: [const Icon(Icons.location_city, size: 110, color: Color(0x33E30613)), Positioned(right: 14, top: 14, child: CircleAvatar(backgroundColor: Colors.white, child: IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border))))])),
+        const SizedBox(height: 18),
+        Text(item.name, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 25, height: 1.05, letterSpacing: -0.7)),
+        const SizedBox(height: 8),
+        Wrap(spacing: 7, runSpacing: 7, children: [
+          if (item.rating != null) Chip(avatar: const Icon(Icons.star, color: Color(0xFFFFB300), size: 18), label: Text('${item.rating}${item.reviews != null ? ' · ${compactCount(item.reviews!)} yorum' : ''}')),
+          if (item.turkishBusiness) const Chip(label: Text('🇹🇷 Türk işletmesi')),
+          if (item.turkishService) const Chip(label: Text('🗣️ Türkçe hizmet')),
+        ]),
+        const SizedBox(height: 8),
+        ListTile(contentPadding: EdgeInsets.zero, leading: const CircleAvatar(child: Icon(Icons.location_on_outlined)), title: Text(item.area, style: const TextStyle(fontWeight: FontWeight.w800)), subtitle: Text(item.subtitle)),
+        const SizedBox(height: 10),
+        Row(children: [
+          Expanded(child: FilledButton.icon(onPressed: () => _open('https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent('${item.name} ${item.area} Dubai')}'), icon: const Icon(Icons.directions), label: const Text('Yol Tarifi'))),
+          const SizedBox(width: 8),
+          Expanded(child: OutlinedButton.icon(onPressed: item.phone == null ? null : () => _open('tel:${item.phone}'), icon: const Icon(Icons.call), label: const Text('Ara'))),
+        ]),
+        if (item.phone != null) ...[
+          const SizedBox(height: 8),
+          SizedBox(width: double.infinity, child: OutlinedButton.icon(onPressed: () => _open('https://wa.me/${item.phone!.replaceAll(RegExp(r'[^0-9]'), '')}'), icon: const Icon(Icons.chat), label: const Text('WhatsApp'))),
+        ],
+        if (item.website != null) ...[
+          const SizedBox(height: 8),
+          SizedBox(width: double.infinity, child: OutlinedButton.icon(onPressed: () => _open(item.website!), icon: const Icon(Icons.language), label: const Text('Resmî site / Menü'))),
+        ],
+        const SizedBox(height: 22),
+        const SectionTitle(title: 'Hakkında'),
+        const SizedBox(height: 8),
+        Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)), child: Text('${item.name}, BizimDubai Keşfet veritabanında ${item.kind.toLowerCase()} olarak listeleniyor. İşletme bilgileri ve Türkçe hizmet durumu yayın öncesi doğrulanarak güncellenir.', style: const TextStyle(height: 1.45, color: Color(0xFF4B5563), fontWeight: FontWeight.w600))),
+        const SizedBox(height: 18),
+        const SectionTitle(title: 'BizimDubai topluluğu'),
+        const SizedBox(height: 8),
+        Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: const Color(0xFFFFF4F5), borderRadius: BorderRadius.circular(20)), child: const Row(children: [Icon(Icons.forum_outlined, color: Color(0xFFE30613)), SizedBox(width: 12), Expanded(child: Text('Bu yer hakkında soru sor veya kendi deneyimini paylaş.', style: TextStyle(fontWeight: FontWeight.w800))), Icon(Icons.chevron_right)])),
+      ]),
+    );
+  }
+}
+
+class CommunityPage extends StatelessWidget {
+  const CommunityPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final groups = [
+      ('Dubai Türk Futbol', '1.248 üye', Icons.sports_soccer),
+      ('Dubai Türk Kadınlar', '2.104 üye', Icons.woman),
+      ('JVC Türkleri', '864 üye', Icons.apartment),
+      ('Dubai Türk Gamerlar', '592 üye', Icons.sports_esports),
+      ('Padel Dubai Türk', '418 üye', Icons.sports_tennis),
+      ('Dubai’ye Yeni Gelenler', '1.570 üye', Icons.flight_land),
+    ];
+    final events = [
+      ('Cuma Halı Saha', 'Cuma · 21:00 · Al Quoz', '9/14 kişi', Icons.sports_soccer),
+      ('Padel Mix Match', 'Cumartesi · 19:30 · Al Barsha', '6/8 kişi', Icons.sports_tennis),
+      ('Yeni Gelenler Kahvesi', 'Cumartesi · 17:30 · Marina', '12 kişi', Icons.coffee),
+    ];
+    return SafeArea(child: ListView(padding: const EdgeInsets.fromLTRB(18, 14, 18, 120), children: [
+      const BrandHeader(compact: true),
+      const SizedBox(height: 20),
+      const SectionTitle(title: 'Topluluk'),
+      const SizedBox(height: 4),
+      const Text('Sadece konuşma değil; birlikte bir şey yap.', style: TextStyle(color: Color(0xFF6B7280), fontWeight: FontWeight.w600)),
+      const SizedBox(height: 16),
+      Row(children: [
+        Expanded(child: FilledButton.icon(onPressed: () => _showCreateEvent(context), icon: const Icon(Icons.add), label: const Text('Etkinlik oluştur'))),
+        const SizedBox(width: 8),
+        Expanded(child: OutlinedButton.icon(onPressed: () => _showCreateGroup(context), icon: const Icon(Icons.group_add_outlined), label: const Text('Grup oluştur'))),
+      ]),
+      const SizedBox(height: 24),
+      const SectionTitle(title: 'Yaklaşan etkinlikler', action: 'Tümü'),
+      const SizedBox(height: 10),
+      ...events.map((e) => Padding(padding: const EdgeInsets.only(bottom: 10), child: EventCard(title: e.$1, subtitle: e.$2, status: e.$3, icon: e.$4))),
+      const SizedBox(height: 14),
+      const SectionTitle(title: 'Gruplar', action: 'Tümü'),
+      const SizedBox(height: 10),
+      ...groups.map((g) => Padding(padding: const EdgeInsets.only(bottom: 10), child: GroupCard(title: g.$1, members: g.$2, icon: g.$3))),
+      const SizedBox(height: 8),
+      Container(padding: const EdgeInsets.all(18), decoration: BoxDecoration(color: const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(22)), child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('Bir aktivite arıyorsun ama etkinlik yok mu?', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17)), SizedBox(height: 6), Text('“Cuma halı saha oynamak istiyorum” diye istek bırak. Aynı istekte yeterli kişi olduğunda etkinlik önerelim.', style: TextStyle(height: 1.4, color: Color(0xFF6B7280), fontWeight: FontWeight.w600))]))
+    ]));
+  }
+
+  void _showCreateEvent(BuildContext context) {
+    showModalBottomSheet(context: context, isScrollControlled: true, builder: (_) => const CreateEventSheet());
+  }
+
+  void _showCreateGroup(BuildContext context) {
+    showModalBottomSheet(context: context, isScrollControlled: true, builder: (_) => const CreateGroupSheet());
+  }
+}
+
+class EventCard extends StatelessWidget {
+  const EventCard({super.key, required this.title, required this.subtitle, required this.status, required this.icon});
+  final String title, subtitle, status;
+  final IconData icon;
+  @override
+  Widget build(BuildContext context) => Container(padding: const EdgeInsets.all(14), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)), child: Row(children: [
+    Container(width: 54, height: 54, decoration: BoxDecoration(color: const Color(0xFFFFECEE), borderRadius: BorderRadius.circular(17)), child: Icon(icon, color: const Color(0xFFE30613), size: 28)),
+    const SizedBox(width: 12),
+    Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: const TextStyle(fontWeight: FontWeight.w900)), const SizedBox(height: 4), Text(subtitle, style: const TextStyle(fontSize: 11.5, color: Color(0xFF6B7280), fontWeight: FontWeight.w600))])),
+    Column(crossAxisAlignment: CrossAxisAlignment.end, children: [Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5), decoration: BoxDecoration(color: const Color(0xFFF3F4F6), borderRadius: BorderRadius.circular(999)), child: Text(status, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w800))), const SizedBox(height: 4), const Text('Katıl →', style: TextStyle(color: Color(0xFFE30613), fontWeight: FontWeight.w900, fontSize: 11))])
+  ]));
+}
+
+class GroupCard extends StatelessWidget {
+  const GroupCard({super.key, required this.title, required this.members, required this.icon});
+  final String title, members;
+  final IconData icon;
+  @override
+  Widget build(BuildContext context) => Container(padding: const EdgeInsets.all(14), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)), child: Row(children: [
+    CircleAvatar(radius: 25, backgroundColor: const Color(0xFFFFECEE), child: Icon(icon, color: const Color(0xFFE30613))),
+    const SizedBox(width: 12),
+    Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: const TextStyle(fontWeight: FontWeight.w900)), Text(members, style: const TextStyle(color: Color(0xFF8B9098), fontWeight: FontWeight.w600, fontSize: 11))])),
+    OutlinedButton(onPressed: () {}, child: const Text('Katıl')),
+  ]));
+}
+
+class CreateEventSheet extends StatefulWidget {
+  const CreateEventSheet({super.key});
+  @override
+  State<CreateEventSheet> createState() => _CreateEventSheetState();
+}
+
+class _CreateEventSheetState extends State<CreateEventSheet> {
+  String type = 'Halı Saha';
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.fromLTRB(18, 14, 18, MediaQuery.of(context).viewInsets.bottom + 24),
+    child: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Center(child: Container(width: 42, height: 4, decoration: BoxDecoration(color: const Color(0xFFD1D5DB), borderRadius: BorderRadius.circular(10)))),
+      const SizedBox(height: 18),
+      const Text('Etkinlik oluştur', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24)),
+      const SizedBox(height: 12),
+      DropdownButtonFormField<String>(value: type, items: const ['Halı Saha','Padel','Maç İzleme','Kahve & Sosyal','Piknik & Outdoor','Oyun Gecesi','Koşu','Aile & Çocuk'].map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: (v) => setState(() => type = v ?? type), decoration: const InputDecoration(labelText: 'Etkinlik türü', border: OutlineInputBorder())),
+      const SizedBox(height: 10),
+      const TextField(decoration: InputDecoration(labelText: 'Başlık', hintText: 'Örn. Cuma Halı Saha', border: OutlineInputBorder())),
+      const SizedBox(height: 10),
+      const Row(children: [Expanded(child: TextField(decoration: InputDecoration(labelText: 'Tarih / Saat', border: OutlineInputBorder()))), SizedBox(width: 8), Expanded(child: TextField(decoration: InputDecoration(labelText: 'Kapasite', hintText: '14', border: OutlineInputBorder())))]),
+      const SizedBox(height: 10),
+      const TextField(decoration: InputDecoration(labelText: 'Konum', hintText: 'Al Quoz', border: OutlineInputBorder())),
+      const SizedBox(height: 10),
+      const TextField(decoration: InputDecoration(labelText: 'Kişi başı ücret (opsiyonel)', hintText: '65 AED', border: OutlineInputBorder())),
+      const SizedBox(height: 10),
+      const TextField(maxLines: 3, decoration: InputDecoration(labelText: 'Açıklama / Kurallar', border: OutlineInputBorder())),
+      const SizedBox(height: 14),
+      SizedBox(width: double.infinity, child: FilledButton(onPressed: () => Navigator.pop(context), child: const Text('Etkinliği Yayınla'))),
+    ])),
+  );
+}
+
+class CreateGroupSheet extends StatelessWidget {
+  const CreateGroupSheet({super.key});
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: EdgeInsets.fromLTRB(18, 14, 18, MediaQuery.of(context).viewInsets.bottom + 24),
+    child: SingleChildScrollView(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Center(child: Container(width: 42, height: 4, decoration: BoxDecoration(color: const Color(0xFFD1D5DB), borderRadius: BorderRadius.circular(10)))),
+      const SizedBox(height: 18),
+      const Text('Grup oluştur', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 24)),
+      const SizedBox(height: 12),
+      const TextField(decoration: InputDecoration(labelText: 'Grup adı', hintText: 'Örn. Dubai Türk Padel', border: OutlineInputBorder())),
+      const SizedBox(height: 10),
+      const TextField(decoration: InputDecoration(labelText: 'Kategori', border: OutlineInputBorder())),
+      const SizedBox(height: 10),
+      const TextField(maxLines: 3, decoration: InputDecoration(labelText: 'Açıklama ve kurallar', border: OutlineInputBorder())),
+      const SizedBox(height: 14),
+      SizedBox(width: double.infinity, child: FilledButton(onPressed: () => Navigator.pop(context), child: const Text('Grubu Oluştur'))),
+    ])),
+  );
+}
+
+class GuidePage extends StatelessWidget {
+  const GuidePage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final guides = [
+      ('Dubai’ye Yeni Geldim', Icons.flight_land, 'SIM, banka, Emirates ID, ev, ulaşım'),
+      ('Ev & Yaşam', Icons.home_outlined, 'Kiralama, Ejari, DEWA, internet, depozito'),
+      ('Araç & Ulaşım', Icons.directions_car_outlined, 'Ehliyet, RTA, Salik, park, sigorta'),
+      ('Sağlık', Icons.health_and_safety_outlined, 'Sigorta, doktor, eczane, acil durum'),
+      ('Aile & Çocuk', Icons.family_restroom, 'Okul, nursery, çocuk doktoru, aktiviteler'),
+      ('İş & Kariyer', Icons.work_outline, 'İş arama, CV, sözleşme, maaş & benefits'),
+      ('Resmî İşlemler', Icons.account_balance_outlined, 'Doğru kurum, gerekli belge, adım adım'),
+      ('Dubai’den Ayrılıyorum', Icons.flight_takeoff, 'DEWA, internet, banka, araç, depozito'),
+      ('Acil Durum', Icons.emergency_outlined, 'Polis, ambulans, konsolosluk, kayıp pasaport'),
+    ];
+    return SafeArea(child: ListView(padding: const EdgeInsets.fromLTRB(18, 14, 18, 120), children: [
+      const BrandHeader(compact: true),
+      const SizedBox(height: 20),
+      const Text('Rehber', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 26, letterSpacing: -0.7)),
+      const SizedBox(height: 4),
+      const Text('Dubai’de bunu nasıl yaparım?', style: TextStyle(color: Color(0xFF6B7280), fontWeight: FontWeight.w600)),
+      const SizedBox(height: 14),
+      TextField(decoration: InputDecoration(hintText: 'Ehliyet, banka, ev kiralama ara…', prefixIcon: const Icon(Icons.search), filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(18)))),
+      const SizedBox(height: 20),
+      GridView.builder(shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), itemCount: guides.length, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 1.22, crossAxisSpacing: 10, mainAxisSpacing: 10), itemBuilder: (_, i) {
+        final g = guides[i];
+        return InkWell(onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => GuideDetailPage(title: g.$1, subtitle: g.$3))), borderRadius: BorderRadius.circular(22), child: Ink(padding: const EdgeInsets.all(14), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(22)), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Container(width: 42, height: 42, decoration: BoxDecoration(color: const Color(0xFFFFECEE), borderRadius: BorderRadius.circular(14)), child: Icon(g.$2, color: const Color(0xFFE30613))), const Spacer(), Text(g.$1, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 14)), const SizedBox(height: 4), Text(g.$3, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Color(0xFF8B9098), fontWeight: FontWeight.w600, fontSize: 10.5))])));
+      }),
+    ]));
+  }
+}
+
+class GuideDetailPage extends StatelessWidget {
+  const GuideDetailPage({super.key, required this.title, required this.subtitle});
+  final String title, subtitle;
+  @override
+  Widget build(BuildContext context) {
+    final steps = title == 'Ev & Yaşam'
+      ? ['Bütçe ve bölgeyi belirle', 'İlan ve emlakçıları karşılaştır', 'Sözleşmeyi kontrol et', 'Ejari kaydını tamamla', 'DEWA bağlantısını aç', 'İnternet bağlantısını ayarla', 'Teslim ve depozito kanıtlarını sakla']
+      : ['Gerekli belgeleri kontrol et', 'Resmî kurumu belirle', 'Başvuruyu hazırla', 'Ücret ve randevu adımını tamamla', 'Sonucu ve belgeleri sakla'];
+    return Scaffold(appBar: AppBar(title: Text(title, style: const TextStyle(fontWeight: FontWeight.w900))), body: ListView(padding: const EdgeInsets.fromLTRB(18, 8, 18, 40), children: [
+      Container(padding: const EdgeInsets.all(18), decoration: BoxDecoration(color: const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(22)), child: const Row(crossAxisAlignment: CrossAxisAlignment.start, children: [Icon(Icons.info_outline, color: Color(0xFFE30613)), SizedBox(width: 10), Expanded(child: Text('Kurallar ve ücretler değişebilir. Yayın tarihinden önce resmî kaynağı kontrol et.', style: TextStyle(fontWeight: FontWeight.w700, height: 1.35)))])),
+      const SizedBox(height: 18),
+      Text(subtitle, style: const TextStyle(color: Color(0xFF6B7280), fontWeight: FontWeight.w700)),
+      const SizedBox(height: 18),
+      ...List.generate(steps.length, (i) => Container(margin: const EdgeInsets.only(bottom: 10), padding: const EdgeInsets.all(14), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(18)), child: Row(children: [CircleAvatar(backgroundColor: const Color(0xFFE30613), foregroundColor: Colors.white, radius: 16, child: Text('${i + 1}', style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12))), const SizedBox(width: 12), Expanded(child: Text(steps[i], style: const TextStyle(fontWeight: FontWeight.w800)))]))),
+      const SizedBox(height: 8),
+      OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.groups_outlined), label: const Text('Topluluğa Sor')),
+      const SizedBox(height: 8),
+      FilledButton.icon(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const DiscoverPage())), icon: const Icon(Icons.explore_outlined), label: const Text('İlgili Türk Hizmetlerini Bul')),
+    ]));
+  }
+}
+
+class ClassifiedItem {
+  const ClassifiedItem({required this.title, required this.price, required this.area, required this.category, required this.icon, this.badge = 'Satılık'});
+  final String title, price, area, category, badge;
+  final IconData icon;
+}
+
+const classifiedItems = [
+  ClassifiedItem(title: 'iPhone 16 Pro 256 GB', price: '3.100 AED', area: 'JVC', category: 'Elektronik', icon: Icons.phone_iphone, badge: 'Acil Satış'),
+  ClassifiedItem(title: 'L koltuk takımı', price: '1.850 AED', area: 'Dubai Marina', category: 'Ev & Mobilya', icon: Icons.chair_alt),
+  ClassifiedItem(title: 'PS5 + 2 kol', price: '1.600 AED', area: 'Business Bay', category: 'Elektronik', icon: Icons.sports_esports),
+  ClassifiedItem(title: 'Bebek arabası', price: '420 AED', area: 'Al Barsha', category: 'Çocuk & Bebek', icon: Icons.child_friendly),
+  ClassifiedItem(title: 'Yemek masası + 4 sandalye', price: '1.250 AED', area: 'JVC', category: 'Ev & Mobilya', icon: Icons.table_restaurant),
+  ClassifiedItem(title: 'TV ünitesi', price: '750 AED', area: 'Marina', category: 'Ev & Mobilya', icon: Icons.tv),
+];
+
+class ClassifiedsPage extends StatefulWidget {
+  const ClassifiedsPage({super.key});
+  @override
+  State<ClassifiedsPage> createState() => _ClassifiedsPageState();
+}
+
+class _ClassifiedsPageState extends State<ClassifiedsPage> {
+  String query = '';
+  @override
+  Widget build(BuildContext context) {
+    final filtered = classifiedItems.where((e) => '${e.title} ${e.category} ${e.area}'.toLowerCase().contains(query.toLowerCase())).toList();
+    return Scaffold(
+      appBar: AppBar(title: const Text('İlanlar', style: TextStyle(fontWeight: FontWeight.w900)), actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.notifications_none))]),
+      floatingActionButton: FloatingActionButton.extended(backgroundColor: const Color(0xFFE30613), foregroundColor: Colors.white, onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const CreateListingPage())), icon: const Icon(Icons.add), label: const Text('İlan Ver', style: TextStyle(fontWeight: FontWeight.w900))),
+      body: ListView(padding: const EdgeInsets.fromLTRB(18, 6, 18, 100), children: [
+        const Text('Dubai’deki Türklerin ikinci el platformu', style: TextStyle(color: Color(0xFF6B7280), fontWeight: FontWeight.w600)),
+        const SizedBox(height: 12),
+        TextField(onChanged: (v) => setState(() => query = v), decoration: InputDecoration(hintText: 'Ne arıyorsun?', prefixIcon: const Icon(Icons.search), suffixIcon: const Icon(Icons.tune), filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(18)))),
+        const SizedBox(height: 14),
+        SizedBox(height: 74, child: ListView(scrollDirection: Axis.horizontal, children: const [
+          ClassifiedCategory(icon: Icons.chair_alt, label: 'Ev & Mobilya'),
+          ClassifiedCategory(icon: Icons.laptop_mac, label: 'Elektronik'),
+          ClassifiedCategory(icon: Icons.directions_car, label: 'Araç'),
+          ClassifiedCategory(icon: Icons.child_friendly, label: 'Çocuk & Bebek'),
+          ClassifiedCategory(icon: Icons.checkroom, label: 'Moda'),
+          ClassifiedCategory(icon: Icons.grid_view, label: 'Tümü'),
+        ])),
+        const SizedBox(height: 18),
+        const SectionTitle(title: 'Yeni İlanlar', action: 'Tümünü Gör'),
+        const SizedBox(height: 10),
+        GridView.builder(shrinkWrap: true, physics: const NeverScrollableScrollPhysics(), itemCount: filtered.length, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: .79, crossAxisSpacing: 10, mainAxisSpacing: 10), itemBuilder: (_, i) => ListingCard(item: filtered[i])),
+        const SizedBox(height: 20),
+        Container(padding: const EdgeInsets.all(18), decoration: BoxDecoration(color: const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(22)), child: const Row(children: [CircleAvatar(backgroundColor: Color(0xFFE30613), foregroundColor: Colors.white, child: Icon(Icons.flight_takeoff)), SizedBox(width: 12), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('Leaving Dubai?', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16)), Text('Tüm ev eşyalarını tek paket ilanla daha hızlı sat.', style: TextStyle(color: Color(0xFF6B7280), fontWeight: FontWeight.w600, fontSize: 11))]))]))
+      ]),
+    );
+  }
+}
+
+class ClassifiedCategory extends StatelessWidget {
+  const ClassifiedCategory({super.key, required this.icon, required this.label});
+  final IconData icon;
+  final String label;
+  @override
+  Widget build(BuildContext context) => Container(width: 82, margin: const EdgeInsets.only(right: 8), child: Column(children: [Container(width: 44, height: 44, decoration: BoxDecoration(color: const Color(0xFFFFECEE), borderRadius: BorderRadius.circular(14)), child: Icon(icon, color: const Color(0xFFE30613))), const SizedBox(height: 5), Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 9.5, fontWeight: FontWeight.w800))]));
+}
+
+class ListingCard extends StatelessWidget {
+  const ListingCard({super.key, required this.item});
+  final ClassifiedItem item;
+  @override
+  Widget build(BuildContext context) => InkWell(
+    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => ListingDetailPage(item: item))),
+    borderRadius: BorderRadius.circular(20),
+    child: Ink(decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Expanded(child: Container(decoration: const BoxDecoration(gradient: LinearGradient(colors: [Color(0xFFFFF0F1), Color(0xFFFFFAFA)]), borderRadius: BorderRadius.vertical(top: Radius.circular(20))), child: Stack(children: [Center(child: Icon(item.icon, size: 58, color: const Color(0xFFE30613))), Positioned(left: 8, top: 8, child: Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: const Color(0xFFE30613), borderRadius: BorderRadius.circular(999)), child: Text(item.badge, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 9)))), const Positioned(right: 8, top: 8, child: CircleAvatar(radius: 14, backgroundColor: Colors.white, child: Icon(Icons.favorite_border, size: 16))) ]))),
+      Padding(padding: const EdgeInsets.all(10), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(item.title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 12)), const SizedBox(height: 3), Text(item.price, style: const TextStyle(color: Color(0xFFE30613), fontWeight: FontWeight.w900, fontSize: 15)), const SizedBox(height: 4), Row(children: [const Icon(Icons.location_on_outlined, size: 13, color: Color(0xFF8B9098)), Expanded(child: Text(item.area, style: const TextStyle(fontSize: 9.5, color: Color(0xFF8B9098), fontWeight: FontWeight.w700))), const Icon(Icons.star, size: 13, color: Color(0xFFFFB300)), const Text('4.9', style: TextStyle(fontSize: 9.5, fontWeight: FontWeight.w800))])]))
+    ])),
+  );
+}
+
+class ListingDetailPage extends StatelessWidget {
+  const ListingDetailPage({super.key, required this.item});
+  final ClassifiedItem item;
+  @override
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(), bottomNavigationBar: SafeArea(child: Padding(padding: const EdgeInsets.all(12), child: Row(children: [Expanded(child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.chat_bubble_outline), label: const Text('Mesaj Gönder'))), const SizedBox(width: 8), Expanded(child: FilledButton.icon(onPressed: () {}, icon: const Icon(Icons.chat), label: const Text('WhatsApp')))]))), body: ListView(padding: const EdgeInsets.fromLTRB(18, 0, 18, 30), children: [
+    Container(height: 270, decoration: BoxDecoration(borderRadius: BorderRadius.circular(26), gradient: const LinearGradient(colors: [Color(0xFFFFECEE), Color(0xFFFFFFFF)])), child: Center(child: Icon(item.icon, size: 120, color: const Color(0xFFE30613)))),
+    const SizedBox(height: 16),
+    Text(item.title, style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 24)),
+    Text(item.price, style: const TextStyle(color: Color(0xFFE30613), fontWeight: FontWeight.w900, fontSize: 24)),
+    const SizedBox(height: 8),
+    Row(children: [const Icon(Icons.location_on_outlined, size: 18), Text(item.area, style: const TextStyle(fontWeight: FontWeight.w700)), const Spacer(), const Text('3 gün önce', style: TextStyle(color: Color(0xFF8B9098), fontWeight: FontWeight.w600))]),
+    const SizedBox(height: 18),
+    Container(padding: const EdgeInsets.all(14), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)), child: const Row(children: [CircleAvatar(child: Icon(Icons.person)), SizedBox(width: 10), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('Merve K.', style: TextStyle(fontWeight: FontWeight.w900)), Text('⭐ 4.8 · 28 değerlendirme', style: TextStyle(fontSize: 11, color: Color(0xFF6B7280), fontWeight: FontWeight.w600))])), Icon(Icons.chevron_right)])),
+    const SizedBox(height: 18),
+    const SectionTitle(title: 'Açıklama'),
+    const SizedBox(height: 8),
+    Text('${item.title} temiz kullanılmıştır. Dubai içinde elden teslim tercih edilir. Detaylar için mesaj gönderebilirsin.', style: const TextStyle(height: 1.45, color: Color(0xFF4B5563), fontWeight: FontWeight.w600)),
+  ]));
+}
+
+class CreateListingPage extends StatelessWidget {
+  const CreateListingPage({super.key});
+  @override
+  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: const Text('İlan Ver', style: TextStyle(fontWeight: FontWeight.w900))), body: ListView(padding: const EdgeInsets.fromLTRB(18, 6, 18, 30), children: [
+    Container(padding: const EdgeInsets.all(14), decoration: BoxDecoration(color: const Color(0xFFFFF1F2), borderRadius: BorderRadius.circular(18)), child: const Row(children: [Icon(Icons.groups, color: Color(0xFFE30613)), SizedBox(width: 10), Expanded(child: Text('Dubai’deki Türk topluluğunun parçası ol. İhtiyacın olanı sat, başkasının ihtiyacını karşıla.', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 12, height: 1.35)))])),
+    const SizedBox(height: 14),
+    Container(height: 135, decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFFD9DDE3))), child: const Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.add_a_photo_outlined, color: Color(0xFFE30613), size: 34), SizedBox(height: 7), Text('Fotoğraf Ekle', style: TextStyle(color: Color(0xFFE30613), fontWeight: FontWeight.w900)), Text('En az 1, en fazla 10 fotoğraf', style: TextStyle(color: Color(0xFF8B9098), fontSize: 10))])),
+    const SizedBox(height: 12),
+    const TextField(decoration: InputDecoration(labelText: 'Kategori', border: OutlineInputBorder())),
+    const SizedBox(height: 10),
+    const TextField(decoration: InputDecoration(labelText: 'Başlık', hintText: 'Örn. L koltuk takımı', border: OutlineInputBorder())),
+    const SizedBox(height: 10),
+    const TextField(keyboardType: TextInputType.number, decoration: InputDecoration(labelText: 'Fiyat (AED)', border: OutlineInputBorder())),
+    const SizedBox(height: 10),
+    const TextField(maxLines: 4, decoration: InputDecoration(labelText: 'Açıklama', border: OutlineInputBorder())),
+    const SizedBox(height: 10),
+    const TextField(decoration: InputDecoration(labelText: 'Bölge', hintText: 'JVC, Marina, Al Barsha…', border: OutlineInputBorder())),
+    const SizedBox(height: 14),
+    const Text('İlan Türü', style: TextStyle(fontWeight: FontWeight.w900)),
+    const SizedBox(height: 8),
+    const Wrap(spacing: 8, children: [Chip(label: Text('Satılık')), Chip(label: Text('Kiralık')), Chip(label: Text('Ücretsiz')), Chip(label: Text('Ürün Takası'))]),
+    const SizedBox(height: 6),
+    SwitchListTile(contentPadding: EdgeInsets.zero, value: true, onChanged: null, title: const Text('Leaving Dubai / Acil Satış Paketi', style: TextStyle(fontWeight: FontWeight.w900)), subtitle: const Text('Tüm ev eşyalarını tek ilan altında sun.')),
+    const SizedBox(height: 10),
+    FilledButton.icon(onPressed: () => Navigator.pop(context), icon: const Icon(Icons.send), label: const Text('İlanı Yayınla')),
+  ]));
+}
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+  @override
+  Widget build(BuildContext context) => SafeArea(child: ListView(padding: const EdgeInsets.fromLTRB(18, 20, 18, 120), children: [
+    const Center(child: BrandLogo(size: 84)),
+    const SizedBox(height: 10),
+    const Center(child: Text('BizimDubai Üyesi', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 22))),
+    const Center(child: Text('Dubai · Topluluğa hoş geldin', style: TextStyle(color: Color(0xFF8B9098), fontWeight: FontWeight.w600))),
+    const SizedBox(height: 24),
+    const ProfileTile(icon: Icons.favorite_border, title: 'Favorilerim'),
+    const ProfileTile(icon: Icons.sell_outlined, title: 'İlanlarım'),
+    const ProfileTile(icon: Icons.event_outlined, title: 'Etkinliklerim'),
+    const ProfileTile(icon: Icons.groups_outlined, title: 'Gruplarım'),
+    const ProfileTile(icon: Icons.notifications_none, title: 'Bildirimler'),
+    const ProfileTile(icon: Icons.verified_outlined, title: 'İşletme profilini sahiplen'),
+    const ProfileTile(icon: Icons.settings_outlined, title: 'Ayarlar'),
+    const ProfileTile(icon: Icons.help_outline, title: 'Yardım & Geri Bildirim'),
+  ]));
+}
+
+class ProfileTile extends StatelessWidget {
+  const ProfileTile({super.key, required this.icon, required this.title});
+  final IconData icon;
+  final String title;
+  @override
+  Widget build(BuildContext context) => Container(margin: const EdgeInsets.only(bottom: 9), decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(17)), child: ListTile(leading: Icon(icon, color: const Color(0xFFE30613)), title: Text(title, style: const TextStyle(fontWeight: FontWeight.w800)), trailing: const Icon(Icons.chevron_right)));
 }
 
 class SplashGate extends StatefulWidget {
@@ -104,7 +909,7 @@ class _SplashGateState extends State<SplashGate> with SingleTickerProviderStateM
       if (!mounted) return;
       Navigator.of(context).pushReplacement(PageRouteBuilder(
         transitionDuration: const Duration(milliseconds: 450),
-        pageBuilder: (_, animation, __) => FadeTransition(opacity: animation, child: const AppShell()),
+        pageBuilder: (_, animation, __) => FadeTransition(opacity: animation, child: const Shell()),
       ));
     });
   }
@@ -118,7 +923,7 @@ class _SplashGateState extends State<SplashGate> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: brand,
+      backgroundColor: const Color(0xFFE30613),
       body: Stack(
         fit: StackFit.expand,
         children: [
@@ -171,204 +976,6 @@ class _SplashGateState extends State<SplashGate> with SingleTickerProviderStateM
   }
 }
 
-class AppShell extends StatefulWidget {
-  const AppShell({super.key});
-  @override
-  State<AppShell> createState() => _AppShellState();
-}
-
-class _AppShellState extends State<AppShell> {
-  int index = 0;
-  final pages = const [HomeScreen(), DiscoverScreen(), CommunityScreen(), GuideScreen(), ProfileScreen()];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(child: IndexedStack(index: index, children: pages)),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [BoxShadow(color: Color(0x14000000), blurRadius: 26, offset: Offset(0, -7))],
-        ),
-        child: NavigationBar(
-          backgroundColor: Colors.white,
-          surfaceTintColor: Colors.white,
-          elevation: 0,
-          height: 72,
-          indicatorColor: const Color(0xFFFFE7EA),
-          selectedIndex: index,
-          labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-          onDestinationSelected: (i) => setState(() => index = i),
-          destinations: const [
-            NavigationDestination(icon: Icon(Icons.home_rounded), label: 'Ana Sayfa'),
-            NavigationDestination(icon: Icon(Icons.search_rounded), label: 'Keşfet'),
-            NavigationDestination(icon: Icon(Icons.groups_2_rounded), label: 'Topluluk'),
-            NavigationDestination(icon: Icon(Icons.menu_book_rounded), label: 'Rehber'),
-            NavigationDestination(icon: Icon(Icons.person_rounded), label: 'Profil'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  final PageController pageController = PageController(viewportFraction: 1);
-  int page = 0;
-  Timer? timer;
-
-  final slides = const [
-    HeroSlide(
-      image: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1400&q=90',
-      eyebrow: 'BİZİM DUBAİ',
-      title: 'Dubai’de Türk topluluğu daha güçlü.',
-      subtitle: 'Mekanlar, etkinlikler, rehberler ve günlük hayat tek uygulamada.',
-      cta: 'Keşfet',
-    ),
-    HeroSlide(
-      image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1400&q=88',
-      eyebrow: 'TÜRK MEKANLARI',
-      title: 'En sevilen Türk mekanlarını keşfet.',
-      subtitle: 'Gerçek mekanlar, güçlü öneriler ve tek dokunuşla yol tarifi.',
-      cta: 'Mekanlara git',
-    ),
-    HeroSlide(
-      image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=88',
-      eyebrow: 'TOPLULUK',
-      title: 'Dubai’de yalnız değilsin.',
-      subtitle: 'Buluşmalar, spor aktiviteleri, aile etkinlikleri ve daha fazlası.',
-      cta: 'Topluluğa katıl',
-    ),
-    HeroSlide(
-      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=88',
-      eyebrow: 'REHBER',
-      title: 'Dubai’de işini daha hızlı çöz.',
-      subtitle: 'Ev, sağlık, ulaşım, eğitim ve günlük yaşam için pratik rehberler.',
-      cta: 'Rehbere git',
-    ),
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    timer = Timer.periodic(const Duration(seconds: 5), (_) {
-      if (!pageController.hasClients) return;
-      final next = (page + 1) % slides.length;
-      pageController.animateToPage(next, duration: const Duration(milliseconds: 580), curve: Curves.easeInOutCubic);
-    });
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    pageController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: const BouncingScrollPhysics(),
-      slivers: [
-        SliverPadding(
-          padding: const EdgeInsets.fromLTRB(18, 14, 18, 26),
-          sliver: SliverList(
-            delegate: SliverChildListDelegate([
-              const AppHeader(),
-              const SizedBox(height: 18),
-              SizedBox(
-                height: 335,
-                child: PageView.builder(
-                  controller: pageController,
-                  itemCount: slides.length,
-                  onPageChanged: (i) => setState(() => page = i),
-                  itemBuilder: (_, i) => HeroCard(slide: slides[i]),
-                ),
-              ),
-              const SizedBox(height: 11),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(slides.length, (i) => AnimatedContainer(
-                  duration: const Duration(milliseconds: 220),
-                  margin: const EdgeInsets.symmetric(horizontal: 3),
-                  width: page == i ? 22 : 7,
-                  height: 7,
-                  decoration: BoxDecoration(color: page == i ? brand : const Color(0xFFD5D7DB), borderRadius: BorderRadius.circular(20)),
-                )),
-              ),
-              const SizedBox(height: 30),
-              const SectionTitle('Hızlı erişim', trailing: 'Tümünü gör'),
-              const SizedBox(height: 14),
-              const QuickAccessGrid(),
-              const SizedBox(height: 30),
-              const SectionTitle('Senin için önerilenler', trailing: 'Tümünü gör'),
-              const SizedBox(height: 14),
-              SizedBox(
-                height: 258,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  children: const [
-                    VenueCard(image: 'https://www.citysearch.ae/UF/Albums/43186/bosporus-jbr-dubai_133819976.jpg', title: 'Bosporus Turkish Cuisine', meta: 'JBR · Türk mutfağı', rating: '4.9'),
-                    VenueCard(image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=85', title: 'MADO Dubai Mall', meta: 'Downtown · Tatlı & Kahvaltı', rating: '4.8'),
-                    VenueCard(image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=85', title: 'ZouZou JBR', meta: 'JBR · Restoran', rating: '4.7'),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 30),
-              const SectionTitle('Yaklaşan etkinlikler', trailing: 'Tümünü gör'),
-              const SizedBox(height: 12),
-              const EventCard(date: '12\nEyl', title: 'Türk Topluluğu Buluşması', meta: 'Dubai Marina · 19:00 – 22:00', image: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=500&q=84'),
-              const EventCard(date: '13\nEyl', title: 'Cuma Halı Saha', meta: 'Al Quoz · 21:00 · 9/14 kişi', image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&w=500&q=84'),
-              const SizedBox(height: 28),
-              const CommunityCallout(),
-              const SizedBox(height: 14),
-            ]),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class AppHeader extends StatelessWidget {
-  const AppHeader({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: [
-      const BrandLogo(size: 54),
-      const SizedBox(width: 12),
-      const Expanded(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Bizim Dubai', style: TextStyle(fontSize: 27, fontWeight: FontWeight.w900, letterSpacing: -1.1, color: ink)),
-          SizedBox(height: 2),
-          Text('Dubai’de Türklerin yanında', style: TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 12.8)),
-        ]),
-      ),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15), border: Border.all(color: const Color(0xFFECEDEF))),
-        child: const Row(children: [Icon(Icons.location_on_rounded, color: brand, size: 18), SizedBox(width: 4), Text('Dubai', style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13))]),
-      ),
-      const SizedBox(width: 8),
-      Container(
-        width: 42,
-        height: 42,
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(14), border: Border.all(color: const Color(0xFFECEDEF))),
-        child: Stack(alignment: Alignment.center, children: [
-          const Icon(Icons.notifications_none_rounded, color: ink, size: 22),
-          Positioned(top: 7, right: 8, child: Container(width: 8, height: 8, decoration: const BoxDecoration(color: brand, shape: BoxShape.circle))),
-        ]),
-      ),
-    ]);
-  }
-}
 
 class HeroSlide {
   final String image;
@@ -381,12 +988,13 @@ class HeroSlide {
 
 class HeroCard extends StatelessWidget {
   final HeroSlide slide;
-  const HeroCard({super.key, required this.slide});
+  final VoidCallback onTap;
+  const HeroCard({super.key, required this.slide, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(28),
+    return GestureDetector(onTap: onTap, child: Semantics(button: true, label: slide.cta, child: ClipRRect(
+      borderRadius: BorderRadius.circular(20),
       child: Stack(fit: StackFit.expand, children: [
         Image.network(slide.image, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(color: const Color(0xFFB90F1B))),
         const DecoratedBox(
@@ -415,7 +1023,7 @@ class HeroCard extends StatelessWidget {
             const SizedBox(height: 16),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 11),
-              decoration: BoxDecoration(color: brand, borderRadius: BorderRadius.circular(999)),
+              decoration: BoxDecoration(color: const Color(0xFFE30613), borderRadius: BorderRadius.circular(999)),
               child: Row(mainAxisSize: MainAxisSize.min, children: [
                 Text(slide.cta, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
                 const SizedBox(width: 7),
@@ -425,259 +1033,39 @@ class HeroCard extends StatelessWidget {
           ]),
         ),
       ]),
-    );
+    )));
   }
 }
 
-class QuickItem {
-  final String title;
-  final String subtitle;
-  final String image;
-  const QuickItem(this.title, this.subtitle, this.image);
-}
 
-class QuickAccessGrid extends StatelessWidget {
-  const QuickAccessGrid({super.key});
-
+class HomePoster extends StatefulWidget {
+  const HomePoster({super.key});
   @override
-  Widget build(BuildContext context) {
-    final items = const [
-      QuickItem('Restoranlar', 'Türk mutfağı ve daha fazlası', 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=84'),
-      QuickItem('Market & Gıda', 'Türk ürünleri kapında', 'https://images.unsplash.com/photo-1543168256-418811576931?auto=format&fit=crop&w=700&q=84'),
-      QuickItem('Sağlık', 'Doktor, klinik ve eczane', 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=84'),
-      QuickItem('Güzellik', 'Kuaför, bakım ve estetik', 'https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=700&q=84'),
-      QuickItem('Ev & Emlak', 'Kiralık, satılık ve danışmanlık', 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=700&q=84'),
-      QuickItem('Eğitim', 'Okul, kurs ve özel ders', 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=700&q=84'),
-      QuickItem('Spor', 'Aktivite, PT ve wellness', 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=84'),
-      QuickItem('İkinci El', 'Al, sat, değerlendir', 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=700&q=84'),
-      QuickItem('Diğer Kategoriler', 'Tüm hizmetleri keşfet', 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=700&q=84'),
-    ];
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: items.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 12,
-        childAspectRatio: .73,
-      ),
-      itemBuilder: (_, i) => QuickAccessCard(item: items[i]),
-    );
-  }
+  State<HomePoster> createState() => _HomePosterState();
 }
-
-class QuickAccessCard extends StatelessWidget {
-  final QuickItem item;
-  const QuickAccessCard({super.key, required this.item});
-
+class _HomePosterState extends State<HomePoster> {
+  final controller = PageController();
+  int selected = 0;
+  static const slides = [
+    HeroSlide(image: 'https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=1400&q=90', eyebrow: 'DUBAİ’Yİ KEŞFET', title: 'Şehrin içinde,\nbizden bir dünya.', subtitle: 'Türk mekanları ve Türkçe hizmetler bir arada.', cta: 'Keşfet'),
+    HeroSlide(image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1400&q=88', eyebrow: 'TÜRK MEKANLARI', title: 'Tanıdık lezzetler,\nyeni favoriler.', subtitle: 'Restoranları ve kafeleri keşfet.', cta: 'Mekanlara git'),
+    HeroSlide(image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=88', eyebrow: 'TOPLULUK', title: 'Dubai’de\nyalnız değilsin.', subtitle: 'Buluşmalar, spor ve yeni dostluklar.', cta: 'Topluluğa git'),
+    HeroSlide(image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=88', eyebrow: 'YAŞAM REHBERİ', title: 'Yeni hayatına\ngüvenle başla.', subtitle: 'Dubai’de günlük hayat için pratik rehberler.', cta: 'Rehbere git'),
+  ];
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: const Color(0xFFE9EBEF)),
-        boxShadow: const [BoxShadow(color: Color(0x09000000), blurRadius: 14, offset: Offset(0, 6))],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(22),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Expanded(
-            flex: 6,
-            child: SizedBox(
-              width: double.infinity,
-              child: Image.network(
-                item.image,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(color: const Color(0xFFFFEEF1), child: const Icon(Icons.image_outlined, color: brand, size: 32)),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 9, 10, 10),
-              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Text(item.title, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 13.2, fontWeight: FontWeight.w800, height: 1.08, color: ink)),
-                const SizedBox(height: 4),
-                Expanded(child: Text(item.subtitle, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 10.6, color: muted, fontWeight: FontWeight.w600, height: 1.18))),
-              ]),
-            ),
-          ),
-        ]),
-      ),
-    );
-  }
-}
-
-class VenueCard extends StatelessWidget {
-  final String image;
-  final String title;
-  final String meta;
-  final String rating;
-  const VenueCard({super.key, required this.image, required this.title, required this.meta, required this.rating});
-
+  void dispose() { controller.dispose(); super.dispose(); }
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 230,
-      margin: const EdgeInsets.only(right: 12),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(22), boxShadow: const [BoxShadow(color: Color(0x0D000000), blurRadius: 20, offset: Offset(0, 8))]),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(22),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Stack(children: [
-            SizedBox(height: 145, width: double.infinity, child: Image.network(image, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(color: const Color(0xFFFFE8EA)))),
-            Positioned(top: 10, right: 10, child: Container(width: 35, height: 35, decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle), child: const Icon(Icons.favorite_border_rounded, size: 20))),
-          ]),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(title, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15.5)),
-              const SizedBox(height: 4),
-              Text(meta, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: muted, fontSize: 12.5, fontWeight: FontWeight.w600)),
-              const SizedBox(height: 9),
-              Row(children: [
-                const Icon(Icons.star_rounded, color: Color(0xFFFFB400), size: 19),
-                const SizedBox(width: 3),
-                Text(rating, style: const TextStyle(fontWeight: FontWeight.w800)),
-                const Spacer(),
-                const Icon(Icons.location_on_outlined, size: 17, color: muted),
-              ]),
-            ]),
-          ),
-        ]),
-      ),
-    );
-  }
-}
-
-class EventCard extends StatelessWidget {
-  final String date;
-  final String title;
-  final String meta;
-  final String image;
-  const EventCard({super.key, required this.date, required this.title, required this.meta, required this.image});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20), border: Border.all(color: const Color(0xFFECEEF1))),
-      child: Row(children: [
-        Container(width: 50, height: 62, decoration: BoxDecoration(color: const Color(0xFFFFEDF0), borderRadius: BorderRadius.circular(16)), alignment: Alignment.center, child: Text(date, textAlign: TextAlign.center, style: const TextStyle(color: brand, fontWeight: FontWeight.w900, height: 1.05))),
-        const SizedBox(width: 10),
-        ClipRRect(borderRadius: BorderRadius.circular(14), child: SizedBox(width: 68, height: 62, child: Image.network(image, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(color: const Color(0xFFF2F3F5))))),
-        const SizedBox(width: 12),
-        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(title, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15)),
-          const SizedBox(height: 5),
-          Text(meta, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 12.2)),
-        ])),
-        const Icon(Icons.arrow_forward_ios_rounded, size: 16, color: muted),
-      ]),
-    );
-  }
-}
-
-class CommunityCallout extends StatelessWidget {
-  const CommunityCallout({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFFFFEFF1), Color(0xFFFFFAFA)]),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: const Color(0xFFFFDDE2)),
-      ),
-      child: const Row(children: [
-        CircleAvatar(radius: 25, backgroundColor: Colors.white, child: Icon(Icons.groups_2_rounded, color: brand, size: 27)),
-        SizedBox(width: 13),
-        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('Türk topluluğuna katıl', style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w800, color: ink)),
-          SizedBox(height: 3),
-          Text('Etkinlikler, duyurular ve yeni bağlantılar', style: TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 12.8)),
-        ])),
-        Icon(Icons.arrow_forward_ios_rounded, color: brand, size: 18),
-      ]),
-    );
-  }
-}
-
-class SectionTitle extends StatelessWidget {
-  final String title;
-  final String? trailing;
-  const SectionTitle(this.title, {super.key, this.trailing});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: [
-      Expanded(child: Text(title, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900, color: ink, letterSpacing: -.6))),
-      if (trailing != null) Row(mainAxisSize: MainAxisSize.min, children: [
-        Text(trailing!, style: const TextStyle(color: brand, fontWeight: FontWeight.w700, fontSize: 13.3)),
-        const SizedBox(width: 4),
-        const Icon(Icons.arrow_forward_rounded, color: brand, size: 16),
-      ]),
-    ]);
-  }
-}
-
-class DiscoverScreen extends StatelessWidget {
-  const DiscoverScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const PlaceholderPage(title: 'Keşfet', subtitle: 'Gerçek Türk mekanları ve Türkçe hizmet noktaları.');
-}
-
-class CommunityScreen extends StatelessWidget {
-  const CommunityScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const PlaceholderPage(title: 'Topluluk', subtitle: 'Dubai’deki Türklerle buluş, etkinliklere katıl.');
-}
-
-class GuideScreen extends StatelessWidget {
-  const GuideScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const PlaceholderPage(title: 'Rehber', subtitle: 'Dubai’de günlük hayatı adım adım çöz.');
-}
-
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-  @override
-  Widget build(BuildContext context) => const PlaceholderPage(title: 'Profil', subtitle: 'Favoriler, ilanlar, etkinlikler ve ayarlar.');
-}
-
-class PlaceholderPage extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  const PlaceholderPage({super.key, required this.title, required this.subtitle});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      physics: const BouncingScrollPhysics(),
-      padding: const EdgeInsets.fromLTRB(18, 14, 18, 30),
-      children: [
-        const AppHeader(),
-        const SizedBox(height: 34),
-        Text(title, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w900, letterSpacing: -1)),
-        const SizedBox(height: 8),
-        Text(subtitle, style: const TextStyle(color: muted, fontWeight: FontWeight.w600, fontSize: 15)),
-        const SizedBox(height: 24),
-        Container(
-          height: 220,
-          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(28), border: Border.all(color: const Color(0xFFECEEF1))),
-          alignment: Alignment.center,
-          child: const Column(mainAxisSize: MainAxisSize.min, children: [
-            BrandLogo(size: 72),
-            SizedBox(height: 14),
-            Text('Bu ekran sıradaki adımda aynı tasarım diliyle tamamlanacak.', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.w700, color: muted)),
-          ]),
-        ),
-      ],
-    );
-  }
+  Widget build(BuildContext context) => Column(children: [
+    SizedBox(height: 360 * MediaQuery.textScalerOf(context).scale(1).clamp(1.0, 2.0), child: PageView.builder(
+      controller: controller, itemCount: slides.length, onPageChanged: (value) => setState(() => selected = value),
+      itemBuilder: (context, index) => HeroCard(slide: slides[index], onTap: () => openHomeDestination(context,
+        switch (index) { 1 => const DiscoverPage(initialCategory: 'Restoranlar'), 2 => const CommunityPage(), 3 => const GuidePage(), _ => const DiscoverPage() }, slides[index].cta)),
+    )),
+    Row(mainAxisAlignment: MainAxisAlignment.center, children: List.generate(slides.length, (index) => Semantics(
+      label: '${slides[index].eyebrow} posteri', selected: selected == index, button: true,
+      child: InkWell(onTap: () => controller.animateToPage(index, duration: const Duration(milliseconds: 250), curve: Curves.easeOut),
+        child: SizedBox(width: 44, height: 44, child: Center(child: Container(width: selected == index ? 22 : 7, height: 7,
+          decoration: BoxDecoration(color: selected == index ? Colors.white : Colors.white38, borderRadius: BorderRadius.circular(20)))))),
+    ))),
+  ]);
 }

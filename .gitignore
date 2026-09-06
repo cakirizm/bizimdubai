@@ -4,8 +4,8 @@
 .pub-cache/
 build/
 
-# Generated at build time from tracked .b64 sources
-lib/main.dart
+# Logo restored from the tracked base64 asset during CI
+
 assets/images/logo.png
 
 # IDE / OS

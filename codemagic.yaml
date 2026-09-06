@@ -11,30 +11,13 @@ workflows:
       - name: Generate iOS project
         script: |
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
-          rm -rf test
-      - name: Restore logo
-        script: |
-          python3 - <<'PY'
-          import base64, re
-          from pathlib import Path
-          src = Path('assets/images/logo.b64')
-          if not src.exists():
-              raise SystemExit('assets/images/logo.b64 is missing')
-          raw = src.read_text(errors='ignore')
-          clean = re.sub(r'[^A-Za-z0-9+/=]', '', raw)
-          logo = base64.b64decode(clean, validate=False)
-          if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
-              raise SystemExit('logo decode completed but output is not a valid PNG')
-          out = Path('assets/images/logo.png')
-          out.parent.mkdir(parents=True, exist_ok=True)
-          out.write_bytes(logo)
-          print(f'logo restored: {out} ({len(logo)} bytes)')
-          PY
-          test -s lib/main.dart
-          test -s assets/images/logo.png
-          file assets/images/logo.png
+          rm -f test/widget_test.dart
+      - name: Prepare brand assets
+        script: python3 scripts/prepare_brand.py
       - name: Get packages
         script: flutter pub get
+      - name: Test home navigation
+        script: flutter test
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Build iOS simulator app
@@ -62,30 +45,13 @@ workflows:
       - name: Generate iOS project
         script: |
           flutter create --platforms=ios --org com.cakirizm --project-name bizimdubai .
-          rm -rf test
-      - name: Restore logo
-        script: |
-          python3 - <<'PY'
-          import base64, re
-          from pathlib import Path
-          src = Path('assets/images/logo.b64')
-          if not src.exists():
-              raise SystemExit('assets/images/logo.b64 is missing')
-          raw = src.read_text(errors='ignore')
-          clean = re.sub(r'[^A-Za-z0-9+/=]', '', raw)
-          logo = base64.b64decode(clean, validate=False)
-          if not logo.startswith(b'\x89PNG\r\n\x1a\n'):
-              raise SystemExit('logo decode completed but output is not a valid PNG')
-          out = Path('assets/images/logo.png')
-          out.parent.mkdir(parents=True, exist_ok=True)
-          out.write_bytes(logo)
-          print(f'logo restored: {out} ({len(logo)} bytes)')
-          PY
-          test -s lib/main.dart
-          test -s assets/images/logo.png
-          file assets/images/logo.png
+          rm -f test/widget_test.dart
+      - name: Prepare brand assets
+        script: python3 scripts/prepare_brand.py
       - name: Get packages
         script: flutter pub get
+      - name: Test home navigation
+        script: flutter test
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
       - name: Apply provisioning profiles

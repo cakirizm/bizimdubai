@@ -24,3 +24,12 @@ Codemagic `codemagic.yaml` içinde iki workflow içerir:
 - `APP_STORE_CONNECT_ISSUER_ID`
 
 Bundle ID: `com.cakirizm.bizimdubai`
+
+## Ana sayfa ve marka güncellemesi
+- `lib/main.dart` doğrudan derlenen kaynak dosyadır; `.gz.b64` eş kopyasıdır.
+- Gönderilen logo uygulama başlıklarında, splash ve profil alanında kullanılır.
+- Codemagic `scripts/prepare_brand.py` ile aynı logodan iOS uygulama ikonlarını ve açılış görsellerini üretir.
+- Posterler, kategori kısayolları ve öneriler ilgili liste veya detay ekranlarına açılır.
+- Listeler arşivlenmiş kaynak içindeki başlangıç verilerini kullanır. Canlı servis bağlantısı yoktur; etkinlik detaylarında örnek veri olduğu belirtilir.
+- `flutter test` gezinme ve dar ekran kontrollerini her iki iOS workflow’unda çalıştırır.
+- Mevcut workflow’lar: `ios-ci` (simülatör), `ios-testflight` (IPA/TestFlight).
