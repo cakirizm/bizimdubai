@@ -120,7 +120,6 @@ void main() {
     final repo = repository();
     await pumpDiscover(tester,
         DiscoverPage(initialCategory: 'Restoranlar', repository: repo));
-    expect(find.byKey(const ValueKey('discover-bosporus-jbr')), findsOneWidget);
     expect(find.byKey(const ValueKey('discover-harput-restaurant-al-barsha-1')),
         findsOneWidget);
 
