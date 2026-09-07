@@ -58,6 +58,13 @@ g = g.replace('Icons.family_restroom_outlined', 'Icons.family_restroom')
 g = g.replace('Icons.directions_car_filled_outlined', 'Icons.directions_car_outlined')
 g = g.replace('Icons.work_outline_rounded', 'Icons.work_outline')
 g = g.replace('FontWeight.w650', 'FontWeight.w600')
+# Repair the two missing Container closing parentheses in the compact guide card.
+g = g.replace(
+    "child: Text(article.category, style: const TextStyle(fontSize: 9.5, fontWeight: FontWeight.w700)), Container(",
+    "child: Text(article.category, style: const TextStyle(fontSize: 9.5, fontWeight: FontWeight.w700))), Container(")
+g = g.replace(
+    "child: Text('${article.links.length} resmî bağlantı', style: const TextStyle(fontSize: 9.5, fontWeight: FontWeight.w700))]),",
+    "child: Text('${article.links.length} resmî bağlantı', style: const TextStyle(fontSize: 9.5, fontWeight: FontWeight.w700)))]),")
 guide.write_text(g)
 
 print('Brand assets, export compliance and premium Guide wiring prepared.')
