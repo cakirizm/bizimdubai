@@ -1,6 +1,7 @@
 """Restore the supplied logo and apply it to generated Apple app assets."""
 import base64
 import json
+import plistlib
 import subprocess
 from pathlib import Path
 
@@ -23,4 +24,17 @@ for name in ('AppIcon.appiconset', 'LaunchImage.imageset'):
         entry['filename'] = filename
         subprocess.run(['sips', '-z', str(size), str(size), str(logo), '--out', str(folder / filename)], check=True)
     manifest.write_text(json.dumps(data, indent=2) + '\n')
-print('Brand logo, iOS app icons and launch images prepared.')
+
+# App Store Connect export-compliance prompt: the app does not implement
+# non-exempt encryption. Because Codemagic regenerates the iOS project on every
+# build, enforce the key after `flutter create` each time.
+info_plist = root / 'ios/Runner/Info.plist'
+if not info_plist.exists():
+    raise SystemExit(f'Missing generated Info.plist: {info_plist}')
+with info_plist.open('rb') as f:
+    info = plistlib.load(f)
+info['ITSAppUsesNonExemptEncryption'] = False
+with info_plist.open('wb') as f:
+    plistlib.dump(info, f, fmt=plistlib.FMT_XML, sort_keys=False)
+
+print('Brand logo, iOS app icons, launch images and export compliance prepared.')
