@@ -25,7 +25,7 @@ Future<void> reveal(WidgetTester tester, Finder finder) async {
 }
 
 void main() {
-  testWidgets('Restaurant category opens only restaurants and returns to Home',
+  testWidgets('Restaurant category opens grouped restaurants and returns to Home',
       (tester) async {
     await pumpHome(tester);
     final shortcut = find.byKey(const ValueKey('category-Restoranlar'));
@@ -33,7 +33,7 @@ void main() {
     await tester.tap(shortcut.hitTestable());
     await tester.pumpAndSettle();
     expect(find.byType(DiscoverPage), findsOneWidget);
-    expect(find.text('Harput Restaurant · Al Barsha 1'), findsWidgets);
+    expect(find.text('Harput Restaurant'), findsWidgets);
     expect(find.text('Dr Tosun Dental Clinic'), findsNothing);
     await tester.pageBack();
     await tester.pumpAndSettle();
