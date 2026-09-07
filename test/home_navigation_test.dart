@@ -33,7 +33,7 @@ void main() {
     await tester.tap(shortcut.hitTestable());
     await tester.pumpAndSettle();
     expect(find.byType(DiscoverPage), findsOneWidget);
-    expect(find.text('Bosporus Turkish Cuisine · The Beach (JBR)'), findsWidgets);
+    expect(find.text('Harput Restaurant · Al Barsha 1'), findsWidgets);
     expect(find.text('Dr Tosun Dental Clinic'), findsNothing);
     await tester.pageBack();
     await tester.pumpAndSettle();
