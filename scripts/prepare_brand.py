@@ -84,6 +84,44 @@ visual = root / 'lib/guide/visual_guide.dart'
 if not visual.exists():
     raise SystemExit(f'Missing visual guide: {visual}')
 v = visual.read_text().replace('FontWeight.w650', 'FontWeight.w600')
+
+# Responsive fixes validated against the 393px iPhone widget-test viewport.
+# 1) Give the image hero enough vertical room for the Turkish copy.
+v = v.replace(
+    "child: SizedBox(\n            height: 260,\n            child: Stack(",
+    "child: SizedBox(\n            height: 282,\n            child: Stack(",
+    1,
+)
+
+# 2) Keep the hero CTA row inside narrow iPhone widths. The label flexes and
+# ellipsizes instead of pushing the circular arrow outside the card.
+hero_row_old = """                          const Text('Adım adım yol haritası', style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.w600)),
+                          const Spacer(),
+                          Container(
+                            width: 38,"""
+hero_row_new = """                          const Expanded(
+                            child: Text(
+                              'Adım adım yol haritası',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(color: Colors.white70, fontSize: 11, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            width: 38,"""
+if hero_row_old not in v:
+    raise SystemExit('Visual Guide hero CTA layout anchor not found')
+v = v.replace(hero_row_old, hero_row_new, 1)
+
+# 3) Flutter Container rejects negative margins. The journey hero stays
+# aligned to the page padding rather than using a web-style full-bleed trick.
+journey_margin_old = "margin: const EdgeInsets.fromLTRB(-18, 0, -18, 16),"
+journey_margin_new = "margin: const EdgeInsets.only(bottom: 16),"
+if journey_margin_old not in v:
+    raise SystemExit('Visual Guide journey margin anchor not found')
+v = v.replace(journey_margin_old, journey_margin_new, 1)
+
 visual.write_text(v)
 
-print('Brand assets, export compliance and visual premium Guide wiring prepared.')
+print('Brand assets, export compliance and responsive visual premium Guide wiring prepared.')
