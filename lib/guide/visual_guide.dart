@@ -771,7 +771,7 @@ class _GuideVisualHeader extends StatelessWidget {
   Widget build(BuildContext context) => Row(children: [
         Icon(icon, color: _guideVisualRed, size: 21),
         const SizedBox(width: 8),
-        Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, letterSpacing: -.3)),
+        Expanded(child: Text(title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, letterSpacing: -.3))),
       ]);
 }
 
@@ -806,7 +806,7 @@ class _GuidePreparePanel extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(children: [Icon(Icons.description_outlined, color: _guideVisualRed, size: 20), SizedBox(width: 8), Text('Hazırla', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900))]),
+            const Row(children: [Icon(Icons.description_outlined, color: _guideVisualRed, size: 20), SizedBox(width: 8), Expanded(child: Text('Hazırla', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900)))]),
             const SizedBox(height: 10),
             for (final item in article.checklist)
               Padding(
@@ -834,7 +834,7 @@ class _GuidePlacePanel extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(20)),
         child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(children: [Icon(Icons.location_on_outlined, color: _guideVisualRed, size: 20), SizedBox(width: 8), Text('Nereye gidebilirim?', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900))]),
+          Row(children: [Icon(Icons.location_on_outlined, color: _guideVisualRed, size: 20), SizedBox(width: 8), Expanded(child: Text('Nereye gidebilirim?', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900)))]),
           SizedBox(height: 12),
           Text('Bu işlem için zorunlu fiziksel merkez belirtilmiyor. Önce resmî online kanalı kullan.', style: TextStyle(color: _guideVisualMuted, height: 1.4, fontSize: 12)),
         ]),
@@ -849,7 +849,7 @@ class _GuidePlacePanel extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(children: [Icon(Icons.location_on_outlined, color: _guideVisualRed, size: 20), SizedBox(width: 8), Text('Nereye gidebilirim?', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900))]),
+          const Row(children: [Icon(Icons.location_on_outlined, color: _guideVisualRed, size: 20), SizedBox(width: 8), Expanded(child: Text('Nereye gidebilirim?', style: TextStyle(fontSize: 17, fontWeight: FontWeight.w900)))]),
           const SizedBox(height: 10),
           ClipRRect(borderRadius: BorderRadius.circular(14), child: SizedBox(height: 92, width: double.infinity, child: Image.asset(_guideVisualAsset(article), fit: BoxFit.cover))),
           const SizedBox(height: 9),
@@ -858,12 +858,32 @@ class _GuidePlacePanel extends StatelessWidget {
           Text(place.area, style: const TextStyle(color: _guideVisualMuted, fontSize: 10.5)),
           if (place.note.isNotEmpty) Padding(padding: const EdgeInsets.only(top: 4), child: Text(place.note, style: const TextStyle(fontSize: 10.5, height: 1.3))),
           const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(child: OutlinedButton.icon(onPressed: () => _openGuideUrl(context, _guideMapUri(place.query).toString()), icon: const Icon(Icons.map_outlined, size: 16), label: const Text('Maps', style: TextStyle(fontSize: 11)))),
-              const SizedBox(width: 7),
-              Expanded(child: OutlinedButton.icon(onPressed: () => _openGuideUrl(context, _guideWazeUri(place.query).toString()), icon: const Icon(Icons.directions_car_outlined, size: 16), label: const Text('Waze', style: TextStyle(fontSize: 11)))),
-            ],
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final mapButton = OutlinedButton.icon(
+                onPressed: () => _openGuideUrl(context, _guideMapUri(place.query).toString()),
+                icon: const Icon(Icons.map_outlined, size: 16),
+                label: const Text('Maps', style: TextStyle(fontSize: 11)),
+              );
+              final wazeButton = OutlinedButton.icon(
+                onPressed: () => _openGuideUrl(context, _guideWazeUri(place.query).toString()),
+                icon: const Icon(Icons.directions_car_outlined, size: 16),
+                label: const Text('Waze', style: TextStyle(fontSize: 11)),
+              );
+              if (constraints.maxWidth < 340) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [mapButton, const SizedBox(height: 7), wazeButton],
+                );
+              }
+              return Row(
+                children: [
+                  Expanded(child: mapButton),
+                  const SizedBox(width: 7),
+                  Expanded(child: wazeButton),
+                ],
+              );
+            },
           ),
           if (article.places.length > 1)
             Padding(
@@ -882,15 +902,19 @@ class _GuideOfficialLink extends StatelessWidget {
   final GuideLink link;
 
   @override
-  Widget build(BuildContext context) => Container(
-        margin: const EdgeInsets.only(bottom: 9),
-        decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(18)),
-        child: ListTile(
-          onTap: () => _openGuideUrl(context, link.url),
-          leading: Container(width: 42, height: 42, decoration: BoxDecoration(color: const Color(0xFFFFECEE), borderRadius: BorderRadius.circular(13)), child: Icon(article.icon, color: _guideVisualRed, size: 20)),
-          title: Text(link.label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w900)),
-          subtitle: Text(link.note.isEmpty ? Uri.parse(link.url).host : link.note, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 10.5, color: _guideVisualMuted)),
-          trailing: const Icon(Icons.open_in_new_rounded, color: _guideVisualRed, size: 18),
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.only(bottom: 9),
+        child: Material(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(18),
+          clipBehavior: Clip.antiAlias,
+          child: ListTile(
+            onTap: () => _openGuideUrl(context, link.url),
+            leading: Container(width: 42, height: 42, decoration: BoxDecoration(color: const Color(0xFFFFECEE), borderRadius: BorderRadius.circular(13)), child: Icon(article.icon, color: _guideVisualRed, size: 20)),
+            title: Text(link.label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w900)),
+            subtitle: Text(link.note.isEmpty ? Uri.parse(link.url).host : link.note, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 10.5, color: _guideVisualMuted)),
+            trailing: const Icon(Icons.open_in_new_rounded, color: _guideVisualRed, size: 18),
+          ),
         ),
       );
 }
