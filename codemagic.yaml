@@ -41,8 +41,8 @@ workflows:
         BUNDLE_ID: com.cakirizm.bizimdubai
         APP_STORE_APPLE_ID: 6809072117
       ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.cakirizm.bizimdubai
+        certificates:
+          - BizimDubai_Distribution_2026
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -63,10 +63,113 @@ workflows:
         script: flutter test
       - name: Analyze
         script: flutter analyze --no-fatal-warnings --no-fatal-infos
-      - name: Apply provisioning profiles
-        script: xcode-project use-profiles
       - name: Install CocoaPods
         script: find . -name "Podfile" -execdir pod install \;
+      - name: Create or fetch provisioning profile for the exact certificate
+        script: |
+          set -euo pipefail
+
+          echo "=== Installed signing identities ==="
+          security find-identity -v -p codesigning
+
+          CERT_PEM=/tmp/bizimdubai_distribution.pem
+          security find-certificate -c "Apple Distribution: MEHMET CAKIR (34JL83RV94)" -p > "$CERT_PEM"
+          test -s "$CERT_PEM"
+          CERT_SERIAL=$(openssl x509 -in "$CERT_PEM" -noout -serial | cut -d= -f2 | tr -d ':' | tr '[:lower:]' '[:upper:]')
+          echo "Selected certificate serial: $CERT_SERIAL"
+
+          app-store-connect certificates list --type DISTRIBUTION --json > /tmp/apple-certs.json
+          app-store-connect bundle-ids list \
+            --bundle-id-identifier "$BUNDLE_ID" \
+            --strict-match-identifier \
+            --json > /tmp/apple-bundle.json
+
+          export CERT_SERIAL
+          export BUNDLE_ID
+          python3 - <<'PY'
+          import json, os
+
+          def norm(v):
+              return str(v or '').replace(':', '').replace(' ', '').upper().lstrip('0') or '0'
+
+          def contains_value(obj, target):
+              if isinstance(obj, dict):
+                  return any(contains_value(v, target) for v in obj.values())
+              if isinstance(obj, list):
+                  return any(contains_value(v, target) for v in obj)
+              return norm(obj) == target
+
+          def find_resource_with_value(obj, target):
+              if isinstance(obj, dict):
+                  if obj.get('id') and contains_value(obj, target):
+                      return obj['id']
+                  for value in obj.values():
+                      found = find_resource_with_value(value, target)
+                      if found:
+                          return found
+              elif isinstance(obj, list):
+                  for value in obj:
+                      found = find_resource_with_value(value, target)
+                      if found:
+                          return found
+              return None
+
+          with open('/tmp/apple-certs.json', encoding='utf-8') as f:
+              certs = json.load(f)
+          with open('/tmp/apple-bundle.json', encoding='utf-8') as f:
+              bundles = json.load(f)
+
+          cert_serial = norm(os.environ['CERT_SERIAL'])
+          bundle_identifier = norm(os.environ['BUNDLE_ID'])
+          cert_id = find_resource_with_value(certs, cert_serial)
+          bundle_id = find_resource_with_value(bundles, bundle_identifier)
+          if not cert_id:
+              raise SystemExit(f'Could not map installed certificate serial {os.environ["CERT_SERIAL"]} to Apple Developer Portal')
+          if not bundle_id:
+              raise SystemExit(f'Could not resolve Bundle ID resource for {os.environ["BUNDLE_ID"]}')
+
+          open('/tmp/cert_resource_id', 'w').write(cert_id)
+          open('/tmp/bundle_resource_id', 'w').write(bundle_id)
+          print(f'Apple certificate resource: {cert_id}')
+          print(f'Apple bundle resource: {bundle_id}')
+          PY
+
+          CERT_RESOURCE_ID=$(cat /tmp/cert_resource_id)
+          BUNDLE_RESOURCE_ID=$(cat /tmp/bundle_resource_id)
+          PROFILE_SUFFIX=$(echo "$CERT_SERIAL" | cut -c1-10)
+          PROFILE_NAME="BizimDubai Codemagic $PROFILE_SUFFIX"
+          PROFILE_DIR="$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"
+          mkdir -p "$PROFILE_DIR"
+          rm -f "$PROFILE_DIR"/*.mobileprovision "$PROFILE_DIR"/*.provisionprofile 2>/dev/null || true
+
+          echo "Looking for profile: $PROFILE_NAME"
+          app-store-connect profiles list \
+            --type IOS_APP_STORE \
+            --state ACTIVE \
+            --name "$PROFILE_NAME" \
+            --save \
+            --json > /tmp/apple-profile.json || true
+
+          if ! find "$PROFILE_DIR" -type f \( -name '*.mobileprovision' -o -name '*.provisionprofile' \) | grep -q .; then
+            echo "No matching profile exists. Creating one for the selected certificate."
+            app-store-connect profiles create "$BUNDLE_RESOURCE_ID" \
+              --certificate-ids "$CERT_RESOURCE_ID" \
+              --type IOS_APP_STORE \
+              --name "$PROFILE_NAME" \
+              --save
+          fi
+
+          echo "=== Provisioning profiles prepared ==="
+          find "$PROFILE_DIR" -type f -maxdepth 1 -print
+
+      - name: Apply exact provisioning profile
+        script: |
+          set -e
+          xcode-project use-profiles --code-signing-setup-verbose-logging
+          echo "=== Effective signing settings ==="
+          xcodebuild -workspace ios/Runner.xcworkspace -scheme Runner -configuration Release -showBuildSettings | \
+            grep -E "PRODUCT_BUNDLE_IDENTIFIER|DEVELOPMENT_TEAM|CODE_SIGN_IDENTITY|PROVISIONING_PROFILE_SPECIFIER" || true
+
       - name: Build IPA with next TestFlight build number
         script: |
           set -e
