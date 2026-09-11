@@ -34,11 +34,12 @@ workflows:
     name: BizimDubai iOS TestFlight
     max_build_duration: 120
     instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: BizimDubai2026
     environment:
-      groups:
-        - appstore_credentials
       vars:
         BUNDLE_ID: com.cakirizm.bizimdubai
+        APP_STORE_APPLE_ID: 6809072117
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.cakirizm.bizimdubai
@@ -66,11 +67,19 @@ workflows:
         script: xcode-project use-profiles
       - name: Install CocoaPods
         script: find . -name "Podfile" -execdir pod install \;
-      - name: Build IPA
+      - name: Build IPA with next TestFlight build number
         script: |
+          set -e
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number "$APP_STORE_APPLE_ID" --platform=IOS 2>/dev/null || true)
+          if [[ "$LATEST_BUILD_NUMBER" =~ ^[0-9]+$ ]]; then
+            NEXT_BUILD_NUMBER=$((LATEST_BUILD_NUMBER + 1))
+          else
+            NEXT_BUILD_NUMBER=$PROJECT_BUILD_NUMBER
+          fi
+          echo "Using iOS build number: $NEXT_BUILD_NUMBER"
           flutter build ipa --release \
             --build-name=1.0.0 \
-            --build-number=$BUILD_NUMBER \
+            --build-number="$NEXT_BUILD_NUMBER" \
             --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
@@ -78,7 +87,5 @@ workflows:
       - build/ios/archive/*.xcarchive
     publishing:
       app_store_connect:
-        api_key: $APP_STORE_CONNECT_PRIVATE_KEY
-        key_id: $APP_STORE_CONNECT_KEY_IDENTIFIER
-        issuer_id: $APP_STORE_CONNECT_ISSUER_ID
+        auth: integration
         submit_to_testflight: true
