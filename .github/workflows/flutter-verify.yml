@@ -7,6 +7,7 @@ on:
     paths:
       - 'lib/main.dart'
       - 'lib/discover/**'
+      - 'scripts/apply_restaurant_grouping.py'
       - 'test/discover_test.dart'
       - 'assets/images/logo.b64'
       - 'pubspec.yaml'
@@ -23,6 +24,8 @@ jobs:
           cache: true
       - name: Restore runtime logo asset
         run: python -c "import base64,pathlib; p=pathlib.Path('assets/images'); (p/'logo.png').write_bytes(base64.b64decode((p/'logo.b64').read_text(), validate=True))"
+      - name: Validate restaurant grouping build patch
+        run: python scripts/apply_restaurant_grouping.py
       - name: Dependencies
         run: flutter pub get
       - name: Analyze production Discover path
