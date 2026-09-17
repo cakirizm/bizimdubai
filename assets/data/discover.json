@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "revision": 2,
-  "updatedAt": "2026-09-17T18:22:19Z",
+  "revision": 3,
+  "updatedAt": "2026-09-17T18:31:01Z",
   "entries": [
     {
       "id": "harput-restaurant-al-barsha-1",
@@ -45,16 +45,26 @@
       "address": "Two Seasons Hotel, Ground Floor, Sheikh Zayed Rd, Al Sufouh, Dubai, UAE",
       "phone": "+97143818003",
       "website": "https://www.2seasonshotels.com/dining-in-dubai/elkasaba-restaurant",
-      "description": "Turkish, Mediterranean. Daily 10:00–02:00",
+      "description": "Turkish, Mediterranean. Two Seasons Hotel & Apartments. Daily 10:00–01:00.",
       "menuUrl": "https://www.2seasonshotels.com/dining-in-dubai/elkasaba-restaurant",
       "photos": [
         {
-          "url": "https://image-tc.galaxy.tf/wijpeg-dveogoqfqmq3qmx2ppjns2koj/el-kasaba1-2024-05-23_standard.jpg?crop=38%2C0%2C604%2C453",
+          "url": "https://image-tc.galaxy.tf/wijpeg-aav94dv43o35pup9lccimiibt/el-kasaba4-drinks-toast_standard.jpg?crop=38%2C0%2C604%2C453",
           "source": "https://www.2seasonshotels.com/dining-in-dubai/elkasaba-restaurant",
-          "caption": "EL KASABA Restaurant & Lounge · gerçek mekan/marka görseli"
+          "caption": "EL KASABA · güncel resmî restoran görseli"
+        },
+        {
+          "url": "https://image-tc.galaxy.tf/wijpeg-1w0txqyy4fwgzw4ircj20dfrz/el-kasaba2-drinks-toast_standard.jpg?crop=38%2C0%2C604%2C453",
+          "source": "https://www.2seasonshotels.com/dining-in-dubai/elkasaba-restaurant",
+          "caption": "EL KASABA · güncel resmî sofra görseli"
+        },
+        {
+          "url": "https://image-tc.galaxy.tf/wijpeg-4klir3neoy9nurr60kj7893go/el-kasaba5_standard.jpg?crop=38%2C0%2C604%2C453",
+          "source": "https://www.2seasonshotels.com/dining-in-dubai/elkasaba-restaurant",
+          "caption": "EL KASABA · güncel resmî yemek görseli"
         }
       ],
-      "checkedAt": "2026-09-07",
+      "checkedAt": "2026-09-17",
       "sources": [
         "https://www.2seasonshotels.com/dining-in-dubai/elkasaba-restaurant"
       ],
@@ -1492,21 +1502,25 @@
       "kind": "Türk steakhouse",
       "entityType": "business",
       "address": "Restaurant Village, Four Seasons Resort Dubai at Jumeirah Beach, Jumeirah 2, Dubai, UAE",
-      "phone": null,
-      "website": "https://www.nusr-et.com.tr/",
-      "description": "Four Seasons Resort Dubai Restaurant Village'da steakhouse konsepti.",
-      "menuUrl": "https://www.nusr-et.com.tr/",
+      "phone": "+97144074100",
+      "website": "https://www.nusr-et.com.tr/en/restaurants/dubai",
+      "description": "Four Seasons Resort Dubai Restaurant Village'da Nusr-Et Steakhouse Dubai şubesi.",
+      "menuUrl": "https://www.nusr-et.com.tr/en/restaurants/dubai",
       "photos": [
         {
-          "url": "https://i0.wp.com/www.turkishrestaurant.ae/wp-content/uploads/2023/08/cropped-Nusret-Dubai-Restaurant.jpg?w=900&ssl=1",
-          "source": "https://www.turkishrestaurant.ae/featured-turkish-restaurants/",
-          "caption": "Nusr-Et Dubai · güncel Dubai restoran rehberi görseli"
+          "url": "https://api.nusr-et.com.tr/assets/images/locations/ef1fc928-e2d8-4655-8daf-d9c27bde268c.jpg",
+          "source": "https://www.nusr-et.com.tr/en/restaurants/dubai",
+          "caption": "Nusr-Et Dubai · güncel resmî şube görseli"
+        },
+        {
+          "url": "https://api.nusr-et.com.tr/assets/images/locations/cda5397f-17c8-4513-9e56-d1f36ddf5e88.jpg",
+          "source": "https://www.nusr-et.com.tr/en/restaurants/dubai",
+          "caption": "Nusr-Et Dubai · güncel resmî atmosfer görseli"
         }
       ],
       "checkedAt": "2026-09-17",
       "sources": [
-        "https://www.turkishrestaurant.ae/featured-turkish-restaurants/",
-        "https://www.nusr-et.com.tr/"
+        "https://www.nusr-et.com.tr/en/restaurants/dubai"
       ],
       "turkishService": false,
       "active": true

@@ -4,7 +4,9 @@
       "id": "huqqa-dubai-mall",
       "name": "HuqqA · Dubai Mall",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Downtown Dubai",
       "kind": "Türk restoranı & lounge",
       "entityType": "business",
@@ -26,7 +28,9 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://www.huqqa.com/dubai-huqqa/"],
+      "sources": [
+        "https://www.huqqa.com/dubai-huqqa/"
+      ],
       "turkishService": false,
       "active": true
     },
@@ -34,7 +38,9 @@
       "id": "huqqabaz-garden-mall-of-emirates",
       "name": "HuQQabaz Garden · Mall of the Emirates",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Al Barsha",
       "kind": "Türk restoranı & lounge",
       "entityType": "business",
@@ -56,7 +62,9 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://huqqabaz.com/en/branch/huqqabaz-garden/"],
+      "sources": [
+        "https://huqqabaz.com/en/branch/huqqabaz-garden/"
+      ],
       "turkishService": false,
       "active": true
     },
@@ -64,7 +72,9 @@
       "id": "karaf-by-bahce-palm-jumeirah",
       "name": "Karaf by Bahçe · Palm Jumeirah",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Palm Jumeirah",
       "kind": "Türk restoranı",
       "entityType": "business",
@@ -86,7 +96,9 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://www.karaf.ae/"],
+      "sources": [
+        "https://www.karaf.ae/"
+      ],
       "turkishService": false,
       "active": true,
       "latitude": 25.1147221,
@@ -97,7 +109,9 @@
       "id": "turk-cuisine-jvc",
       "name": "Turk Cuisine · JVC",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Jumeirah Village Circle",
       "kind": "Türk restoranı",
       "entityType": "business",
@@ -119,7 +133,9 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://turkcuisine.ae/"],
+      "sources": [
+        "https://turkcuisine.ae/"
+      ],
       "turkishService": false,
       "active": true
     },
@@ -127,7 +143,9 @@
       "id": "gunaydin-souk-al-bahar",
       "name": "Günaydın · Souk Al Bahar",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Downtown Dubai",
       "kind": "Türk steakhouse & kebap",
       "entityType": "business",
@@ -149,7 +167,9 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://www.gunaydindubai.com/en/contact"],
+      "sources": [
+        "https://www.gunaydindubai.com/en/contact"
+      ],
       "turkishService": false,
       "active": true
     },
@@ -157,24 +177,33 @@
       "id": "nusr-et-dubai",
       "name": "Nusr-Et Steakhouse · Dubai",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Jumeirah 2",
       "kind": "Türk steakhouse",
       "entityType": "business",
       "address": "Restaurant Village, Four Seasons Resort Dubai at Jumeirah Beach, Jumeirah 2, Dubai, UAE",
-      "phone": null,
-      "website": "https://www.nusr-et.com.tr/",
-      "description": "Four Seasons Resort Dubai Restaurant Village'da steakhouse konsepti.",
-      "menuUrl": "https://www.nusr-et.com.tr/",
+      "phone": "+97144074100",
+      "website": "https://www.nusr-et.com.tr/en/restaurants/dubai",
+      "description": "Four Seasons Resort Dubai Restaurant Village'da Nusr-Et Steakhouse Dubai şubesi.",
+      "menuUrl": "https://www.nusr-et.com.tr/en/restaurants/dubai",
       "photos": [
         {
-          "url": "https://i0.wp.com/www.turkishrestaurant.ae/wp-content/uploads/2023/08/cropped-Nusret-Dubai-Restaurant.jpg?w=900&ssl=1",
-          "source": "https://www.turkishrestaurant.ae/featured-turkish-restaurants/",
-          "caption": "Nusr-Et Dubai · güncel Dubai restoran rehberi görseli"
+          "url": "https://api.nusr-et.com.tr/assets/images/locations/ef1fc928-e2d8-4655-8daf-d9c27bde268c.jpg",
+          "source": "https://www.nusr-et.com.tr/en/restaurants/dubai",
+          "caption": "Nusr-Et Dubai · güncel resmî şube görseli"
+        },
+        {
+          "url": "https://api.nusr-et.com.tr/assets/images/locations/cda5397f-17c8-4513-9e56-d1f36ddf5e88.jpg",
+          "source": "https://www.nusr-et.com.tr/en/restaurants/dubai",
+          "caption": "Nusr-Et Dubai · güncel resmî atmosfer görseli"
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://www.turkishrestaurant.ae/featured-turkish-restaurants/", "https://www.nusr-et.com.tr/"],
+      "sources": [
+        "https://www.nusr-et.com.tr/en/restaurants/dubai"
+      ],
       "turkishService": false,
       "active": true
     },
@@ -182,7 +211,9 @@
       "id": "beyoglu-baklava-jumeirah-3",
       "name": "Beyoğlu Baklava · Jumeirah 3",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Jumeirah 3",
       "kind": "Baklava & Türk tatlıları",
       "entityType": "business",
@@ -199,7 +230,9 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://www.turkishrestaurant.ae/featured-turkish-restaurants/"],
+      "sources": [
+        "https://www.turkishrestaurant.ae/featured-turkish-restaurants/"
+      ],
       "turkishService": false,
       "active": true
     },
@@ -207,7 +240,9 @@
       "id": "kadayifzade-dubai-mall",
       "name": "Kadayıfzade · Dubai Mall",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Downtown Dubai",
       "kind": "Kadayıf & Türk tatlıları",
       "entityType": "business",
@@ -224,7 +259,9 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://www.turkishrestaurant.ae/featured-turkish-restaurants/"],
+      "sources": [
+        "https://www.turkishrestaurant.ae/featured-turkish-restaurants/"
+      ],
       "turkishService": false,
       "active": true
     },
@@ -232,7 +269,9 @@
       "id": "aroma-turkish-dragon-mart",
       "name": "Aroma Turkish · Dragon Mart 1",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Dubai International City",
       "kind": "Türk restoranı",
       "entityType": "business",
@@ -249,7 +288,10 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://www.dragonmart.ae/en/dine/aroma-turkish", "https://www.turkishrestaurant.ae/featured-turkish-restaurants/"],
+      "sources": [
+        "https://www.dragonmart.ae/en/dine/aroma-turkish",
+        "https://www.turkishrestaurant.ae/featured-turkish-restaurants/"
+      ],
       "turkishService": false,
       "active": true
     },
@@ -257,7 +299,9 @@
       "id": "cilgin-dondurmaci-dubai-marina",
       "name": "Çılgın Dondurmacı · Dubai Marina",
       "category": "Restoranlar",
-      "categories": ["Restoranlar"],
+      "categories": [
+        "Restoranlar"
+      ],
       "area": "Dubai Marina",
       "kind": "Dondurma & tatlı",
       "entityType": "business",
@@ -274,7 +318,9 @@
         }
       ],
       "checkedAt": "2026-09-17",
-      "sources": ["https://www.turkishrestaurant.ae/featured-turkish-restaurants/"],
+      "sources": [
+        "https://www.turkishrestaurant.ae/featured-turkish-restaurants/"
+      ],
       "turkishService": false,
       "active": true
     }
