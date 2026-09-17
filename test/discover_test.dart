@@ -37,11 +37,11 @@ Future<void> pumpDiscover(WidgetTester tester, Widget child,
 }
 
 void main() {
-  test('Bundled catalog contains 40 restaurants and all Discover categories', () {
+  test('Bundled catalog contains expanded restaurants and all Discover categories', () {
     final catalog = DiscoverCatalog.parse(discoverSeedJson);
     final restaurants =
         catalog.entries.where((e) => e.categories.contains('Restoranlar')).toList();
-    expect(restaurants, hasLength(40));
+    expect(restaurants.length, greaterThanOrEqualTo(50));
     expect(catalog.entries.length, greaterThanOrEqualTo(53));
     expect(restaurants.any((e) => e.id == 'harput-restaurant-al-barsha-1'), isTrue);
     expect(restaurants.any((e) => e.id == 'el-kasaba-restaurant-lounge-two-seasons-hotel'), isTrue);
@@ -93,7 +93,7 @@ void main() {
     await repo.refresh();
     await repo.refresh();
     expect(requests, 1);
-    expect(repo.catalog.entries.where((e) => e.category == 'Restoranlar'), hasLength(40));
+    expect(repo.catalog.entries.where((e) => e.category == 'Restoranlar').length, greaterThanOrEqualTo(50));
     expect(repo.updateError, isNotNull);
   });
 

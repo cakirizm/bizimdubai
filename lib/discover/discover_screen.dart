@@ -302,6 +302,8 @@ class _DiscoverPageState extends State<DiscoverPage>
             final items = filter.apply(repo);
             final restaurantMode = filter.category == 'Restoranlar';
             final groupedRestaurants = restaurantMode ? _restaurantGroups(items) : const <_RestaurantGroup>[];
+            final restaurantMode = filter.category == 'Restoranlar';
+            final groupedRestaurants = restaurantMode ? _restaurantGroups(items) : const <_RestaurantGroup>[];
             return RefreshIndicator(
                 onRefresh: () => repo.refresh(force: true),
                 child: CustomScrollView(
