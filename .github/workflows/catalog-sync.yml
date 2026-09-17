@@ -7,7 +7,7 @@ on:
     paths:
       - 'assets/data/restaurants_*.json'
       - 'scripts/sync_restaurant_catalog.py'
-      - 'scripts/apply_restaurant_grouping.py'
+      - 'scripts/fix_restaurant_grouping.py'
       - 'scripts/optimize_discover_images.py'
       - 'scripts/update_discover_tests.py'
       - '.github/workflows/catalog-sync.yml'
@@ -32,8 +32,8 @@ jobs:
       - name: Build live restaurant catalog
         run: python scripts/sync_restaurant_catalog.py
 
-      - name: Apply restaurant UX grouping
-        run: python scripts/apply_restaurant_grouping.py
+      - name: Normalize restaurant UX grouping
+        run: python scripts/fix_restaurant_grouping.py
 
       - name: Optimize image rendering
         run: python scripts/optimize_discover_images.py
