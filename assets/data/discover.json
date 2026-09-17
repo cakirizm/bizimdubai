@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "revision": 3,
-  "updatedAt": "2026-09-17T18:31:01Z",
+  "revision": 4,
+  "updatedAt": "2026-09-17T19:28:49Z",
   "entries": [
     {
       "id": "harput-restaurant-al-barsha-1",
@@ -339,6 +339,800 @@
       "checkedAt": "2026-09-17",
       "sources": [
         "https://turkishvillage.com/contact"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "patisserie-istanbul-rixos-the-palm",
+      "name": "Patisserie Istanbul · Rixos The Palm",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Palm Jumeirah",
+      "kind": "Türk tatlı & kahve lounge",
+      "entityType": "business",
+      "address": "Rixos The Palm Dubai, East Crescent Plot 40, Palm Jumeirah, Dubai, UAE",
+      "phone": "+97144575555",
+      "website": "https://all.accor.com/hotel/B1I2/index.en.shtml",
+      "description": "Rixos The Palm içinde Türk tatlıları, çay ve kahve konsepti.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://b.zmtcdn.com/data/pictures/2/205852/2bb36ed344be0c3fb434deb1d678840b.jpeg",
+          "source": "https://www.zomato.com/dubai/patisserie-istanbul-rixos-the-palm-dubai-palm-jumeirah",
+          "caption": "Patisserie Istanbul · gerçek mekan/ürün görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://all.accor.com/hotel/B1I2/index.en.shtml",
+        "https://www.zomato.com/dubai/patisserie-istanbul-rixos-the-palm-dubai-palm-jumeirah"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-business-bay",
+      "name": "German Doner Kebab · Business Bay",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Business Bay",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Bay Avenue, Shop G-60, Business Bay, Dubai, UAE",
+      "phone": "+971564165357",
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-dafza",
+      "name": "German Doner Kebab · DAFZA",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "DAFZA",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Dubai Airport Free Zone, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-damac-mall",
+      "name": "German Doner Kebab · DAMAC Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "DAMAC Hills",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Unit Retail 19, Ground Floor, DAMAC Mall, DAMAC Hills, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/companies/38031/german-doner-kebab-damac-mall.jpg",
+          "source": "https://www.citysearch.ae/german-doner-kebab-damac-mall-dubai",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://www.citysearch.ae/german-doner-kebab-damac-mall-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-difc",
+      "name": "German Doner Kebab · DIFC Gate Avenue",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "DIFC",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Unit GA-00-SZ-L1-FH-T5, Gate Avenue, South Market, Sheikh Zayed Road, DIFC, Dubai, UAE",
+      "phone": "+971502735626",
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-dubai-mall",
+      "name": "German Doner Kebab · Dubai Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Downtown Dubai",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Dubai Mall Main Food Court, Downtown Dubai, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-mirdif-hunger-hub",
+      "name": "German Doner Kebab · Hunger Hub Mirdif",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Mirdif",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Hunger Hub, Shop 13, Mizher 1, Mirdif, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-jlt",
+      "name": "German Doner Kebab · JLT",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah Lake Towers",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Liwa Heights Building, Cluster W, Jumeirah Lake Towers, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-jumeirah-road",
+      "name": "German Doner Kebab · Jumeirah Road",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah 3",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Jumeirah 3, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-loggia-plaza-dso",
+      "name": "German Doner Kebab · Loggia Plaza DSO",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Silicon Oasis",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Retail 3, Loggia Plaza, Dubai Silicon Oasis, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-motor-city",
+      "name": "German Doner Kebab · Motor City",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Motor City",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Shop 6, Detroit Building, Motor City, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-oasis-mall",
+      "name": "German Doner Kebab · Oasis Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Quoz",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Unit 1308, Level 3 Food Court, Oasis Mall, Sheikh Zayed Rd, Al Quoz, Dubai, UAE",
+      "phone": "+971549989239",
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "gdk-tecom",
+      "name": "German Doner Kebab · Barsha Heights",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Barsha Heights",
+      "kind": "Döner fast-casual",
+      "entityType": "business",
+      "address": "Al Thuraya Tower, Barsha Heights, Dubai, UAE",
+      "phone": null,
+      "website": "https://gdk.com/gb/gdk-locations?country=ae",
+      "description": "GDK'nın Dubai şubesi; döner odaklı fast-casual konsept.",
+      "menuUrl": "https://www.gdk.com/ae/menu",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/29c641ba-4d73-44e4-b603-7c9344f25ed5/image.jpeg",
+          "source": "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall",
+          "caption": "GDK UAE · güncel gerçek marka/menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://gdk.com/gb/gdk-locations?country=ae",
+        "https://www.gdk.com/ae/menu",
+        "https://deliveroo.ae/ar/menu/dubai/downtown-dubai-mall/german-doner-kebab-dubai-mall"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "meat-moot-jbr",
+      "name": "Meat Moot · JBR",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Türkiye merkezli smokehouse & steakhouse",
+      "entityType": "business",
+      "address": "Jumeirah Beach Residence, Dubai, UAE",
+      "phone": "+971581264843",
+      "website": "https://www.meatmoot.ae/jbr",
+      "description": "İstanbul merkezli Meat Moot'un Dubai şubesi; tütsülenmiş et ve steakhouse konsepti.",
+      "menuUrl": "https://www.meatmoot.ae/",
+      "photos": [
+        {
+          "url": "https://meatmoot.ae/_next/image?q=75&url=%2Fjbr%2Fjb5.jpg&w=3840",
+          "source": "https://www.meatmoot.ae/jbr",
+          "caption": "Meat Moot · gerçek resmî şube görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.meatmoot.ae/jbr",
+        "https://www.meatmoot.ae/jbr",
+        "https://www.meatmoot.ae/about"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "meat-moot-dubai-hills",
+      "name": "Meat Moot · Dubai Hills Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Hills",
+      "kind": "Türkiye merkezli smokehouse & steakhouse",
+      "entityType": "business",
+      "address": "Dubai Hills Mall, Dubai, UAE",
+      "phone": "+971581264843",
+      "website": "https://www.meatmoot.ae/dubai-hills",
+      "description": "İstanbul merkezli Meat Moot'un Dubai şubesi; tütsülenmiş et ve steakhouse konsepti.",
+      "menuUrl": "https://www.meatmoot.ae/",
+      "photos": [
+        {
+          "url": "https://meatmoot.com.tr/storage/2024/12/Meat-Moot-DHM_Grand-opening_27.webp",
+          "source": "https://meatmoot.com.tr/branches/dubai-hills/",
+          "caption": "Meat Moot · gerçek resmî şube görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.meatmoot.ae/dubai-hills",
+        "https://meatmoot.com.tr/branches/dubai-hills/",
+        "https://www.meatmoot.ae/about"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "meat-moot-city-walk",
+      "name": "Meat Moot · City Walk",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "City Walk / Al Wasl",
+      "kind": "Türkiye merkezli smokehouse & steakhouse",
+      "entityType": "business",
+      "address": "City Walk, Al Wasl, Dubai, UAE",
+      "phone": "+971586903040",
+      "website": "https://www.meatmoot.ae/",
+      "description": "İstanbul merkezli Meat Moot'un Dubai şubesi; tütsülenmiş et ve steakhouse konsepti.",
+      "menuUrl": "https://www.meatmoot.ae/",
+      "photos": [
+        {
+          "url": "https://meatmoot.com.tr/storage/2024/12/Meat-Moot-City-Walk_Grand-opening_10.webp",
+          "source": "https://meatmoot.com.tr/branches/dubai-branch/",
+          "caption": "Meat Moot · gerçek resmî şube görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.meatmoot.ae/",
+        "https://meatmoot.com.tr/branches/dubai-branch/",
+        "https://www.meatmoot.ae/about"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "meat-moot-al-khawaneej",
+      "name": "Meat Moot · Al Khawaneej",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Khawaneej",
+      "kind": "Türkiye merkezli smokehouse & steakhouse",
+      "entityType": "business",
+      "address": "Last Exit Al Khawaneej, Al Khawaneej 1, Dubai, UAE",
+      "phone": "+971581264843",
+      "website": "https://www.meatmoot.ae/khawaneej",
+      "description": "İstanbul merkezli Meat Moot'un Dubai şubesi; tütsülenmiş et ve steakhouse konsepti.",
+      "menuUrl": "https://www.meatmoot.ae/",
+      "photos": [
+        {
+          "url": "https://meatmoot.com.tr/storage/2024/12/meatmoot-dubai-al-khawaneej.jpg",
+          "source": "https://meatmoot.com.tr/branches/alkhawaneej-dubai/",
+          "caption": "Meat Moot · gerçek resmî şube görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.meatmoot.ae/khawaneej",
+        "https://meatmoot.com.tr/branches/alkhawaneej-dubai/",
+        "https://www.meatmoot.ae/about"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "evas-fusion-barsha-heights",
+      "name": "Eva's Fusion Restaurant & Café · Barsha Heights",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Barsha Heights",
+      "kind": "Türk & Lübnan karma restoranı",
+      "entityType": "business",
+      "address": "Millennium Place, First Al Khail Road, Barsha Heights, Dubai, UAE",
+      "phone": "+97148750115",
+      "website": "https://www.zomato.com/tr/dubai/evas-fusion-restaurant-caf%C3%A9-1-barsha-heights/info",
+      "description": "Barsha Heights'te Türk, Lübnan ve Ortadoğu mutfağı.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://offerengine.theentertainerme.com/evas-fusion-turkish-lebanese-restaurant-x23953247/merchant_profile_%22hero%22_image_slide.4_%28retina%29202505161207.jpg",
+          "source": "https://www.theentertainerme.com/outlets/evas-fusion-turkish-lebanese-restaurant/detail?m=65379&o=125976",
+          "caption": "Eva's Fusion · güncel gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/tr/dubai/evas-fusion-restaurant-caf%C3%A9-1-barsha-heights/info",
+        "https://www.theentertainerme.com/outlets/evas-fusion-turkish-lebanese-restaurant/detail?m=65379&o=125976"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "patio-gourmet-jbr",
+      "name": "Patio Gourmet · JBR",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Türk & Lübnan karma restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, Rimal Residence, JBR, Dubai, UAE",
+      "phone": "+971555777103",
+      "website": "https://www.zomato.com/dubai/patio-gourmet-jumeirah-beach-residence",
+      "description": "JBR'da Türk ve Lübnan mutfağı sunan restoran.",
+      "menuUrl": "https://deliveroo.ae/en/menu/dubai/jbr/patio-gourmet-restaurant",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/companies/43051/patio-gourmet.jpg",
+          "source": "https://www.citysearch.ae/patio-gourmet-dubai",
+          "caption": "Patio Gourmet · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/patio-gourmet-jumeirah-beach-residence",
+        "https://deliveroo.ae/en/menu/dubai/jbr/patio-gourmet-restaurant"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "yara-jumeirah",
+      "name": "Yara Jumeirah · Palm Strip Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah 1",
+      "kind": "Türk & Akdeniz karma restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, Palm Strip Mall, Jumeirah 1, Dubai, UAE",
+      "phone": "+971502506641",
+      "website": "https://www.zomato.com/dubai/yara-jumeirah-1",
+      "description": "Jumeirah'da Türk/Akdeniz mutfağı ve lounge konsepti.",
+      "menuUrl": "https://www.zomato.com/dubai/yara-jumeirah-1/menu",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/40309/yara-jumeirah-dubai_14.jpg",
+          "source": "https://www.citysearch.ae/yara-jumeirah-dubai",
+          "caption": "Yara Jumeirah · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/yara-jumeirah-1",
+        "https://www.citysearch.ae/yara-jumeirah-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "blue-door-delano-bluewaters",
+      "name": "Blue Door · Delano Dubai",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Bluewaters Island",
+      "kind": "Anadolu/Türk kıyı mutfağı",
+      "entityType": "business",
+      "address": "Delano Dubai, Bluewaters Island, Dubai, UAE",
+      "phone": "+97145566466",
+      "website": "https://delanohotels.com/dubai/restaurants-and-bars/blue-door/",
+      "description": "Delano Dubai'de Coastal Anatolian/Turkish dining konsepti.",
+      "menuUrl": "https://delanohotels.com/dubai/restaurants-and-bars/blue-door/",
+      "photos": [
+        {
+          "url": "https://thehuntr-prod.s3.me-central-1.amazonaws.com/places/1005/gallery/the-blue-door-dubai-l-10-28618.jpg",
+          "source": "https://thehuntr.com/dubai/blue-door-delano-dubai/",
+          "caption": "Blue Door Dubai · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://delanohotels.com/dubai/restaurants-and-bars/blue-door/",
+        "https://thehuntr.com/dubai/blue-door-delano-dubai/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "a-la-turca-rixos-the-palm",
+      "name": "A La Turca · Rixos The Palm",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Palm Jumeirah",
+      "kind": "Türk grill & uluslararası açık büfe",
+      "entityType": "business",
+      "address": "Rixos The Palm Dubai, East Crescent Plot 40, Palm Jumeirah, Dubai, UAE",
+      "phone": "+97144575555",
+      "website": "https://all.accor.com/hotel/B1I2/index.en.shtml",
+      "description": "Rixos The Palm içindeki Türk grill ve açık büfe restoranı.",
+      "menuUrl": "https://www.zomato.com/dubai/a-la-turca-rixos-the-palm-dubai-palm-jumeirah/menu",
+      "photos": [
+        {
+          "url": "https://img.grouponcdn.com/deal/2WgT149o76C36waYVTPnMgb5jpbr/2W-960x576/v1/t2001x1212.webp",
+          "source": "https://www.groupon.ae/deals/rixos-the-palm-dubai",
+          "caption": "A La Turca · gerçek restoran görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://all.accor.com/hotel/B1I2/index.en.shtml",
+        "https://www.zomato.com/dubai/a-la-turca-rixos-the-palm-dubai-palm-jumeirah"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "asil-dubai-jbr",
+      "name": "Asil Dubai · Rixos Premium JBR",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Türk, Lübnan & Fas karma restoranı",
+      "entityType": "business",
+      "address": "Rixos Premium Dubai JBR, The Walk, JBR, Dubai, UAE",
+      "phone": "+971521600333",
+      "website": "https://www.citysearch.ae/asil-dubai",
+      "description": "JBR'da Türk, Lübnan ve Fas mutfaklarını birleştiren restoran ve lounge.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/companies/42813/asil-dubai.jpg",
+          "source": "https://www.citysearch.ae/asil-dubai",
+          "caption": "Asil Dubai · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.citysearch.ae/asil-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "anzeera-lounge-business-bay",
+      "name": "Anzeera Restaurant & Lounge · Business Bay",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Business Bay",
+      "kind": "Türk & uluslararası restoran/lounge",
+      "entityType": "business",
+      "address": "DAMAC Paramount Tower B, Business Bay, Dubai, UAE",
+      "phone": "+971555362026",
+      "website": "https://anzeeralounge.com/",
+      "description": "Business Bay'de Türk mutfağı da sunan restoran ve lounge.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://b.zmtcdn.com/data/pictures/4/21732104/dc41eabde94bc445688f75cb7c56e36e.jpg?crop=960%3A500%3B%2A%2C%2A&fit=around%7C960%3A500",
+          "source": "https://www.zomato.com/dubai/anzeera-restaurant-lounge-business-bay",
+          "caption": "Anzeera · güncel gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://anzeeralounge.com/",
+        "https://www.zomato.com/dubai/anzeera-restaurant-lounge-business-bay"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "levantish-al-qusais",
+      "name": "Levant'ish · Al Qusais",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Qusais",
+      "kind": "Türk & Levanten karma restoranı",
+      "entityType": "business",
+      "address": "Near Grand Service Station, Baghdad Street, Al Qusais, Dubai, UAE",
+      "phone": "+97142657557",
+      "website": "https://www.zomato.com/dubai/levantish-qusais",
+      "description": "Al Qusais'te Türk, Lübnan ve Suriye mutfağını birleştiren restoran.",
+      "menuUrl": "https://www.zomato.com/dubai/levantish-qusais/menu",
+      "photos": [
+        {
+          "url": "https://b.zmtcdn.com/data/pictures/5/19043565/4fd1ddd907acd911fb1179c73c9f8287.jpg",
+          "source": "https://www.zomato.com/dubai/levantish-qusais",
+          "caption": "Levant'ish · gerçek mekan/yemek görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/levantish-qusais"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "khobzah-w-fakhaara-dso",
+      "name": "Khobzah W Fakhaara · DSO",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Silicon Oasis",
+      "kind": "Arap & Türk seçenekli karma restoran",
+      "entityType": "business",
+      "address": "Q1 Mall, 90 Street, Dubai Silicon Oasis, Dubai, UAE",
+      "phone": "+971565005516",
+      "website": "https://www.khobzahfakhaara.com/",
+      "description": "Dubai Silicon Oasis'te Arap/Ortadoğu mutfağı; menüsünde Türk seçenekleri de bulunuyor.",
+      "menuUrl": "https://www.khobzahfakhaara.com/order",
+      "photos": [
+        {
+          "url": "https://static.wixstatic.com/media/0b8861_842507e93c1a4eccbdc84a75c4072660~mv2.jpg/v1/fill/w_640%2Ch_640%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/0b8861_842507e93c1a4eccbdc84a75c4072660~mv2.jpg",
+          "source": "https://www.khobzahfakhaara.com/",
+          "caption": "Khobzah W Fakhaara · güncel resmî yemek görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.khobzahfakhaara.com/",
+        "https://www.khobzahfakhaara.com/order"
       ],
       "turkishService": false,
       "active": true
@@ -1638,6 +2432,1204 @@
       "checkedAt": "2026-09-17",
       "sources": [
         "https://www.turkishrestaurant.ae/featured-turkish-restaurants/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "lalezar-downtown-dubai",
+      "name": "Lalezar Restaurant and Cafe · Downtown Dubai",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Downtown Dubai",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Clarens Tower 2, Sheikh Mohammed bin Rashid Blvd, Downtown Dubai, Dubai, UAE",
+      "phone": "+97145761466",
+      "website": "https://www.lalezardubai.com/",
+      "description": "Downtown Dubai'de Türk fine dining restoranı; resmî site ve güncel menü doğrulandı.",
+      "menuUrl": "https://www.lalezarmenu.com/",
+      "photos": [
+        {
+          "url": "https://b.zmtcdn.com/data/pictures/6/20155676/5d99e263a851b96c2253eb2ce7cbcdbe.jpg?crop=750%3A500%3B%2A%2C%2A&fit=around%7C750%3A500",
+          "source": "https://www.zomato.com/dubai/lalezar-downtown-dubai",
+          "caption": "Lalezar · güncel gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.lalezardubai.com/",
+        "https://www.lalezarmenu.com/",
+        "https://www.zomato.com/dubai/lalezar-downtown-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "bebek-restaurant-jumeirah-3",
+      "name": "Bebek Restaurant & Lounge · Jumeirah 3",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah 3",
+      "kind": "Türk restoranı & lounge",
+      "entityType": "business",
+      "address": "Villa 531, Jumeirah Beach Road, Jumeirah 3, Dubai, UAE",
+      "phone": "+97143490024",
+      "website": "https://bebekrestaurant.ae/",
+      "description": "Jumeirah Beach Road'da Türk ve Arap mutfağı sunan restoran ve lounge.",
+      "menuUrl": "https://bebekrestaurant.ae/menu",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/UF/Albums/40748/bebek-dubai_3.jpg",
+          "source": "https://www.citysearch.ae/bebek-dubai",
+          "caption": "Bebek Restaurant · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://bebekrestaurant.ae/",
+        "https://bebekrestaurant.ae/menu",
+        "https://www.citysearch.ae/bebek-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "mercan-restaurant-dubai-marina",
+      "name": "Mercan Restaurant · Dubai Marina",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Marina",
+      "kind": "Türk & Akdeniz restoranı",
+      "entityType": "business",
+      "address": "Nasaq Street, Marina Promenade, Jannah Place, Dubai Marina, Dubai, UAE",
+      "phone": "+97145911419",
+      "website": "https://www.zomato.com/dubai/mercan-restaurant-1-dubai-marina",
+      "description": "Dubai Marina'da Türk ve Akdeniz mutfağı; güncel restoran ve teslimat kayıtları doğrulandı.",
+      "menuUrl": "https://deliveroo.ae/en/menu/dubai/marina-west/mercan-restaurant",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/companies/41846/mercan-restaurant-1629697.jpg",
+          "source": "https://www.citysearch.ae/mercan-restaurant-dubai",
+          "caption": "Mercan Restaurant · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/mercan-restaurant-1-dubai-marina",
+        "https://www.citysearch.ae/mercan-restaurant-dubai",
+        "https://deliveroo.ae/en/menu/dubai/marina-west/mercan-restaurant"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "divan-turkish-restaurant-business-bay",
+      "name": "Divan Turkish Restaurant · Business Bay",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Business Bay",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Safeer Tower 1, Asayel Street, Business Bay, Dubai, UAE",
+      "phone": "+971505051234",
+      "website": "https://www.zomato.com/dubai/divan-turkish-restaurant-business-bay",
+      "description": "Business Bay'de klasik Türk kahvaltısı, kebap, pide, lahmacun ve İskender.",
+      "menuUrl": "https://www.zomato.com/dubai/divan-turkish-restaurant-business-bay/menu",
+      "photos": [
+        {
+          "url": "https://static.wixstatic.com/media/aba8bb_bf086af3fb814b6b8bad716caf98c461~mv2.jpg/v1/fit/w_2500%2Ch_1330%2Cal_c/aba8bb_bf086af3fb814b6b8bad716caf98c461~mv2.jpg",
+          "source": "https://www.daidubai.com/explore/divan-turkish-restaurant",
+          "caption": "Divan Turkish Restaurant · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/divan-turkish-restaurant-business-bay",
+        "https://www.daidubai.com/explore/divan-turkish-restaurant"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "pide-keyfi-jvc",
+      "name": "Pide Keyfi · JVC",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah Village Circle",
+      "kind": "Türk pide & kebap restoranı",
+      "entityType": "business",
+      "address": "District 13, Jumeirah Village Circle, Dubai, UAE",
+      "phone": "+971544766060",
+      "website": "https://www.citysearch.ae/pide-keyfi-dubai",
+      "description": "JVC'de pide, lahmacun, kebap ve Türk mutfağı.",
+      "menuUrl": "https://www.zomato.com/dubai/pide-keyfi-turkish-bite-jumeirah-village/menu",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/companies/35544/pide-keyfi-dubai.jpg",
+          "source": "https://www.citysearch.ae/pide-keyfi-dubai",
+          "caption": "Pide Keyfi · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.citysearch.ae/pide-keyfi-dubai",
+        "https://www.zomato.com/dubai/pide-keyfi-turkish-bite-jumeirah-village"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "the-qasab-ibn-battuta",
+      "name": "The Qasab Turkish Cuisine · Ibn Battuta Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jebel Ali Village",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, Persia Court, Ibn Battuta Mall, Jebel Ali Village, Dubai, UAE",
+      "phone": "+97145831973",
+      "website": "https://www.zomato.com/dubai/the-qasab-turkish-cuisine-jebel-ali-village",
+      "description": "Ibn Battuta Mall Persia Court'ta Türk mutfağı.",
+      "menuUrl": "https://www.zomato.com/dubai/the-qasab-turkish-cuisine-jebel-ali-village/menu",
+      "photos": [
+        {
+          "url": "https://b.zmtcdn.com/data/pictures/9/19823359/227019015e30bc6ea7702c973656e946.jpg?crop=960%3A500%3B%2A%2C%2A&fit=around%7C960%3A500",
+          "source": "https://www.zomato.com/dubai/the-qasab-turkish-cuisine-jebel-ali-village",
+          "caption": "The Qasab · güncel gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/the-qasab-turkish-cuisine-jebel-ali-village"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "mekan-turkish-restaurant-umm-suqeim",
+      "name": "Mekan Turkish Restaurant · Umm Suqeim",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Umm Suqeim",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "3 Jumeira St, Umm Suqeim 1, Dubai, UAE",
+      "phone": "+971585320241",
+      "website": "https://mekan-turkish-restaurant.menufyy.com/",
+      "description": "Umm Suqeim'de Türk restoranı; adres, telefon ve güncel menü kaydı doğrulandı.",
+      "menuUrl": "https://mekan-turkish-restaurant.menufyy.com/",
+      "photos": [
+        {
+          "url": "https://static2.menufyy.com/mekan-turkish-restaurant-albums-1.jpg",
+          "source": "https://mekan-turkish-restaurant.menufyy.com/",
+          "caption": "Mekan Turkish Restaurant · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://mekan-turkish-restaurant.menufyy.com/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "ala-turkish-restaurant-business-bay",
+      "name": "Ala Turkish Restaurant · Business Bay",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Business Bay",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "6B Marasi Dr, Business Bay, Dubai, UAE",
+      "phone": "+971501384850",
+      "website": "https://yalah.ae/turkish-restaurants",
+      "description": "Business Bay'de Türk mutfağı; 2026 Dubai Türk restoranları dizininde aktif.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://weekenduae.com/wp-content/uploads/2023/10/weekenduae-Ala-Turkish-Restaurant-Dubai-UAE-2-scaled.jpg",
+          "source": "https://weekenduae.com/2023/11/01/weekend-dining-at-ala-turkish-restaurant-in-dubai/",
+          "caption": "Ala Turkish Restaurant · gerçek restoran görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://yalah.ae/turkish-restaurants",
+        "https://weekenduae.com/2023/11/01/weekend-dining-at-ala-turkish-restaurant-in-dubai/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "lezzet-dubai-hills-mall",
+      "name": "Lezzet Turkish Restaurant · Dubai Hills Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Hills",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Dubai Hills Mall, Al Khail Road, Dubai Hills Estate, Dubai, UAE",
+      "phone": "+97143275995",
+      "website": "https://www.zomato.com/dubai/lezzet-turkish-restaurant-dubai-hills",
+      "description": "Dubai Hills Mall'da modern Türk mutfağı.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://cdn.squaremeal.ae/restaurants/989/images/lezzet-turkish-restaurant-dubai_20072023023903.jpg?auto=format%2Ccompress&fit=crop&h=800&w=1200",
+          "source": "https://www.squaremeal.ae/restaurants/lezzet-turkish-restaurant_989",
+          "caption": "Lezzet Dubai Hills · gerçek şube görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.squaremeal.ae/restaurants/lezzet-turkish-restaurant_989",
+        "https://www.timeoutdubai.com/things-to-do/experience-modern-turkish-cuisine-at-lezzet-turkish-restaurant"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "doner-istanbul-muhaisnah",
+      "name": "Doner Istanbul · Muhaisnah",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Muhaisnah",
+      "kind": "Türk döner restoranı",
+      "entityType": "business",
+      "address": "Lulu Village, Amman Street, Muhaisnah 4, Dubai, UAE",
+      "phone": "+97142737180",
+      "website": "https://www.zomato.com/dubai/doner-istanbul-muhaisnah",
+      "description": "Muhaisnah'da Türk döneri ve ızgara.",
+      "menuUrl": "https://www.zomato.com/dubai/doner-istanbul-muhaisnah/menu",
+      "photos": [
+        {
+          "url": "https://images.deliveryhero.io/image/global-menu-service/TB_AE/vendor/754852/PRODUCT/2706595467/70da22cd-66b8-47e7-b353-f6d06fc4e834.jpg",
+          "source": "https://www.talabat.com/uae/restaurant/754852/doner-istanbul-muhaisnah-4?aid=2793",
+          "caption": "Doner Istanbul · güncel menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/doner-istanbul-muhaisnah",
+        "https://www.talabat.com/uae/restaurant/754852/doner-istanbul-muhaisnah-4?aid=2793"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "cardak-cag-kebap-jumeirah-1",
+      "name": "Çardak Cağ Kebap · Jumeirah 1",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah 1",
+      "kind": "Türk cağ kebabı restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, ATA Residence, Jumeirah 1, Dubai, UAE",
+      "phone": "+97148247115",
+      "website": "https://www.zomato.com/dubai/cardak-cag-kebap-turkish-restaurant-jumeirah-1",
+      "description": "Jumeirah 1'de cağ kebabı ve Türk ızgaraları.",
+      "menuUrl": "https://deliveroo.ae/en/menu/Dubai/jumeirah-1/cardak-cag-kebap-turkish-restaurant",
+      "photos": [
+        {
+          "url": "https://images.deliveryhero.io/image/talabat/MenuItems/mmw_638698638820644685",
+          "source": "https://deliveroo.ae/en/menu/Dubai/jumeirah-1/cardak-cag-kebap-turkish-restaurant",
+          "caption": "Çardak Cağ Kebap · güncel gerçek yemek görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/cardak-cag-kebap-turkish-restaurant-jumeirah-1",
+        "https://deliveroo.ae/en/menu/Dubai/jumeirah-1/cardak-cag-kebap-turkish-restaurant"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "ayla-tantuni-jumeirah",
+      "name": "Ayla Tantuni · Jumeirah",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Umm Suqeim",
+      "kind": "Tantuni & Türk fast-casual",
+      "entityType": "business",
+      "address": "710 Jumeira St, Umm Suqeim Second, Dubai, UAE",
+      "phone": null,
+      "website": "https://aylatantuni.com.tr/en/subelerimiz/",
+      "description": "Mersin tantunisi ve Türk fast-casual menüsü; Dubai şubesi resmî şube listesinde.",
+      "menuUrl": "https://deliveroo.ae/menu/Dubai/umm-suqeim-2/ayla-tantuni",
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/886689ec-52c9-4c0b-9a6b-11bc4f0de14c/image.jpeg?fit=crop&height=630&width=1200",
+          "source": "https://deliveroo.ae/menu/Dubai/umm-suqeim-2/ayla-tantuni",
+          "caption": "Ayla Tantuni · güncel gerçek menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://aylatantuni.com.tr/en/subelerimiz/",
+        "https://deliveroo.ae/menu/Dubai/umm-suqeim-2/ayla-tantuni"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "ayla-tantuni-azizi-riviera",
+      "name": "Ayla Tantuni · Azizi Riviera",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Meydan / Nad Al Sheba",
+      "kind": "Tantuni & Türk fast-casual",
+      "entityType": "business",
+      "address": "Azizi Riviera 13, Al Merkadh, Nad Al Sheba 1, Dubai, UAE",
+      "phone": "+971524062581",
+      "website": "https://aylatantuni.com.tr/en/subelerimiz/",
+      "description": "Ayla Tantuni'nin Azizi Riviera Dubai şubesi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://rs-menus-api.roocdn.com/images/886689ec-52c9-4c0b-9a6b-11bc4f0de14c/image.jpeg?fit=crop&height=630&width=1200",
+          "source": "https://deliveroo.ae/menu/Dubai/umm-suqeim-2/ayla-tantuni",
+          "caption": "Ayla Tantuni · güncel gerçek menü görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://aylatantuni.com.tr/en/subelerimiz/",
+        "https://deliveroo.ae/menu/Dubai/umm-suqeim-2/ayla-tantuni"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "bursa-kebap-evi-kite-beach",
+      "name": "Bursa Kebap Evi · Kite Beach",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Umm Suqeim",
+      "kind": "İskender & Türk kebap restoranı",
+      "entityType": "business",
+      "address": "Kite Beach, Umm Suqeim, Dubai, UAE",
+      "phone": "+971568029396",
+      "website": "https://www.bursakebapevi.com/",
+      "description": "Kite Beach'te Bursa usulü İskender ve Türk kebapları.",
+      "menuUrl": "https://www.zomato.com/dubai/bursa-kebap-evi-umm-suqeim/menu",
+      "photos": [
+        {
+          "url": "https://www.bursakebapevi.com/de/assets/components/images/3.png",
+          "source": "https://www.bursakebapevi.com/de/media/galerie",
+          "caption": "Bursa Kebap Evi · resmî marka görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.bursakebapevi.com/",
+        "https://www.zomato.com/dubai/bursa-kebap-evi-umm-suqeim"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "ziyafet-turkish-restaurant-umm-suqeim",
+      "name": "Ziyafet Turkish Restaurant · Umm Suqeim",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Umm Suqeim",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Opposite Eppco Petrol Station, Jumeirah Road, Umm Suqeim, Dubai, UAE",
+      "phone": "+97145484418",
+      "website": "https://www.zomato.com/dubai/ziyafet-turkish-restaurant-umm-suqeim",
+      "description": "Jumeirah Road'da Türk kebapları, pide ve kahvaltı.",
+      "menuUrl": "https://www.zomato.com/dubai/ziyafet-turkish-restaurant-umm-suqeim/menu",
+      "photos": [
+        {
+          "url": "https://www.timeoutdubai.com/cloud/timeoutdubai/2024/03/25/Ziyafet-Dubai-3.jpg",
+          "source": "https://www.timeoutdubai.com/restaurants/ziyafet",
+          "caption": "Ziyafet · gerçek restoran görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/ziyafet-turkish-restaurant-umm-suqeim",
+        "https://www.timeoutdubai.com/restaurants/ziyafet"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "mawlana-turkish-cuisine-dragon-mart-2",
+      "name": "Mawlana Turkish Cuisine · Dragon Mart 2",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai International City",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, Dragon Mart 2, Al Awir Road, International City, Dubai, UAE",
+      "phone": "+97145149108",
+      "website": "https://www.zomato.com/dubai/mawlana-turkish-cuisine-international-city",
+      "description": "Dragon Mart 2'de modern Türk mutfağı.",
+      "menuUrl": "https://www.zomato.com/dubai/mawlana-turkish-cuisine-international-city/menu",
+      "photos": [
+        {
+          "url": "https://b.zmtcdn.com/data/pictures/3/21167133/faade132d0c4ca3b4813cb1e8e30530f.jpg?crop=750%3A500%3B%2A%2C%2A&fit=around%7C750%3A500",
+          "source": "https://www.zomato.com/dubai/mawlana-turkish-cuisine-international-city",
+          "caption": "Mawlana Turkish Cuisine · güncel gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/mawlana-turkish-cuisine-international-city"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "turkish-bite-al-warqa",
+      "name": "Turkish Bite · Al Warqa",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Warqa",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, Q1 Mall, Al Warqa, Dubai, UAE",
+      "phone": "+97145485899",
+      "website": "https://www.zomato.com/dubai/turkish-bite-al-warqa",
+      "description": "Q1 Mall'da kahvaltı, pide, lahmacun, döner, kebap ve ızgaralar.",
+      "menuUrl": "https://www.zomato.com/dubai/turkish-bite-al-warqa/menu",
+      "photos": [
+        {
+          "url": "https://wl-img-prd.s3-accelerate.amazonaws.com/867c3084-5698-44de-91ec-1f0f5b10f608-h.jpeg",
+          "source": "https://www.hidubai.com/businesses/turkish-bite-restaurant-food-beverage-restaurants-bars-al-warqaa-1-dubai-1",
+          "caption": "Turkish Bite · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/turkish-bite-al-warqa",
+        "https://deliveroo.ae/en/menu/dubai/al-warqaa/turkish-bite-restaurant"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "peak-time-al-baraka-naif",
+      "name": "Peak Time · Al Baraka Turkish Restaurant · Naif",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Naif",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Opposite West Hotel, Naif Road, Naif, Dubai, UAE",
+      "phone": "+971586840044",
+      "website": "https://www.zomato.com/dubai/peak-time-al-baraka-turkish-restaurant-naif",
+      "description": "Naif Road'da uzun süredir hizmet veren Türk restoranı.",
+      "menuUrl": "https://www.zomato.com/dubai/peak-time-al-baraka-turkish-restaurant-naif/menu",
+      "photos": [
+        {
+          "url": "https://assets.bayut.com/content/Naif_Road_Al_Barakah_Turkish_Restaurant_10_11_22_de344fbb6f.jpg",
+          "source": "https://www.bayut.com/area-guides/naif-road/",
+          "caption": "Al Baraka Turkish Restaurant · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/peak-time-al-baraka-turkish-restaurant-naif",
+        "https://www.bayut.com/area-guides/naif-road/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "grand-dine-al-muteena",
+      "name": "Grand Dine Restaurant · Al Muteena",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Muteena",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Al Ghurair Building 1084, Al Muteena Street, Al Muteena, Dubai, UAE",
+      "phone": "+97142366001",
+      "website": "https://www.zomato.com/dubai/grand-dine-restaurant-al-muteena",
+      "description": "Al Muteena'da Türk yemekleri sunan restoran.",
+      "menuUrl": "https://www.zomato.com/dubai/grand-dine-restaurant-al-muteena/menu",
+      "photos": [
+        {
+          "url": "https://b.zmtcdn.com/data/pictures/1/21969301/d6b3243b5d23fe583568dfb9799698ee.jpg",
+          "source": "https://www.zomato.com/dubai/grand-dine-restaurant-al-muteena",
+          "caption": "Grand Dine · güncel gerçek dış cephe görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/grand-dine-restaurant-al-muteena"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "istanbul-flower-al-safa",
+      "name": "Istanbul Flower Restaurant · Al Safa",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Safa",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, Safest Way Supermarket Building, Sheikh Zayed Road, Al Safa, Dubai, UAE",
+      "phone": "+97143434585",
+      "website": "https://www.zomato.com/dubai/istanbul-flower-al-safa",
+      "description": "Al Safa'da klasik Türk ev yemekleri, kebap ve fırın ürünleri.",
+      "menuUrl": "https://www.zomato.com/dubai/istanbul-flower-al-safa/menu",
+      "photos": [
+        {
+          "url": "https://dubailocal.ae/assets/more_images/1673192117_ab7f29ede2130b3062c2.jpg",
+          "source": "https://dubailocal.ae/business/istanbul-flower-restaurant",
+          "caption": "Istanbul Flower · gerçek yemek görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/istanbul-flower-al-safa",
+        "https://dubailocal.ae/business/istanbul-flower-restaurant"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "ankara-restaurant-naif",
+      "name": "Ankara Restaurant · Naif",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Naif / Al Baraha",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Near Belhoul Hospital, Al Khaleej Road, Al Baraha, Naif, Dubai, UAE",
+      "phone": "+97142731855",
+      "website": "https://www.zomato.com/tr/dubai/ankara-naif/info",
+      "description": "Deira/Naif bölgesinde klasik Türk restoranı.",
+      "menuUrl": "https://www.zomato.com/tr/dubai/ankara-naif/menu",
+      "photos": [
+        {
+          "url": "https://eercorporateservices.ae/cafes/wp-content/uploads/2022/06/AF1QipPBz8O1IYHuC4Xy1b7ZSYrrNs_snBjTU7n6BMjDw1600-h1000-k-no.jpeg",
+          "source": "https://eercorporateservices.ae/cafes/annuaire/ankara-restaurant-deira-dubai/",
+          "caption": "Ankara Restaurant · gerçek dış cephe görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/tr/dubai/ankara-naif/info",
+        "https://eercorporateservices.ae/cafes/annuaire/ankara-restaurant-deira-dubai/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "mawlana-turkish-restaurant-riggat-al-buteen",
+      "name": "Mawlana Turkish Restaurant & Cafe · Riggat Al Buteen",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Riggat Al Buteen",
+      "kind": "Türk restoranı & kafe",
+      "entityType": "business",
+      "address": "Al Maktoum Street, Riggat Al Buteen, Deira, Dubai, UAE",
+      "phone": "+97142956868",
+      "website": "https://www.hidubai.com/businesses/mawlana-turkish-restaurant-cafe-food-beverage-restaurants-bars-riggat-al-buteen-dubai-2",
+      "description": "Deira'da Türk restoranı ve kafe.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://wl-img-prd.s3-accelerate.amazonaws.com/5dc8986a-df54-4f6f-9d7f-aa71befd7006-t.jpeg",
+          "source": "https://www.hidubai.com/businesses/mawlana-turkish-restaurant-cafe-food-beverage-restaurants-bars-riggat-al-buteen-dubai-2",
+          "caption": "Mawlana · gerçek dış cephe görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.hidubai.com/businesses/mawlana-turkish-restaurant-cafe-food-beverage-restaurants-bars-riggat-al-buteen-dubai-2"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "iskender-doner-circle-mall-jvc",
+      "name": "İskender Döner · Circle Mall JVC",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah Village Circle",
+      "kind": "Türk döner & İskender",
+      "entityType": "business",
+      "address": "Ground Level, Circle Mall, Jumeirah Village Circle, Dubai, UAE",
+      "phone": "+971521137185",
+      "website": "https://www.zomato.com/dubai/iskender-d%C3%B6ner-jumeirah-village",
+      "description": "Circle Mall'da döner, İskender ve Türk fast-casual menüsü.",
+      "menuUrl": "https://www.zomato.com/tr/dubai/iskender-d%C3%B6ner-jumeirah-village/menu?category=2",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/companies/35465/iskender-doner-dubai.jpg",
+          "source": "https://www.citysearch.ae/iskender-doner-dubai",
+          "caption": "İskender Döner · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/iskender-d%C3%B6ner-jumeirah-village",
+        "https://www.citysearch.ae/iskender-doner-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "sofra-turkish-restaurant-al-barsha",
+      "name": "Sofra Turkish Restaurant · Al Barsha",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Barsha",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "City Stay Hotel Apartment, Behind Mall of the Emirates, Al Barsha 1, Dubai, UAE",
+      "phone": "+97143233550",
+      "website": "https://www.tripadvisor.co.uk/Restaurant_Review-g295424-d19468778-Reviews-Sofra_Turkish_Restaurant-Dubai_Emirate_of_Dubai.html",
+      "description": "Al Barsha'da Türk restoranı; otel apartmanı içinde.",
+      "menuUrl": "https://www.talabat.com/uae/restaurant/20366/sofra-turkish-al-barsha-1?aid=1174",
+      "photos": [
+        {
+          "url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/76/9b/d5/sofra-turkish-restaurant.jpg?h=-1&s=1&w=1200",
+          "source": "https://www.tripadvisor.co.uk/Restaurant_Review-g295424-d19468778-Reviews-Sofra_Turkish_Restaurant-Dubai_Emirate_of_Dubai.html",
+          "caption": "Sofra Turkish Restaurant · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.tripadvisor.co.uk/Restaurant_Review-g295424-d19468778-Reviews-Sofra_Turkish_Restaurant-Dubai_Emirate_of_Dubai.html",
+        "https://www.talabat.com/uae/restaurant/20366/sofra-turkish-al-barsha-1?aid=1174"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "zozan-gourmet-dubai-marina",
+      "name": "Zozan Gourmet · Dubai Marina",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Marina",
+      "kind": "Türk & Anadolu restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, Marinascape Building, Marina Walk, Dubai Marina, Dubai, UAE",
+      "phone": "+971523369318",
+      "website": "https://zozangourmet.com/",
+      "description": "Dubai Marina'da Anadolu/Türk mutfağı odaklı restoran.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/UF/Companies/41616/zozan-gourmet.jpg",
+          "source": "https://www.citysearch.ae/zozan-dubai",
+          "caption": "Zozan Gourmet · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://zozangourmet.com/",
+        "https://www.citysearch.ae/zozan-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "deniz-turkish-restaurant-dubai-marina",
+      "name": "Deniz Turkish Restaurant · Dubai Marina",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Marina",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Ground Floor, The Torch Tower, Dubai Marina, Dubai, UAE",
+      "phone": "+97144471606",
+      "website": "https://denizrestaurant.ae/",
+      "description": "The Torch Tower'da Türk ve Akdeniz mutfağı.",
+      "menuUrl": "https://denizrestaurant.ae/menu/",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/41466/deniz-restaurant-and-caf-dubai_22.jpg",
+          "source": "https://www.citysearch.ae/deniz-restaurant-and-cafe-dubai",
+          "caption": "Deniz Turkish Restaurant · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://denizrestaurant.ae/",
+        "https://www.citysearch.ae/deniz-restaurant-and-cafe-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "jasmira-dubai-marina",
+      "name": "Jasmira · Dubai Marina",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Marina",
+      "kind": "Türk & Akdeniz restoranı",
+      "entityType": "business",
+      "address": "Shop 4, Level B2, Bay Central, King Salman Bin Abdulaziz Al Saud St, beside Intercontinental Hotel, Dubai Marina, Dubai, UAE",
+      "phone": "+97145762985",
+      "website": "https://jasmira.ae/",
+      "description": "Dubai Marina'da Türk/Akdeniz mutfağı.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/42141/jasmira-dubai_11.jpg",
+          "source": "https://www.citysearch.ae/jasmira-dubai",
+          "caption": "Jasmira · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://jasmira.ae/",
+        "https://www.citysearch.ae/jasmira-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "odoner-jbr",
+      "name": "ODÖNER · JBR",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Türk döner restoranı",
+      "entityType": "business",
+      "address": "Sadaf, Ground Floor, Jumeirah Beach Residence, Dubai, UAE",
+      "phone": "+97148351947",
+      "website": "https://jbr.ae/en/discover/dine",
+      "description": "JBR'da ODÖNER şubesi; döner ve Türk fast-casual menüsü.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/UF/Albums/42647/odoner-jbr-dubai_141622351.jpg",
+          "source": "https://www.citysearch.ae/odoner-jbr-dubai",
+          "caption": "ODÖNER JBR · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://jbr.ae/en/discover/dine",
+        "https://www.citysearch.ae/odoner-jbr-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "tolia-jumeirah-garden-city",
+      "name": "Tolia · Jumeirah Garden City",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah Garden City / Al Satwa",
+      "kind": "Türk restoranı",
+      "entityType": "business",
+      "address": "Jumeirah Garden City, Sheikh Zayed Rd, opposite Dubai World Trade Centre, Al Satwa, Dubai, UAE",
+      "phone": "+971525767027",
+      "website": "https://toliadubai.com/",
+      "description": "DWTC karşısında modern Türk restoranı.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://toliadubai.com/images/about/about.jpg",
+          "source": "https://toliadubai.com/about-us/",
+          "caption": "Tolia · güncel resmî dış cephe görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://toliadubai.com/",
+        "https://toliadubai.com/about-us/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "helvaci-ali-jumeirah-3",
+      "name": "Helvacı Ali · Jumeirah 3",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jumeirah 3",
+      "kind": "Türk tatlıcısı",
+      "entityType": "business",
+      "address": "Near Spades Barber Shop, Jumeirah Street, Jumeirah 3, Dubai, UAE",
+      "phone": "+97143388055",
+      "website": "https://www.zomato.com/dubai/helvaci-ali-umm-suqeim",
+      "description": "İrmik helvası, dondurma ve Türk tatlıları.",
+      "menuUrl": "https://www.zomato.com/dubai/helvaci-ali-umm-suqeim/menu",
+      "photos": [
+        {
+          "url": "https://wl-img-prd.s3-accelerate.amazonaws.com/25bcb1f4-e158-457f-9b7f-04fc9105d217-t.png",
+          "source": "https://www.hidubai.com/businesses/helvaci-ali-turkish-sweets-food-beverage-bakeries-desserts-sweets-umm-suqeim-2-dubai",
+          "caption": "Helvacı Ali · gerçek marka/mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/helvaci-ali-umm-suqeim",
+        "https://www.hidubai.com/businesses/helvaci-ali-turkish-sweets-food-beverage-bakeries-desserts-sweets-umm-suqeim-2-dubai"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "kahve-dunyasi-city-centre-mirdif",
+      "name": "Kahve Dünyası · City Centre Mirdif",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Mirdif",
+      "kind": "Türk kahve & tatlı kafesi",
+      "entityType": "business",
+      "address": "City Centre Mirdif, Shop G067, First Floor, Dubai, UAE",
+      "phone": "+97143374874",
+      "website": "https://kahvedunyasiuae.com/",
+      "description": "Türkiye merkezli Kahve Dünyası'nın City Centre Mirdif şubesi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://kahvedunyasiuae.com/cdn/shop/files/unnamed.jpg?v=1733044679&width=1500",
+          "source": "https://kahvedunyasiuae.com/pages/find-us",
+          "caption": "Kahve Dünyası UAE · güncel resmî görsel"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://kahvedunyasiuae.com/pages/find-us",
+        "https://kahvedunyasiuae.com/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "kahve-dunyasi-ibn-battuta",
+      "name": "Kahve Dünyası · Ibn Battuta Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jebel Ali Village",
+      "kind": "Türk kahve & tatlı kafesi",
+      "entityType": "business",
+      "address": "Ibn Battuta Mall, Premises IBS-GF-115, Sheikh Zayed Road, Dubai, UAE",
+      "phone": "+97145727738",
+      "website": "https://kahvedunyasiuae.com/",
+      "description": "Türkiye merkezli Kahve Dünyası'nın Ibn Battuta Mall şubesi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://kahvedunyasiuae.com/cdn/shop/files/unnamed.jpg?v=1733044679&width=1500",
+          "source": "https://kahvedunyasiuae.com/pages/find-us",
+          "caption": "Kahve Dünyası UAE · güncel resmî görsel"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://kahvedunyasiuae.com/pages/find-us",
+        "https://kahvedunyasiuae.com/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "simit-sarayi-jbr",
+      "name": "Simit Sarayı · JBR The Walk",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Türk fırın & kafe",
+      "entityType": "business",
+      "address": "Al Mamsha Street, The Walk, JBR, Dubai, UAE",
+      "phone": "+97144270882",
+      "website": "https://simitsarayi.com/",
+      "description": "Simit, börek, kahvaltı ve Türk fırın ürünleri.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://simitsarayi.com/Upload/TranslationsImg/6c63186d-44b1-4479-b381-a7fcba6d4a7d_1.jpg",
+          "source": "https://simitsarayi.com/",
+          "caption": "Simit Sarayı · resmî marka görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://simitsarayi.com/"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "olab-coffee-jbr",
+      "name": "OLAB COFFEE SHOP · JBR",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Türkiye merkezli kahve & tatlı kafesi",
+      "entityType": "business",
+      "address": "Beach Walk, Rimal 5, King Salman Bin Abdulaziz Al Saud St, JBR, Dubai, UAE",
+      "phone": "+97142399005",
+      "website": "https://www.zomato.com/dubai/olab-coffee-shop-jumeirah-beach-residence",
+      "description": "Türkiye merkezli OLAB'ın JBR şubesi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/43062/olab-coffee-dubai_134134301.jpg",
+          "source": "https://www.citysearch.ae/olab-coffee-dubai",
+          "caption": "OLAB JBR · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.citysearch.ae/olab-coffee-dubai",
+        "https://deliveroo.ae/en/menu/Dubai/silicon-oasis/o-lab-coffee-shop-silicon-oasis"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "olab-coffee-dubai-hills",
+      "name": "OLAB COFFEE SHOP · Dubai Hills Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Hills",
+      "kind": "Türkiye merkezli kahve & tatlı kafesi",
+      "entityType": "business",
+      "address": "Ground Level, Dubai Hills Mall, Dubai Hills, Dubai, UAE",
+      "phone": "+971503426522",
+      "website": "https://www.zomato.com/dubai/olab-coffee-shop-dubai-hills",
+      "description": "Türkiye merkezli OLAB'ın Dubai Hills Mall şubesi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/43062/olab-coffee-dubai_134134301.jpg",
+          "source": "https://www.citysearch.ae/olab-coffee-dubai",
+          "caption": "OLAB UAE · güncel gerçek marka/mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/olab-coffee-shop-dubai-hills",
+        "https://deliveroo.ae/en/menu/Dubai/silicon-oasis/o-lab-coffee-shop-silicon-oasis"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "olab-coffee-motor-city",
+      "name": "OLAB COFFEE SHOP · Motor City",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Motor City",
+      "kind": "Türkiye merkezli kahve & tatlı kafesi",
+      "entityType": "business",
+      "address": "Ground Floor, Motor City Mall, Detroit Road, Motor City, Dubai, UAE",
+      "phone": "+971521254023",
+      "website": "https://www.zomato.com/dubai/olab-coffee-shop-motor-city",
+      "description": "Türkiye merkezli OLAB'ın Motor City şubesi.",
+      "menuUrl": "https://www.zomato.com/dubai/olab-coffee-shop-motor-city/menu",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/43062/olab-coffee-dubai_134134301.jpg",
+          "source": "https://www.citysearch.ae/olab-coffee-dubai",
+          "caption": "OLAB UAE · güncel gerçek marka/mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/olab-coffee-shop-motor-city",
+        "https://deliveroo.ae/en/menu/Dubai/silicon-oasis/o-lab-coffee-shop-silicon-oasis"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "olab-coffee-silicon-oasis",
+      "name": "OLAB COFFEE SHOP · Silicon Oasis",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Dubai Silicon Oasis",
+      "kind": "Türkiye merkezli kahve & tatlı kafesi",
+      "entityType": "business",
+      "address": "Union Coop Hypermarket, Dubai Silicon Oasis, Dubai, UAE",
+      "phone": "+971527510540",
+      "website": "https://www.zomato.com/dubai/olab-coffee-shop-dubai-silicon-oasis-dso",
+      "description": "Türkiye merkezli OLAB'ın Silicon Oasis şubesi.",
+      "menuUrl": "https://www.zomato.com/dubai/olab-coffee-shop-dubai-silicon-oasis-dso/menu",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/43062/olab-coffee-dubai_134134301.jpg",
+          "source": "https://www.citysearch.ae/olab-coffee-dubai",
+          "caption": "OLAB UAE · güncel gerçek marka/mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/olab-coffee-shop-dubai-silicon-oasis-dso",
+        "https://corporate.unioncoop.ae/en/branches/silicon-oasis/",
+        "https://deliveroo.ae/en/menu/Dubai/silicon-oasis/o-lab-coffee-shop-silicon-oasis"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "olab-coffee-al-furjan-west",
+      "name": "OLAB COFFEE SHOP · Al Furjan West",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Al Furjan / Jebel Ali Village",
+      "kind": "Türkiye merkezli kahve & tatlı kafesi",
+      "entityType": "business",
+      "address": "Al Furjan Pavilion West, Jebel Ali Village, Dubai, UAE",
+      "phone": null,
+      "website": "https://www.zomato.com/dubai/olab-coffee-shop-jebel-ali-village",
+      "description": "Türkiye merkezli OLAB'ın Al Furjan West şubesi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/43062/olab-coffee-dubai_134134301.jpg",
+          "source": "https://www.citysearch.ae/olab-coffee-dubai",
+          "caption": "OLAB UAE · güncel gerçek marka/mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/olab-coffee-shop-jebel-ali-village",
+        "https://deliveroo.ae/en/menu/Dubai/silicon-oasis/o-lab-coffee-shop-silicon-oasis"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "olab-coffee-ibn-battuta",
+      "name": "OLAB COFFEE SHOP · Ibn Battuta Mall",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "Jebel Ali Village",
+      "kind": "Türkiye merkezli kahve & tatlı kafesi",
+      "entityType": "business",
+      "address": "Ibn Battuta Mall, Jebel Ali Village, Dubai, UAE",
+      "phone": "+971527165951",
+      "website": "https://www.zomato.com/dubai/olab-coffee-shop-1-jebel-ali-village",
+      "description": "Türkiye merkezli OLAB'ın Ibn Battuta Mall şubesi.",
+      "menuUrl": null,
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/uf/albums/43062/olab-coffee-dubai_134134301.jpg",
+          "source": "https://www.citysearch.ae/olab-coffee-dubai",
+          "caption": "OLAB UAE · güncel gerçek marka/mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://www.zomato.com/dubai/olab-coffee-shop-1-jebel-ali-village",
+        "https://deliveroo.ae/en/menu/Dubai/silicon-oasis/o-lab-coffee-shop-silicon-oasis"
+      ],
+      "turkishService": false,
+      "active": true
+    },
+    {
+      "id": "midyeci-ahmet-jbr",
+      "name": "Midyeci Ahmet · JBR",
+      "category": "Restoranlar",
+      "categories": [
+        "Restoranlar"
+      ],
+      "area": "JBR",
+      "kind": "Midye & Türk sokak lezzetleri",
+      "entityType": "business",
+      "address": "GM 18, AMWAJ Walk 1, Al Mamsha Street, JBR, Dubai, UAE",
+      "phone": "+971501384850",
+      "website": "https://midyeciahmetjbr.ae/",
+      "description": "JBR'da midye dolma, kokoreç ve Türk sokak lezzetleri.",
+      "menuUrl": "https://midyeciahmetjbr.ae/menu-from-the-oven/",
+      "photos": [
+        {
+          "url": "https://www.citysearch.ae/UF/Albums/43085/midyeci-ahmet-dubai_114918691.jpg",
+          "source": "https://www.citysearch.ae/midyeci-ahmet-dubai",
+          "caption": "Midyeci Ahmet JBR · gerçek mekan görseli"
+        }
+      ],
+      "checkedAt": "2026-09-17",
+      "sources": [
+        "https://midyeciahmetjbr.ae/",
+        "https://www.citysearch.ae/midyeci-ahmet-dubai"
       ],
       "turkishService": false,
       "active": true
