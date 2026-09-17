@@ -21,44 +21,76 @@ Future<void> _discoverOpen(BuildContext context, Uri uri) async {
 /// never a stale photograph belonging to another version of the listing.
 class DiscoverImage extends StatelessWidget {
   const DiscoverImage(
-      {super.key, required this.photo, this.fit = BoxFit.cover});
+      {super.key,
+      required this.photo,
+      this.fit = BoxFit.cover,
+      this.fallbackAsset,
+      this.maxDecodeWidth = 1200});
   final DiscoverPhoto photo;
   final BoxFit fit;
+  final String? fallbackAsset;
+  final int maxDecodeWidth;
   static final _bundledUrls = {
     for (final entry in DiscoverCatalog.parse(discoverSeedJson).entries)
       for (final p in entry.photos) p.asset: p.url,
   };
   @override
   Widget build(BuildContext context) {
-    Widget fallback() => Container(
-        color: const Color(0xFFF3F0F1),
-        alignment: Alignment.center,
-        child: const Column(mainAxisSize: MainAxisSize.min, children: [
-          Icon(Icons.image_not_supported_outlined, color: Colors.grey),
-          SizedBox(height: 6),
-          Text('Fotoğraf yüklenemedi',
-              style: TextStyle(color: Colors.grey, fontSize: 12))
-        ]));
+    Widget fallback() => fallbackAsset != null
+        ? Image.asset(
+            fallbackAsset!,
+            fit: fit,
+            width: double.infinity,
+            height: double.infinity,
+            cacheWidth: 900,
+            filterQuality: FilterQuality.medium)
+        : Container(
+            color: const Color(0xFFF3F0F1),
+            alignment: Alignment.center,
+            child: const Column(mainAxisSize: MainAxisSize.min, children: [
+              Icon(Icons.image_not_supported_outlined, color: Colors.grey),
+              SizedBox(height: 6),
+              Text('Fotoğraf yüklenemedi',
+                  style: TextStyle(color: Colors.grey, fontSize: 12))
+            ]));
     if (photo.asset != null && _bundledUrls[photo.asset] == photo.url) {
-      return Image.asset(photo.asset!,
+      return LayoutBuilder(builder: (context, constraints) {
+        final dpr = MediaQuery.devicePixelRatioOf(context);
+        final logicalWidth = constraints.hasBoundedWidth
+            ? constraints.maxWidth
+            : MediaQuery.sizeOf(context).width;
+        final decodeWidth =
+            (logicalWidth * dpr).round().clamp(320, maxDecodeWidth).toInt();
+        return Image.asset(photo.asset!,
+            fit: fit,
+            width: double.infinity,
+            height: double.infinity,
+            cacheWidth: decodeWidth,
+            filterQuality: FilterQuality.medium,
+            semanticLabel: photo.caption,
+            errorBuilder: (_, __, ___) => fallback());
+      });
+    }
+    return LayoutBuilder(builder: (context, constraints) {
+      final dpr = MediaQuery.devicePixelRatioOf(context);
+      final logicalWidth = constraints.hasBoundedWidth
+          ? constraints.maxWidth
+          : MediaQuery.sizeOf(context).width;
+      final decodeWidth =
+          (logicalWidth * dpr).round().clamp(320, maxDecodeWidth).toInt();
+      return Image.network(photo.url,
           fit: fit,
           width: double.infinity,
           height: double.infinity,
+          cacheWidth: decodeWidth,
+          filterQuality: FilterQuality.medium,
+          gaplessPlayback: true,
           semanticLabel: photo.caption,
-          errorBuilder: (_, __, ___) => fallback());
-    }
-    return Image.network(photo.url,
-        fit: fit,
-        width: double.infinity,
-        height: double.infinity,
-        semanticLabel: photo.caption,
-        errorBuilder: (_, __, ___) => fallback(),
-        loadingBuilder: (_, child, loading) => loading == null
-            ? child
-            : Container(
-                color: const Color(0xFFF3F0F1),
-                alignment: Alignment.center,
-                child: const CircularProgressIndicator(strokeWidth: 2)));
+          errorBuilder: (_, __, ___) => fallback(),
+          loadingBuilder: (_, child, loading) => loading == null
+              ? child
+              : const ColoredBox(color: Color(0xFFF3F0F1)));
+    });
   }
 }
 
@@ -268,6 +300,8 @@ class _DiscoverPageState extends State<DiscoverPage>
           animation: repo,
           builder: (context, _) {
             final items = filter.apply(repo);
+            final restaurantMode = filter.category == 'Restoranlar';
+            final groupedRestaurants = restaurantMode ? _restaurantGroups(items) : const <_RestaurantGroup>[];
             return RefreshIndicator(
                 onRefresh: () => repo.refresh(force: true),
                 child: CustomScrollView(
@@ -416,7 +450,7 @@ class _DiscoverPageState extends State<DiscoverPage>
                                           style: const TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.w800))),
-                                  Text('${items.length} sonuç',
+                                  Text(restaurantMode ? '${groupedRestaurants.length} restoran · ${items.length} şube' : '${items.length} sonuç',
                                       style: const TextStyle(
                                           color: Color(0xFF747B87),
                                           fontSize: 12))
@@ -467,13 +501,155 @@ class _DiscoverPageState extends State<DiscoverPage>
                       SliverPadding(
                           padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
                           sliver: SliverList.builder(
-                              itemCount: items.length,
+                              itemCount: restaurantMode ? groupedRestaurants.length : items.length,
                               itemBuilder: (_, index) => Padding(
                                   padding: const EdgeInsets.only(bottom: 18),
-                                  child: DiscoverCard(
-                                      item: items[index], repository: repo)))),
+                                  child: restaurantMode
+                                      ? _RestaurantGroupCard(group: groupedRestaurants[index], repository: repo)
+                                      : DiscoverCard(item: items[index], repository: repo)))),
                     ]));
           }));
+}
+
+
+String _restaurantBrandName(DiscoverItem item) {
+  var name = item.name.split(' · ').first.trim();
+  name = name.replaceAll(' (JBR)', '');
+  if (name.startsWith('Bosporus')) return 'Bosporus Turkish Cuisine';
+  if (name.startsWith('ZouZou')) return 'ZouZou Turkish & Lebanese';
+  if (name.startsWith('Hafiz Mustafa') || name.startsWith('Hafız Mustafa')) {
+    return 'Hafiz Mustafa 1864';
+  }
+  if (name.startsWith('MADO')) return 'MADO';
+  if (name.startsWith('Turkish Village')) return 'Turkish Village';
+  if (name.startsWith('ODÖNER') || name.startsWith('ODONER')) return 'ODÖNER';
+  return name;
+}
+
+class _RestaurantGroup {
+  const _RestaurantGroup(this.name, this.branches);
+  final String name;
+  final List<DiscoverItem> branches;
+  DiscoverItem get hero => branches.first;
+}
+
+List<_RestaurantGroup> _restaurantGroups(List<DiscoverItem> items) {
+  final map = <String, List<DiscoverItem>>{};
+  for (final item in items.where((e) => e.category == 'Restoranlar')) {
+    map.putIfAbsent(_restaurantBrandName(item), () => <DiscoverItem>[]).add(item);
+  }
+  return map.entries.map((e) => _RestaurantGroup(e.key, e.value)).toList();
+}
+
+class _RestaurantGroupCard extends StatelessWidget {
+  const _RestaurantGroupCard({required this.group, required this.repository});
+  final _RestaurantGroup group;
+  final DiscoverRepository repository;
+
+  @override
+  Widget build(BuildContext context) {
+    final hero = group.hero;
+    final areas = group.branches.map((e) => e.area).toSet().take(3).join(' · ');
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(22),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        key: ValueKey('discover-${hero.id}'),
+        onTap: () {
+          if (group.branches.length == 1) {
+            Navigator.push(context, MaterialPageRoute<void>(
+              builder: (_) => PlaceDetailPage(item: hero, repository: repository)));
+          } else {
+            Navigator.push(context, MaterialPageRoute<void>(
+              builder: (_) => _RestaurantBranchesPage(group: group, repository: repository)));
+          }
+        },
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          AspectRatio(
+            aspectRatio: 1.85,
+            child: Stack(fit: StackFit.expand, children: [
+              DiscoverImage(photo: hero.photos.first, fallbackAsset: 'assets/images/home/restaurant.jpg'),
+              Positioned(
+                left: 12, top: 12,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(color: Colors.white.withValues(alpha: .96), borderRadius: BorderRadius.circular(10)),
+                  child: Text(group.branches.length > 1 ? '${group.branches.length} şube' : 'Türk restoranı',
+                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700))))
+            ])),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(group.name, style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w800, letterSpacing: -.3)),
+              const SizedBox(height: 6),
+              Row(children: [
+                const Icon(Icons.location_on_outlined, size: 15, color: _discoverRed),
+                const SizedBox(width: 6),
+                Expanded(child: Text(areas, maxLines: 1, overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(color: Color(0xFF747B87), fontSize: 13))),
+                const Icon(Icons.arrow_forward_rounded, color: _discoverRed, size: 19)
+              ]),
+              if (group.branches.length > 1) ...[
+                const SizedBox(height: 9),
+                Text('Şubeleri görüntüle, ardından seçtiğin şubenin menü, telefon, Google Maps ve Waze bilgilerine ulaş.',
+                  style: const TextStyle(color: Color(0xFF555E6B), height: 1.4, fontSize: 13)),
+              ]
+            ]))
+        ])));
+  }
+}
+
+class _RestaurantBranchesPage extends StatelessWidget {
+  const _RestaurantBranchesPage({required this.group, required this.repository});
+  final _RestaurantGroup group;
+  final DiscoverRepository repository;
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: const Color(0xFFF7F8FA),
+    appBar: AppBar(title: Text(group.name)),
+    body: ListView(
+      padding: const EdgeInsets.fromLTRB(18, 12, 18, 28),
+      children: [
+        Text('${group.branches.length} Dubai şubesi', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
+        const SizedBox(height: 6),
+        const Text('Şubeyi seç; adres, telefon, menü ve yol tarifi o şubeye özel açılır.',
+          style: TextStyle(color: Color(0xFF68717D), height: 1.4)),
+        const SizedBox(height: 16),
+        for (final branch in group.branches)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Material(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(18),
+              clipBehavior: Clip.antiAlias,
+              child: InkWell(
+                key: ValueKey('branch-${branch.id}'),
+                onTap: () => Navigator.push(context, MaterialPageRoute<void>(
+                  builder: (_) => PlaceDetailPage(item: branch, repository: repository))),
+                child: Row(children: [
+                  SizedBox(width: 112, height: 104,
+                    child: DiscoverImage(photo: branch.photos.first, fallbackAsset: 'assets/images/home/restaurant.jpg')),
+                  Expanded(child: Padding(
+                    padding: const EdgeInsets.all(13),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text(branch.name.split(' · ').length > 1 ? branch.name.split(' · ').sublist(1).join(' · ') : branch.area,
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w800)),
+                      const SizedBox(height: 5),
+                      Text(branch.area, style: const TextStyle(color: Color(0xFF747B87), fontSize: 12)),
+                      const SizedBox(height: 5),
+                      if (branch.rating != null)
+                        Text('★ ${branch.rating}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 5),
+                      Row(children: [
+                        if (branch.menuUrl != null) const _DiscoverTag(icon: Icons.menu_book_outlined, text: 'Menü'),
+                        const SizedBox(width: 6),
+                        const _DiscoverTag(icon: Icons.directions_outlined, text: 'Yol tarifi')
+                      ])
+                    ])))
+                ]))))
+      ]));
 }
 
 class DiscoverCard extends StatelessWidget {
@@ -499,6 +675,7 @@ class DiscoverCard extends StatelessWidget {
                 child: Stack(fit: StackFit.expand, children: [
                   DiscoverImage(
                       photo: item.photos.first,
+                      fallbackAsset: item.category == 'Restoranlar' ? 'assets/images/home/restaurant.jpg' : null,
                       fit: item.entityType == 'professional'
                           ? BoxFit.contain
                           : BoxFit.cover),
@@ -662,6 +839,7 @@ class _PlaceDetailPageState extends State<PlaceDetailPage> {
                                                 initialPage: index))),
                                     child: DiscoverImage(
                                         photo: item.photos[index],
+                                        fallbackAsset: item.category == 'Restoranlar' ? 'assets/images/home/restaurant.jpg' : null,
                                         fit: item.entityType == 'professional'
                                             ? BoxFit.contain
                                             : BoxFit.cover))),
