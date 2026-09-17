@@ -1,0 +1,64 @@
+name: Sync restaurant catalog
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/data/restaurants_*.json'
+      - 'scripts/sync_restaurant_catalog.py'
+      - 'scripts/apply_restaurant_grouping.py'
+      - 'scripts/optimize_discover_images.py'
+      - '.github/workflows/catalog-sync.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build live restaurant catalog
+        run: python scripts/sync_restaurant_catalog.py
+
+      - name: Apply restaurant UX grouping
+        run: python scripts/apply_restaurant_grouping.py
+
+      - name: Optimize image rendering
+        run: python scripts/optimize_discover_images.py
+
+      - name: Validate generated catalog
+        run: |
+          python -m json.tool assets/data/discover.json > /dev/null
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data = json.loads(Path('assets/data/discover.json').read_text())
+          restaurants = [x for x in data['entries'] if x.get('category') == 'Restoranlar']
+          assert len(restaurants) >= 45, f'Expected at least 45 restaurant branches, got {len(restaurants)}'
+          assert len({x['id'] for x in restaurants}) == len(restaurants), 'Duplicate restaurant ids'
+          assert all(x.get('photos') for x in restaurants), 'Restaurant without photo'
+          print(f"Validated {len(restaurants)} restaurant branches, revision {data['revision']}")
+          PY
+
+      - name: Commit generated catalog and UI
+        run: |
+          if git diff --quiet; then
+            echo 'Nothing to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/data/discover.json lib/discover/seed_data.dart lib/discover/discover_screen.dart
+          git commit -m 'Sync restaurant catalog and image performance'
+          git push
