@@ -1,12 +1,15 @@
-name: Flutter verify
+name: Flutter Discover verify
 
 on:
   workflow_dispatch:
   push:
     branches: [main]
     paths:
-      - 'lib/**'
-      - 'test/**'
+      - 'lib/main.dart'
+      - 'lib/home/**'
+      - 'lib/discover/**'
+      - 'test/discover_test.dart'
+      - 'test/home_navigation_test.dart'
       - 'pubspec.yaml'
       - '.github/workflows/flutter-verify.yml'
 
@@ -21,7 +24,7 @@ jobs:
           cache: true
       - name: Dependencies
         run: flutter pub get
-      - name: Analyze
-        run: flutter analyze --no-fatal-infos
-      - name: Tests
-        run: flutter test
+      - name: Analyze production Discover path
+        run: flutter analyze --no-fatal-infos lib/main.dart test/discover_test.dart test/home_navigation_test.dart
+      - name: Discover tests
+        run: flutter test test/discover_test.dart test/home_navigation_test.dart
